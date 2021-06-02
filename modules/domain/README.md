@@ -78,10 +78,7 @@ module "cis-domain" {
 |-----------------------------------------|---------------------------------------|
 | cis_id           | CRN of CIS Service Instance |
 | domain_id           | ID id CIS Domain |
-| ibm_cis           | Details of CIS Service Instance |
-| ibm_domain           | Details id CIS Domain|
 | dns_record_ids           | Ids CIS DNS Records |
-| dns_records           | Details of CIS DNS Records |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

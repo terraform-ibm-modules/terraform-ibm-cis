@@ -121,11 +121,8 @@ module "cis-glb" {
 | Name                                    | Description                           |
 |-----------------------------------------|---------------------------------------|
 | glb_id           | Id of CIS GLB |
-| cis_glb           | Details of CIS GLB |
 | origin_pool_ids           | Ids of CIS origin pools |
-| cis_pools           | Details of CIS origin pools |
 | health_check_id           | Id of CIS Health Check |
-| cis_health_check           | Details of CIS Health Check |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
