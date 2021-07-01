@@ -6,9 +6,9 @@ module "cis-domain" {
   domain                = var.domain
 }
 module "cis-glb" {
+  source             = "../../modules/glb"
   cis_id             = module.cis-domain.cis_id
   domain_id          = module.cis-domain.domain_id
-  source             = "../../modules/glb"
   glb_name           = join(".", [var.glb_name, var.domain])
   fallback_pool_name = local.origin_pools[0].name
   glb_description    = "Load balancer"
