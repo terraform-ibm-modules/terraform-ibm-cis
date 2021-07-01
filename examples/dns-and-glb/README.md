@@ -14,9 +14,9 @@ module "cis-domain" {
   record_set            = local.record_set
 }
 module "cis-glb" {
+  source             = "../../modules/glb"
   cis_id             = module.cis-domain.cis_id
   domain_id          = module.cis-domain.domain_id
-  source             = "../../modules/glb"
   glb_name           = var.glb_name
   fallback_pool_name = var.fallback_pool_name
   region_pools       = local.region_pools

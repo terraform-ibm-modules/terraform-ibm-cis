@@ -1,17 +1,13 @@
 # IBM CIS Terraform Module
 
 This is a collection of modules that make it easier to provision Cloud Internet Services and its resources on IBM Cloud Platform:
-
-* [domain-and-dns_records](./modules/domain)
-* [glb-origin_poold-monitor](./modules/glb)
-
 ## Compatibility
 
 This module is meant for use with Terraform 0.13 and above versions.
 
 ## Example Usage
 
-Full examples are in the [examples](./examples/) folder, but basic usage is as follows for creation of CIS Instance, Domains, DNS Records, Health Checks, Origin Pools, GLB:
+Full examples are in the `examples` folder, but basic usage is as follows for creation of CIS Instance, Domains, DNS Records, Health Checks, Origin Pools, GLB:
 
 ```terraform
 module "cis-domain" {
@@ -23,9 +19,9 @@ module "cis-domain" {
   record_set            = local.record_set
 }
 module "cis-glb" {
+  source             = "../../modules/glb"
   cis_id             = module.cis-domain.cis_id
   domain_id          = module.cis-domain.domain_id
-  source             = "../../modules/glb"
   glb_name           = var.glb_name
   fallback_pool_name = var.fallback_pool_name
   region_pools       = local.region_pools

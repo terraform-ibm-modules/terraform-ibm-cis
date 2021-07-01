@@ -1,7 +1,4 @@
-variable "ibmcloud_api_key" {
-  description = "IBMCloud Api Key"
-  type        = string
-}
+
 variable "region" {
   description = "IBMCloud region"
   type        = string
