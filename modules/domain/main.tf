@@ -7,8 +7,9 @@ resource "ibm_cis" "cis_instance" {
   location          = "global"
 }
 data "ibm_cis" "cis_instance" {
-  count = var.is_cis_instance_exist == false ? 0 : 1
-  name  = var.service_name
+  count             = var.is_cis_instance_exist == false ? 0 : 1
+  name              = var.service_name
+  resource_group_id = var.resource_group_id
 }
 locals {
   cis_id    = var.is_cis_instance_exist == false ? ibm_cis.cis_instance[0].id : data.ibm_cis.cis_instance[0].id
