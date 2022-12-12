@@ -48,6 +48,11 @@ variable "glb_enabled" {
   type        = bool
   default     = null
 }
+variable "steering_policy" {
+  description = "Steering Policy"
+  type        = string
+  default     = "off"
+}
 variable "ttl" {
   description = "TTL of CIS Global Load Balancer"
   type        = number

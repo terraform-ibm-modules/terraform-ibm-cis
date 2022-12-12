@@ -8,6 +8,7 @@ resource "ibm_cis_global_load_balancer" "cis_glb" {
   proxied          = (var.glb_proxied != null ? var.glb_proxied : null)
   session_affinity = (var.session_affinity != null ? var.session_affinity : null)
   ttl              = (var.ttl != null ? var.ttl : null)
+  steering_policy  = (var.steering_policy != null ? var.steering_policy : "off")
   enabled          = (var.glb_enabled != null ? var.glb_enabled : null)
   dynamic region_pools {
     for_each = var.region_pools

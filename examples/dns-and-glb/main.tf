@@ -17,4 +17,5 @@ module "cis-glb" {
   region_pools       = local.region_pools
   origin_pools       = local.origin_pools
   monitors           = local.monitors
+  steering_policy    = var.steering_policy
 }

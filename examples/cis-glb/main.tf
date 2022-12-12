@@ -16,4 +16,5 @@ module "cis-glb" {
   glb_proxied        = var.glb_proxied
   session_affinity   = "cookie"
   origin_pools       = local.origin_pools
+  steering_policy    = var.steering_policy
 }
