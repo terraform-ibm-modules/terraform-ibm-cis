@@ -21,6 +21,12 @@ variable "is_cis_domain_exist" {
   default     = false
 }
 
+variable "steering_policy" {
+  description = "Steering Policy"
+  type        = string
+  default     = "off"
+}
+
 variable "plan" {
   type        = string
   description = "Plan of the CIS instance that has to be created"

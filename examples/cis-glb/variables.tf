@@ -34,6 +34,12 @@ variable "plan" {
   default = "standard"
 }
 
+variable "steering_policy" {
+  description = "Steering Policy"
+  type        = string
+  default     = "off"
+}
+
 variable "domain" {
   type        = string
   description = "Domain Name that has to be created on CIS Instance"
