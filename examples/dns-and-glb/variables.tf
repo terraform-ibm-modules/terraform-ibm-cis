@@ -30,7 +30,7 @@ variable "steering_policy" {
 variable "plan" {
   type        = string
   description = "Plan of the CIS instance that has to be created"
-  default = "standard"
+  default     = "standard"
 }
 
 variable "domain" {
@@ -48,4 +48,3 @@ variable "fallback_pool_name" {
   type        = string
   default     = "op1"
 }
-

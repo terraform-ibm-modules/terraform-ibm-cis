@@ -10,14 +10,14 @@ resource "ibm_cis_global_load_balancer" "cis_glb" {
   ttl              = (var.ttl != null ? var.ttl : null)
   steering_policy  = (var.steering_policy != null ? var.steering_policy : "off")
   enabled          = (var.glb_enabled != null ? var.glb_enabled : null)
-  dynamic region_pools {
+  dynamic "region_pools" {
     for_each = var.region_pools
     content {
       region   = region_pools.value.region
       pool_ids = lookup(region_pools.value, "pool_names", null) != null ? [for pool in lookup(region_pools.value, "pool_names") : ibm_cis_origin_pool.origin_pool[pool].id] : lookup(region_pools.value, "pool_ids", null)
     }
   }
-  dynamic pop_pools {
+  dynamic "pop_pools" {
     for_each = var.pop_pools
     content {
       pop      = region_pools.value.pop
@@ -30,7 +30,7 @@ resource "ibm_cis_origin_pool" "origin_pool" {
   cis_id   = var.cis_id
   for_each = { for pool in var.origin_pools : pool.name => pool }
   name     = each.value.name
-  dynamic origins {
+  dynamic "origins" {
     for_each = lookup(each.value, "origins")
     content {
       name    = origins.value.name
@@ -64,7 +64,7 @@ resource "ibm_cis_healthcheck" "health_check" {
   interval         = lookup(each.value, "interval", 60)
   retries          = lookup(each.value, "retries", 2)
 
-  dynamic headers {
+  dynamic "headers" {
     for_each = lookup(each.value, "headers", [])
     content {
       header = lookup(headers.value, "header", null)
@@ -72,4 +72,3 @@ resource "ibm_cis_healthcheck" "health_check" {
     }
   }
 }
-

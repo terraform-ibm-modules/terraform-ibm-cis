@@ -1,14 +1,10 @@
 locals {
-  record_set = [{
-    name    = "test-exmple.aaaa"
-    type    = "AAAA"
-    content = "2001::4"
-    ttl     = 900
-    },
+  record_set = [
     {
-      name = "test-exmple.loc"
-      type = "LOC"
-      ttl  = 900
+      name    = "test-exmple.loc"
+      type    = "LOC"
+      ttl     = 900
+      content = "2001::4"
       data = {
         altitude       = 98
         lat_degrees    = 60

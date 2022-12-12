@@ -1,4 +1,4 @@
-module "cis-domain" {
+module "cis_domain" {
   source                = "../../modules/domain"
   is_cis_instance_exist = var.is_cis_instance_exist
   service_name          = var.service_name
@@ -6,10 +6,10 @@ module "cis-domain" {
   domain                = var.domain
   plan                  = var.plan
 }
-module "cis-glb" {
+module "cis_glb" {
   source             = "../../modules/glb"
-  cis_id             = module.cis-domain.cis_id
-  domain_id          = module.cis-domain.domain_id
+  cis_id             = module.cis_domain.cis_id
+  domain_id          = module.cis_domain.domain_id
   glb_name           = join(".", [var.glb_name, var.domain])
   fallback_pool_name = local.origin_pools[0].name
   glb_description    = "Load balancer"

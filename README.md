@@ -1,36 +1,35 @@
 # IBM CIS Terraform Module
 
-This is a collection of modules that make it easier to provision Cloud Internet Services and its resources on IBM Cloud Platform:
+Collection of modules that make it easier to provision Cloud Internet Services and its resources on IBM Cloud Platform:
+
 ## Compatibility
 
 This module is meant for use with Terraform 0.13 and above versions.
 
 ## Example Usage
 
-Full examples are in the `examples` folder, but basic usage is as follows for creation of CIS Instance, Domains, DNS Records, Health Checks, Origin Pools, GLB:
+Examples are covered in `examples` folder, but basic usage is as follows for creation of CIS Instance, Domains, DNS Records, Health Checks, Origin Pools, GLB:
 
 ```terraform
-module "cis-domain" {
+module "cis_domain" {
   source                = "../../modules/domain"
   is_cis_instance_exist = true
-  service_name          = var.service_name
+  service_name          = "CisTest"
   is_cis_domain_exist   = true
-  domain                = var.domain
+  domain                = "sub.cis-terraform.com"
   record_set            = local.record_set
 }
-module "cis-glb" {
+module "cis_glb" {
   source             = "../../modules/glb"
-  cis_id             = module.cis-domain.cis_id
-  domain_id          = module.cis-domain.domain_id
-  glb_name           = var.glb_name
-  fallback_pool_name = var.fallback_pool_name
+  cis_id             = module.cis_domain.cis_id
+  domain_id          = module.cis_domain.domain_id
+  glb_name           = "cis_glb"
+  fallback_pool_name = "cis_fpn"
   region_pools       = local.region_pools
   origin_pools       = local.origin_pools
   monitors           = local.monitors
 }
 ```
-
-### NOTE: To make use of a particular version of module, Set the `version` argument to respective module version
 
 ## Requirements
 
@@ -74,24 +73,15 @@ To destroy the resources
 
 `terraform destroy`
 
-All optional parameters by default will be set to null in respective example's varaible.tf file. If user wants to configure any optional paramter he has overwrite the default value.
-
-## Note
-
-All optional fields should be given value `null` in respective resource varaible.tf file. User can configure the same by overwriting with appropriate values.
-
-### Pre-commit Hooks
-
-Run the following command to execute the pre-commit hooks defined in `.pre-commit-config.yaml` file
-
-  `pre-commit run -a`
-
-We can install pre-coomit tool using
-
-  `pip install pre-commit`
 
 ## References
 
 [IBM-Cloud Cloud Internet Services docs](https://cloud.ibm.com/docs/cis/getting-started.html)
 
 [IBM-Cloud Cloud Internet Services Registry docs](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis)
+
+## Contributing
+
+To set up your local development environment, see [Local development setup](https://terraform-ibm-modules.github.io/documentation/#/local-dev-setup) in the project documentation.
+
+To set up your local development environment, see [Local development setup](https://terraform-ibm-modules.github.io/documentation/#/local-dev-setup) in the project documentation.

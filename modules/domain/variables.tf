@@ -37,4 +37,24 @@ variable "domain" {
 variable "record_set" {
   description = "Set objects of CIS Service Instance DNS Records that has to be created"
   default     = []
+  type = list(object({
+    name    = string
+    type    = string
+    ttl     = number
+    content = string
+    data = object({
+      altitude       = number
+      lat_degrees    = number
+      lat_direction  = string
+      lat_minutes    = number
+      lat_seconds    = number
+      long_degrees   = number
+      long_direction = string
+      long_minutes   = number
+      long_seconds   = number
+      precision_horz = number
+      precision_vert = number
+      size           = number
+    })
+  }))
 }
