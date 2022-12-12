@@ -3,15 +3,17 @@ variable "is_cis_instance_exist" {
   description = "Determines if cis instance exits or not. If set true it will not create a cis instance"
   default     = null
 }
+
 variable "service_name" {
   type        = string
   description = "Name of the CIS instance."
 }
+
 variable "plan" {
   type        = string
   description = "Plan of the CIS instance that has to be created"
-  default     = null
 }
+
 variable "resource_group_id" {
   type        = string
   description = "Resource group ID in which CIS instance that has to be created"

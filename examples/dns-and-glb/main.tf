@@ -1,11 +1,13 @@
 module "cis-domain" {
   source                = "../../modules/domain"
-  is_cis_instance_exist = true
+  is_cis_instance_exist = var.is_cis_instance_exist
   service_name          = var.service_name
-  is_cis_domain_exist   = true
+  is_cis_domain_exist   = var.is_cis_domain_exist
   domain                = var.domain
   record_set            = local.record_set
+  plan                  = var.plan
 }
+
 module "cis-glb" {
   source             = "../../modules/glb"
   cis_id             = module.cis-domain.cis_id
