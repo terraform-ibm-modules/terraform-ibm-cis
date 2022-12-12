@@ -9,6 +9,24 @@ variable "service_name" {
   description = "Name of the CIS instance that has to be created"
   default     = "CISTest"
 }
+variable "is_cis_instance_exist" {
+  type        = bool
+  description = "Make this as true to read existing CIS instance"
+  default     = false
+}
+
+variable "is_cis_domain_exist" {
+  type        = bool
+  description = "Make this as true to read existing CIS domain"
+  default     = false
+}
+
+variable "plan" {
+  type        = string
+  description = "Plan of the CIS instance that has to be created"
+  default = "standard"
+}
+
 variable "domain" {
   type        = string
   description = "Domain Name that has to be created on CIS Instance"
