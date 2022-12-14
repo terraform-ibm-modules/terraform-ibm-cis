@@ -8,7 +8,7 @@ variable "domain_id" {
   type        = string
 }
 
-// GLB Variables
+# GLB Variables
 variable "glb_name" {
   description = "Name of CIS Global Load Balancer"
   type        = string
@@ -61,18 +61,31 @@ variable "ttl" {
 variable "region_pools" {
   description = "Region Pools of CIS Global Load Balancer"
   default     = []
+  type        = list(any)
 }
 variable "pop_pools" {
   description = "Pop Pools of CIS Global Load Balancer"
   default     = []
+  type        = list(any)
 }
 
-// Pool Variables
+# Pool Variables
 variable "origin_pools" {
   description = "List of objects of origin pools"
+  default     = []
+  type = list(object({
+    name = string
+    origins = list(object({
+      name    = string
+      address = string
+      enabled = bool
+    }))
+    enabled = bool
+  }))
 }
-//Health Check Variables
+# Health Check Variables
 variable "monitors" {
   description = "List of monitors to be created"
   default     = []
+  type        = list(any)
 }

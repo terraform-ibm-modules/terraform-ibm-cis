@@ -5,85 +5,60 @@ This module is used to manage CIS Instance, CIS Domains, CIS DNS Records.
 ## Example Usage
 
 ```terraform
-module "cis-domain" {
+module "cis_domain" {
   source                = "../../modules/domain"
   is_cis_instance_exist = true
-  service_name          = var.service_name
+  service_name          = "CISTest"
   is_cis_domain_exist   = true
-  domain                = var.domain
+  domain                = "sub.cis-terraform.com"
   record_set            = local.record_set
 }
 
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## CIS Instance and Domain Inputs
+## Requirements
 
-| Name                                    | Description                           | Type   | Default | Required |
-|-----------------------------------------|---------------------------------------|--------|---------|----------|
-| is_cis_instance_exist | Determines if cis instance exits or not. If set false it will create a cis instance with given name. | bool | n/a | yes  |
-| service_name           | Name of the CIS instance | string | n/a     | yes      |
-| plan           | Plan of the CIS instance that has to be created | string | n/a     | yes      |
-| resource_group_id     | Resource group ID in which CIS instance that has to be created | string | n/a     | yes      |
-| tags           | Tags attached to CIS Instance | list(string) | n/a     | no      |
-| is_cis_domain_exist      | Determines if cis domains exits or not. If set false it will create a cis domain | bool | n/a     | yes      |
-| domain           | Domain name of CIS Instance | string | n/a     | yes      |
+| Name | Version |
+|------|---------|
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | 1.41.1 |
 
-### NOTE: If `is_cis_instance_exist` is set to true, Following attributes `plan`, `resource_group_id`,`tags` are not required
+## Modules
 
-## CIS DNS Records Inputs
+No modules.
 
-| Name                                    | Description                           | Type   | Default | Required |
-|-----------------------------------------|---------------------------------------|--------|---------|----------|
-| record_set           | List of objects of DNS Records. If not provided, Records will not be created. | list(obj) | n/a     | no      |
+## Resources
 
-### record_set Object
+| Name | Type |
+|------|------|
+| [ibm_cis.cis_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.41.1/docs/resources/cis) | resource |
+| [ibm_cis_dns_record.dns_rescords](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.41.1/docs/resources/cis_dns_record) | resource |
+| [ibm_cis_domain.cis_domain](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.41.1/docs/resources/cis_domain) | resource |
+| [ibm_cis.cis_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.41.1/docs/data-sources/cis) | data source |
+| [ibm_cis_domain.cis_domain](https://registry.terraform.io/providers/IBM-Cloud/ibm/1.41.1/docs/data-sources/cis_domain) | data source |
 
-| Name                                    | Description                           | Type   | Default | Required |
-|-----------------------------------------|---------------------------------------|--------|---------|----------|
-| name           | The name of a DNS record. | string | n/a     | yes      |
-| type           | The type of the DNS record to be created.| string | n/a     | yes      |
-| content           | The (string) value of the record, e.g. "192.168.127.127". Conflicts with `data` | string | n/a     | no      |
-| data           | Map of attributes that constitute the record value. Only for LOC, CAA and SRV record types. Find the keys of map in below table. This attribute conflicts with `content`| map | n/a     | yes      |
-| ttl           | TTL of the record. It should be automatic(i.e ttl=1) if the record is proxied. Terraform provider takes ttl in unit seconds. Therefore, it starts with value 120. | number | n/a     | no      |
-| priority           | The priority of the record. Mandatory field for SRV record type. | number | n/a     | no      |
-| proxied           | Whether the record gets CIS's origin protection | bool | n/a     | no      |
+## Inputs
 
-### data MAP
-
-| Name                                    | Description                           | Type   | Default | Required |
-|-----------------------------------------|---------------------------------------|--------|---------|----------|
-| weight |  The weight of distributing queries among multiple target servers. Mandatory field for SRV record | number| n/a|no|
-| port |  The port number of the target server. Mandatory field for SRV record.| number| n/a|no|
-| service |  The symbolic name of the desired service, start with an underscore (\_). Mandatory field for SRV record.| number| n/a|no|
-| protocol |  The symbolic name of the desired protocol. Madatory field for SRV record.| number| n/a|no|
-| altitude |  The LOC altitude. Mondatory field for LOC record.| number| n/a|no|
-| size |  The LOC altitude size. Mondatory field for LOC record.| number| n/a|no|
-| lat_degrees |  The LOC latitude degrees. Mondatory field for LOC record.| number| n/a|no|
-| lat_direction |  The LOC latitude direction ("N", "E", "S", "W"). Mondatory field for LOC record.| string | n/a|no|
-| lat_minutes |  The LOC latitude minutes. Mondatory field for LOC record.| number| n/a|no|
-| lat_seconds |  The LOC latitude seconds. Mondatory field for LOC record.| number| n/a|no|
-| long_degrees |  The LOC Longitude degrees. Mondatory field for LOC record.| number| n/a|no|
-| long_direction |  The LOC longitude direction ("N", "E", "S", "W"). Mondatory field for LOC record.| string| n/a|no|
-| long_minutes |  The LOC longitude minutes. Mondatory field for LOC record.| number| n/a|no|
-| long_seconds |  The LOC longitude seconds. Mondatory field for LOC record.| number| n/a|no|
-| precision_horz |  The LOC horizontal precision. Mondatory field for LOC record.| number| n/a|no|
-| precision_vert |  The LOC vertical precision. Mondatory field for LOC record.| number| n/a|no|
-| priority |  The priority of the record| number| n/a|no|
-
+| Name | Description | Type | Default | Required |
+|------|-------------|------|---------|:--------:|
+| <a name="input_domain"></a> [domain](#input\_domain) | Domain name of CIS Instance | `string` | n/a | yes |
+| <a name="input_is_cis_domain_exist"></a> [is\_cis\_domain\_exist](#input\_is\_cis\_domain\_exist) | Determines if cis domains exits or not. If set true it will not create a cis domain | `bool` | `null` | no |
+| <a name="input_is_cis_instance_exist"></a> [is\_cis\_instance\_exist](#input\_is\_cis\_instance\_exist) | Determines if cis instance exits or not. If set true it will not create a cis instance | `bool` | `null` | no |
+| <a name="input_plan"></a> [plan](#input\_plan) | Plan of the CIS instance that has to be created | `string` | n/a | yes |
+| <a name="input_record_set"></a> [record\_set](#input\_record\_set) | Set objects of CIS Service Instance DNS Records that has to be created | <pre>list(object({<br>    name    = string<br>    type    = string<br>    ttl     = number<br>    content = string<br>    data = object({<br>      altitude       = number<br>      lat_degrees    = number<br>      lat_direction  = string<br>      lat_minutes    = number<br>      lat_seconds    = number<br>      long_degrees   = number<br>      long_direction = string<br>      long_minutes   = number<br>      long_seconds   = number<br>      precision_horz = number<br>      precision_vert = number<br>      size           = number<br>    })<br>  }))</pre> | `[]` | no |
+| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | Resource group ID in which CIS instance that has to be created | `string` | `null` | no |
+| <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Name of the CIS instance. | `string` | n/a | yes |
+| <a name="input_tags"></a> [tags](#input\_tags) | Tags attached to CIS Instance | `list(string)` | `null` | no |
 
 ## Outputs
 
-| Name                                    | Description                           |
-|-----------------------------------------|---------------------------------------|
-| cis_id           | CRN of CIS Service Instance |
-| domain_id           | ID id CIS Domain |
-| dns_record_ids           | Ids CIS DNS Records |
-
+| Name | Description |
+|------|-------------|
+| <a name="output_cis_id"></a> [cis\_id](#output\_cis\_id) | CRN of CIS Service Instance |
+| <a name="output_dns_record_ids"></a> [dns\_record\_ids](#output\_dns\_record\_ids) | Ids CIS DNS Records |
+| <a name="output_domain_id"></a> [domain\_id](#output\_domain\_id) | ID id CIS Domain |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
-### NOTE: To make use of a particular version of module, Set the `version` argument to respective module version
-
 
 ## Usage
 
