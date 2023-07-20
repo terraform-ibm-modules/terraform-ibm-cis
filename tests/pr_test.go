@@ -21,7 +21,6 @@ func setupOptions(t *testing.T, prefix string) *testhelper.TestOptions {
 
 	options.TerraformVars = map[string]interface{}{
 		"service_name":    fmt.Sprintf("%s-%s", options.Prefix, "cis-new"),
-		"plan":            "standard",
 		"pool_name":       fmt.Sprintf("%s-%s", options.Prefix, "cis-pool"),
 		"steering_policy": "off",
 	}
