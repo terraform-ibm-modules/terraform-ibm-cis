@@ -30,7 +30,7 @@ variable "steering_policy" {
 variable "plan" {
   type        = string
   description = "Plan of the CIS instance that has to be created"
-  default     = "standard"
+  default     = "standard-next"
 }
 
 variable "domain" {
