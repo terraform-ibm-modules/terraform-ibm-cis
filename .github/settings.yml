@@ -23,3 +23,5 @@ repository:
   # Uncomment this description property
   # and update the description to the current repo description.
   description: "Terraform module to create and work with internet services on IBM Cloud"
+
+  topics: terraform, ibm-cloud, terraform-module, cloud-internet-services, cis
