@@ -54,7 +54,7 @@ No resources.
 | <a name="input_glb_name"></a> [glb\_name](#input\_glb\_name) | Name of CIS Global Load Balancer | `string` | `"test.cis-terraform.com"` | no |
 | <a name="input_is_cis_domain_exist"></a> [is\_cis\_domain\_exist](#input\_is\_cis\_domain\_exist) | Make this as true to read existing CIS domain | `bool` | `false` | no |
 | <a name="input_is_cis_instance_exist"></a> [is\_cis\_instance\_exist](#input\_is\_cis\_instance\_exist) | Make this as true to read existing CIS instance | `bool` | `false` | no |
-| <a name="input_plan"></a> [plan](#input\_plan) | Plan of the CIS instance that has to be created | `string` | `"standard"` | no |
+| <a name="input_plan"></a> [plan](#input\_plan) | Plan of the CIS instance that has to be created | `string` | `"standard-next"` | no |
 | <a name="input_region"></a> [region](#input\_region) | IBMCloud region | `string` | `"us-south"` | no |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Name of the CIS instance that has to be created | `string` | `"CISTest"` | no |
 | <a name="input_steering_policy"></a> [steering\_policy](#input\_steering\_policy) | Steering Policy | `string` | `"off"` | no |
