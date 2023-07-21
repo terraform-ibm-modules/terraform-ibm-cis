@@ -31,7 +31,7 @@ variable "glb_proxied" {
 variable "plan" {
   type        = string
   description = "Plan of the CIS instance that has to be created"
-  default     = "standard"
+  default     = "standard-next"
 }
 
 variable "steering_policy" {
