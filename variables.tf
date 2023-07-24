@@ -2,14 +2,29 @@
 # List of input varaibles - example
 ##############################################################################
 
-# variable "is_kp_instance_exist" {
-#   default     = false
-#   description = "Determines if kp instance exists on not. If false, it creates and instance with given name."
-#   type        = bool
-# }
-# variable "resource_group_id" {
-#   type        = string
-#   description = "Resource group ID of instance"
-# }
+variable "resource_group_id" {
+  type        = string
+  description = "Resource group ID where CIS instance will be created."
+}
 
+variable "service_name" {
+  type        = string
+  description = "Name of the CIS instance."
+}
+
+variable "plan" {
+  type        = string
+  description = "Plan for the CIS instance. Standard-next or trial."
+  default     = "trial"
+  validation {
+    condition     = contains(["standard-next", "trial"], var.plan)
+    error_message = "Only the free and standard-next plan is supported currently"
+  }
+}
+
+variable "tags" {
+  type        = list(string)
+  description = "List of tags to be associated to CIS instance."
+  default     = []
+}
 ##############################################################################

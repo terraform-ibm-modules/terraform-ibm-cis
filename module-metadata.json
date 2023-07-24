@@ -1,12 +1,132 @@
 {
   "path": ".",
-  "variables": {},
-  "outputs": {},
+  "variables": {
+    "plan": {
+      "name": "plan",
+      "type": "string",
+      "description": "Plan for the CIS instance. Standard-next or trial.",
+      "default": "trial",
+      "required": true,
+      "source": [
+        "ibm_cis.cis_instance.plan"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 15
+      }
+    },
+    "resource_group_id": {
+      "name": "resource_group_id",
+      "type": "string",
+      "description": "Resource group ID where CIS instance will be created.",
+      "required": true,
+      "source": [
+        "ibm_cis.cis_instance.resource_group_id"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 5
+      },
+      "cloud_data_type": "resource_group",
+      "immutable": true,
+      "computed": true
+    },
+    "service_name": {
+      "name": "service_name",
+      "type": "string",
+      "description": "Name of the CIS instance.",
+      "required": true,
+      "source": [
+        "ibm_cis.cis_instance.name"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 10
+      }
+    },
+    "tags": {
+      "name": "tags",
+      "type": "list(string)",
+      "description": "List of tags to be associated to CIS instance.",
+      "default": [],
+      "source": [
+        "ibm_cis.cis_instance.tags"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 25
+      },
+      "min_length": 1,
+      "max_length": 128,
+      "matches": "^[A-Za-z0-9:_ .-]+$",
+      "computed": true,
+      "elem": {
+        "type": "TypeString"
+      }
+    }
+  },
+  "outputs": {
+    "cis_instance_crn": {
+      "name": "cis_instance_crn",
+      "description": "CRN of CIS instance",
+      "value": "ibm_cis.cis_instance.id",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 15
+      }
+    },
+    "cis_instance_guid": {
+      "name": "cis_instance_guid",
+      "description": "GUID of CIS instance",
+      "value": "ibm_cis.cis_instance.guid",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 10
+      },
+      "type": "TypeString"
+    },
+    "cis_instance_name": {
+      "name": "cis_instance_name",
+      "description": "CIS instance name",
+      "value": "ibm_cis.cis_instance.name",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 5
+      },
+      "type": "TypeString"
+    }
+  },
   "required_core": [
     "\u003e= 1.3.0"
   ],
-  "required_providers": {},
-  "managed_resources": {},
+  "required_providers": {
+    "ibm": {
+      "source": "IBM-Cloud/ibm",
+      "version_constraints": [
+        "\u003e= 1.49.0, \u003c 2.0.0"
+      ]
+    }
+  },
+  "managed_resources": {
+    "ibm_cis.cis_instance": {
+      "mode": "managed",
+      "type": "ibm_cis",
+      "name": "cis_instance",
+      "attributes": {
+        "name": "service_name",
+        "plan": "plan",
+        "resource_group_id": "resource_group_id",
+        "tags": "tags"
+      },
+      "provider": {
+        "name": "ibm"
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 5
+      }
+    }
+  },
   "data_resources": {},
   "module_calls": {}
 }
