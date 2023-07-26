@@ -1,19 +1,15 @@
 # Module CIS Domain
 
-This module is used to manage CIS Instance, CIS Domains, CIS DNS Records.
+This module is used to manage CIS Domains.
 
 ## Example Usage
 
 ```terraform
 module "cis_domain" {
   source                = "../../modules/domain"
-  is_cis_instance_exist = true
-  service_name          = "CISTest"
-  is_cis_domain_exist   = true
   domain                = "sub.cis-terraform.com"
-  record_set            = local.record_set
+  cis_id                = var.cis_instance_id
 }
-
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
