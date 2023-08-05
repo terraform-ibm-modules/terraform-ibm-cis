@@ -27,25 +27,25 @@ module "cis_glb" {
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-## Requirements
+### Requirements
 
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | 1.49.0 |
 
-## Modules
+### Modules
 
 | Name | Source | Version |
 |------|--------|---------|
 | <a name="module_cis_domain"></a> [cis\_domain](#module\_cis\_domain) | ../../modules/domain | n/a |
 | <a name="module_cis_glb"></a> [cis\_glb](#module\_cis\_glb) | ../../modules/glb | n/a |
 
-## Resources
+### Resources
 
 No resources.
 
-## Inputs
+### Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
@@ -59,7 +59,7 @@ No resources.
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Name of the CIS instance that has to be created | `string` | `"CISTest"` | no |
 | <a name="input_steering_policy"></a> [steering\_policy](#input\_steering\_policy) | Steering Policy | `string` | `"off"` | no |
 
-## Outputs
+### Outputs
 
 | Name | Description |
 |------|-------------|
