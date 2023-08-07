@@ -29,13 +29,12 @@ variable "resource_tags" {
 variable "plan" {
   type        = string
   description = "Plan for the CIS instance. Standard-next or free."
-  default     = "standard-next"
+  default     = "trial"
 }
 
 variable "domain" {
   type        = string
   description = "Domain name of CIS Instance"
-  default     = "sm1.goldeneye.dev.cloud.ibm.com"
 }
 
 variable "record_set" {
@@ -73,7 +72,7 @@ variable "record_set" {
   default = [
     {
       type    = "A"
-      name    = "test-exmple1"
+      name    = "test-example1"
       content = "1.2.3.4"
       ttl     = 900
     }

@@ -1,14 +1,31 @@
-# Module CIS Domain
+# Module CIS DNS
 
 This module is used to manage CIS DNS Records.
 
 ## Example Usage
 
 ```terraform
-module "cis_domain" {
+module "cis_dns_records" {
   source                = "../../modules/dns"
-  domain                = "sub.cis-terraform.com"
+  domain_id             = var.domain_id
   cis_id                = var.cis_instance_id
+  records               = [
+    {
+      type    = "A"
+      name    = "test-example1"
+      content = "1.2.3.4"
+      ttl     = 900
+    },
+    {
+      name    = "test-example.caa"
+      type    = "CAA"
+      ttl     = 900
+      data = {
+        tag   = "http"
+        value = "domain.com"
+      }
+    }
+  ]
 }
 ```
 
