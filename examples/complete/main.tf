@@ -29,5 +29,20 @@ module "cis_instance" {
 module "cis_domain" {
   source          = "../../modules/domain"
   domain          = var.domain
-  cis_instance_id = module.cis_instance.cis_instance_guid
+  cis_instance_id = module.cis_instance.cis_instance_id
+}
+
+##############################################################################
+# Add dns records to CIS instance
+##############################################################################
+
+# locals {
+#   dummy_value = { for rec in var.record_set : join("/", [lookup(rec, "name", ""), rec.type]) => rec }
+# }
+
+module "cis_dns_records" {
+  source          = "../../modules/dns"
+  cis_instance_id = module.cis_instance.cis_instance_id
+  domain_id       = module.cis_domain.cis_domain.domain_id
+  record_set      = var.record_set
 }

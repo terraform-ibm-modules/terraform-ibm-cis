@@ -29,10 +29,53 @@ variable "resource_tags" {
 variable "plan" {
   type        = string
   description = "Plan for the CIS instance. Standard-next or free."
-  default     = "trial"
+  default     = "standard-next"
 }
 
 variable "domain" {
   type        = string
   description = "Domain name of CIS Instance"
+  default     = "sm1.goldeneye.dev.cloud.ibm.com"
+}
+
+variable "record_set" {
+  description = "Create DNS records of CIS Instance"
+  type = list(object({
+    name     = optional(string)
+    type     = string
+    ttl      = optional(number)
+    content  = optional(string)
+    priority = optional(number)
+    data = optional(object({
+      altitude       = optional(number)
+      lat_degrees    = optional(number)
+      lat_direction  = optional(string)
+      lat_minutes    = optional(number)
+      lat_seconds    = optional(number)
+      long_degrees   = optional(number)
+      long_direction = optional(string)
+      long_minutes   = optional(number)
+      long_seconds   = optional(number)
+      precision_horz = optional(number)
+      precision_vert = optional(number)
+      size           = optional(number)
+      tag            = optional(string)
+      value          = optional(string)
+      port           = optional(number)
+      priority       = optional(number)
+      proto          = optional(string)
+      service        = optional(string)
+      target         = optional(string)
+      weight         = optional(number)
+      name           = optional(string)
+    }))
+  }))
+  default = [
+    {
+      type    = "A"
+      name    = "test-exmple1"
+      content = "1.2.3.4"
+      ttl     = 900
+    }
+  ]
 }
