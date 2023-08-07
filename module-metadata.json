@@ -66,15 +66,6 @@
     }
   },
   "outputs": {
-    "cis_instance_crn": {
-      "name": "cis_instance_crn",
-      "description": "CRN of CIS instance",
-      "value": "ibm_cis.cis_instance.id",
-      "pos": {
-        "filename": "outputs.tf",
-        "line": 15
-      }
-    },
     "cis_instance_guid": {
       "name": "cis_instance_guid",
       "description": "GUID of CIS instance",
@@ -84,6 +75,15 @@
         "line": 10
       },
       "type": "TypeString"
+    },
+    "cis_instance_id": {
+      "name": "cis_instance_id",
+      "description": "CRN of CIS instance",
+      "value": "ibm_cis.cis_instance.id",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 15
+      }
     },
     "cis_instance_name": {
       "name": "cis_instance_name",

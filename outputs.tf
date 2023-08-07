@@ -12,7 +12,7 @@ output "cis_instance_guid" {
   value       = ibm_cis.cis_instance.guid
 }
 
-output "cis_instance_crn" {
+output "cis_instance_id" {
   description = "CRN of CIS instance"
   value       = ibm_cis.cis_instance.id
 }

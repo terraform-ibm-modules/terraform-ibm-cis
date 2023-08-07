@@ -117,7 +117,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cis_instance_crn"></a> [cis\_instance\_crn](#output\_cis\_instance\_crn) | CRN of CIS instance |
 | <a name="output_cis_instance_guid"></a> [cis\_instance\_guid](#output\_cis\_instance\_guid) | GUID of CIS instance |
+| <a name="output_cis_instance_id"></a> [cis\_instance\_id](#output\_cis\_instance\_id) | CRN of CIS instance |
 | <a name="output_cis_instance_name"></a> [cis\_instance\_name](#output\_cis\_instance\_name) | CIS instance name |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
