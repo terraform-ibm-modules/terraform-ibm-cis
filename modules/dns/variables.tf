@@ -1,12 +1,12 @@
 
 variable "cis_instance_id" {
   type        = string
-  description = "ID of CIS instance"
+  description = "ID of the CIS instance"
 }
 
 variable "domain_id" {
   type        = string
-  description = "Domain ID of CIS Instance"
+  description = "ID of the domain to add a DNS record"
 }
 
 variable "record_set" {
@@ -14,31 +14,32 @@ variable "record_set" {
   type = list(object({
     name     = optional(string)
     type     = string
-    ttl      = optional(number)
+    ttl      = optional(number) # in unit seconds, starts with value 120
     content  = optional(string)
-    priority = optional(number)
+    priority = optional(number) # mandatory for SRV type of record
+    proxied  = optional(bool)   # default value is false
     data = optional(object({
-      altitude       = optional(number)
-      lat_degrees    = optional(number)
-      lat_direction  = optional(string)
-      lat_minutes    = optional(number)
-      lat_seconds    = optional(number)
-      long_degrees   = optional(number)
-      long_direction = optional(string)
-      long_minutes   = optional(number)
-      long_seconds   = optional(number)
-      precision_horz = optional(number)
-      precision_vert = optional(number)
-      size           = optional(number)
+      altitude       = optional(number) # mandatory for LOC type of record
+      lat_degrees    = optional(number) # mandatory for LOC type of record
+      lat_direction  = optional(string) # mandatory for LOC type of record
+      lat_minutes    = optional(number) # mandatory for LOC type of record
+      lat_seconds    = optional(number) # mandatory for LOC type of record
+      long_degrees   = optional(number) # mandatory for LOC type of record
+      long_direction = optional(string) # mandatory for LOC type of record
+      long_minutes   = optional(number) # mandatory for LOC type of record
+      long_seconds   = optional(number) # mandatory for LOC type of record
+      precision_horz = optional(number) # mandatory for LOC type of record
+      precision_vert = optional(number) # mandatory for LOC type of record
       tag            = optional(string)
       value          = optional(string)
-      port           = optional(number)
-      priority       = optional(number)
-      proto          = optional(string)
-      service        = optional(string)
       target         = optional(string)
-      weight         = optional(number)
-      name           = optional(string)
+      priority       = optional(number)
+      size           = optional(number) # mandatory for LOC type of record
+      name           = optional(string) # required for SRV type of record
+      port           = optional(number) # mandatory for SRV type of record
+      proto          = optional(string) # mandatory for SRV type of record
+      service        = optional(string) # mandatory for SRV type of record, starts with an '_'
+      weight         = optional(number) # mandatory for SRV type of record
     }))
   }))
   default = []

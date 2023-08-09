@@ -9,4 +9,5 @@ resource "ibm_cis_dns_record" "dns_records" {
   ttl       = lookup(each.value, "ttl", null)
   priority  = lookup(each.value, "priority", null)
   data      = lookup(each.value, "data", null)
+  proxied   = lookup(each.value, "proxied", false)
 }

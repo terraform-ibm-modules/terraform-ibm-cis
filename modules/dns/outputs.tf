@@ -1,5 +1,5 @@
 
 output "cis_dns_records" {
-  description = "CIS DNS records"
+  description = "DNS records of CIS instance"
   value       = ibm_cis_dns_record.dns_records
 }
