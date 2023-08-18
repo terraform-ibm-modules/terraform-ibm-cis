@@ -16,3 +16,8 @@ output "cis_dns_records" {
   description = "CIS DNS records"
   value       = module.cis_dns_records
 }
+
+output "cis_glb" {
+  description = "CIS Global Load Balancer"
+  value       = module.cis_glb
+}

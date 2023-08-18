@@ -28,7 +28,7 @@ variable "resource_tags" {
 
 variable "plan" {
   type        = string
-  description = "Plan for the CIS instance. Standard-next or free."
+  description = "Plan for the CIS instance. standard-next or trial."
   default     = "trial"
 }
 
@@ -72,9 +72,106 @@ variable "record_set" {
   default = [
     {
       type    = "A"
-      name    = "test-example1"
+      name    = "test-example2"
       content = "1.2.3.4"
       ttl     = 900
+    }
+  ]
+}
+
+variable "glb_name" {
+  description = "Name of CIS Global Load Balancer."
+  type        = string
+  default     = "glb"
+}
+
+variable "glb_description" {
+  description = "Description of CIS Global Load Balancer"
+  type        = string
+  default     = "Load Balancer"
+}
+
+variable "glb_enabled" {
+  description = "To enable / disable CIS Global Load Balancer. If set to true, the load balancer is enabled and can receive network traffic."
+  type        = bool
+  default     = true
+}
+
+variable "session_affinity" {
+  description = "Session Affinity of CIS Global Load Balancer"
+  type        = string
+  default     = "cookie"
+}
+
+variable "origin_pools" {
+  description = "List of objects of origin pools"
+  type = list(object({
+    name = string
+    origins = list(object({
+      name    = string
+      address = string
+      enabled = optional(bool)
+      weight  = optional(number)
+    }))
+    enabled            = bool # if set to true, the pool is enabled and can receive incoming network traffic
+    description        = optional(string)
+    check_regions      = list(string) # list of region codes
+    minimum_origins    = optional(number)
+    monitor_name       = optional(string)
+    notification_email = optional(string)
+  }))
+  default = [
+    {
+      name = "glb1"
+      origins = [{
+        name    = "o-1"
+        address = "1.1.1.0"
+        enabled = true
+        },
+        {
+          name    = "o-2"
+          address = "1.1.1.4"
+          enabled = true
+      }]
+      enabled       = true
+      description   = "Test GLB"
+      check_regions = ["WEU"]
+      monitor_name  = "hc1"
+    }
+  ]
+}
+
+variable "monitors" {
+  description = "List of monitors to be created"
+  type = list(object({
+    name             = string
+    description      = optional(string)
+    path             = optional(string)
+    type             = optional(string)
+    port             = optional(number)
+    expected_body    = string
+    expected_codes   = string
+    method           = optional(string)
+    timeout          = optional(number)
+    follow_redirects = optional(bool)
+    allow_insecure   = optional(bool)
+    interval         = optional(number)
+    retries          = optional(number)
+    headers = optional(list(object({
+      header = optional(string)
+      values = optional(string)
+    })))
+  }))
+  default = [
+    {
+      expected_body  = "alive"
+      expected_codes = "200"
+      method         = "GET"
+      timeout        = 7
+      path           = "/health"
+      interval       = 60
+      retries        = 3
+      name           = "hc1"
     }
   ]
 }

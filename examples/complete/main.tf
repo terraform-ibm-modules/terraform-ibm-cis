@@ -36,13 +36,26 @@ module "cis_domain" {
 # Add dns records to CIS instance
 ##############################################################################
 
-# locals {
-#   dummy_value = { for rec in var.record_set : join("/", [lookup(rec, "name", ""), rec.type]) => rec }
-# }
-
 module "cis_dns_records" {
   source          = "../../modules/dns"
   cis_instance_id = module.cis_instance.cis_instance_id
   domain_id       = module.cis_domain.cis_domain.domain_id
   record_set      = var.record_set
+}
+
+##############################################################################
+# Add global load balancer to CIS instance
+##############################################################################
+
+module "cis_glb" {
+  source             = "../../modules/glb"
+  cis_instance_id    = module.cis_instance.cis_instance_id
+  domain_id          = module.cis_domain.cis_domain.domain_id
+  glb_name           = join(".", [var.glb_name, var.domain])
+  fallback_pool_name = var.origin_pools[0].name
+  glb_description    = var.glb_description
+  glb_enabled        = var.glb_enabled
+  session_affinity   = var.session_affinity
+  origin_pools       = var.origin_pools
+  monitors           = var.monitors
 }
