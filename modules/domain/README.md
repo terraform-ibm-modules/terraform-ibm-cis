@@ -34,9 +34,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | GUID of CIS instance | `string` | n/a | yes |
-| <a name="input_domain"></a> [domain](#input\_domain) | Domain name of CIS Instance | `string` | n/a | yes |
-| <a name="input_domain_type"></a> [domain\_type](#input\_domain\_type) | The type of domain to be created. Default value is full for regular domains. To create a partial domain for CNAME setup, set this variable to partial. | `string` | `"full"` | no |
+| <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of CIS instance. | `string` | n/a | yes |
+| <a name="input_domain"></a> [domain](#input\_domain) | Domain name of CIS Instance. | `string` | n/a | yes |
+| <a name="input_domain_type"></a> [domain\_type](#input\_domain\_type) | Type of domain to be created. Default value is full for regular domains. To create a partial domain for CNAME setup, set this variable to partial. | `string` | `"full"` | no |
 
 ### Outputs
 

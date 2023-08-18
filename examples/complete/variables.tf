@@ -4,13 +4,13 @@
 
 variable "ibmcloud_api_key" {
   type        = string
-  description = "The IBM Cloud API Key"
+  description = "The IBM Cloud API Key."
   sensitive   = true
 }
 
 variable "prefix" {
   type        = string
-  description = "Prefix to append to all resources created by this example"
+  description = "Prefix to append to all resources created by this example."
   default     = "example-cis"
 }
 
@@ -22,7 +22,7 @@ variable "resource_group" {
 
 variable "resource_tags" {
   type        = list(string)
-  description = "Optional list of tags to be added to created resources"
+  description = "Optional list of tags to be added to created resources."
   default     = []
 }
 
@@ -34,11 +34,11 @@ variable "plan" {
 
 variable "domain" {
   type        = string
-  description = "Domain name of CIS Instance"
+  description = "Domain name of CIS Instance."
 }
 
 variable "record_set" {
-  description = "Create DNS records of CIS Instance"
+  description = "List of DNS records of CIS Instance."
   type = list(object({
     name     = optional(string)
     type     = string
@@ -86,7 +86,7 @@ variable "glb_name" {
 }
 
 variable "glb_description" {
-  description = "Description of CIS Global Load Balancer"
+  description = "Description of CIS Global Load Balancer."
   type        = string
   default     = "Load Balancer"
 }
@@ -98,13 +98,13 @@ variable "glb_enabled" {
 }
 
 variable "session_affinity" {
-  description = "Session Affinity of CIS Global Load Balancer"
+  description = "Session Affinity of CIS Global Load Balancer."
   type        = string
   default     = "cookie"
 }
 
 variable "origin_pools" {
-  description = "List of objects of origin pools"
+  description = "List of origins with an associated health check to be created for CIS Global Load Balancer."
   type = list(object({
     name = string
     origins = list(object({
@@ -117,7 +117,7 @@ variable "origin_pools" {
     description        = optional(string)
     check_regions      = list(string) # list of region codes
     minimum_origins    = optional(number)
-    monitor_name       = optional(string)
+    health_check_name  = optional(string)
     notification_email = optional(string)
   }))
   default = [
@@ -133,16 +133,16 @@ variable "origin_pools" {
           address = "1.1.1.4"
           enabled = true
       }]
-      enabled       = true
-      description   = "Test GLB"
-      check_regions = ["WEU"]
-      monitor_name  = "hc1"
+      enabled           = true
+      description       = "Test GLB"
+      check_regions     = ["WEU"]
+      health_check_name = "hc1"
     }
   ]
 }
 
-variable "monitors" {
-  description = "List of monitors to be created"
+variable "health_checks" {
+  description = "List of health checks to be created for CIS Global Load Balancer."
   type = list(object({
     name             = string
     description      = optional(string)

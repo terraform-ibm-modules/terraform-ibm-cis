@@ -1,16 +1,16 @@
 
 variable "cis_instance_id" {
   type        = string
-  description = "ID of the CIS instance"
+  description = "CRN of the CIS instance."
 }
 
 variable "domain_id" {
   type        = string
-  description = "ID of the domain to add a DNS record"
+  description = "ID of the domain to add a DNS record."
 }
 
 variable "record_set" {
-  description = "Create DNS records of CIS Instance"
+  description = "List of DNS records to be created."
   type = list(object({
     name     = optional(string)
     type     = string
@@ -30,11 +30,11 @@ variable "record_set" {
       long_seconds   = optional(number) # mandatory for LOC type of record
       precision_horz = optional(number) # mandatory for LOC type of record
       precision_vert = optional(number) # mandatory for LOC type of record
-      tag            = optional(string)
-      value          = optional(string)
-      target         = optional(string)
-      priority       = optional(number)
       size           = optional(number) # mandatory for LOC type of record
+      tag            = optional(string) # required for CAA type of record
+      value          = optional(string) # required for CAA type of record
+      target         = optional(string) # required for SRV type of record
+      priority       = optional(number) # required for SRV type of record
       name           = optional(string) # required for SRV type of record
       port           = optional(number) # mandatory for SRV type of record
       proto          = optional(string) # mandatory for SRV type of record

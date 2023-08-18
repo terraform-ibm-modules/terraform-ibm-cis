@@ -9,6 +9,6 @@ output "origin_pool_ids" {
 }
 
 output "health_check_id" {
-  description = "ID of CIS Health Check"
+  description = "IDs of CIS Health Checks"
   value       = [for monitor in ibm_cis_healthcheck.health_check : monitor.id]
 }

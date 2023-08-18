@@ -1,5 +1,5 @@
 ##############################################################################
-# List of modules or resources
+# Create Cloud Internet Services service
 ##############################################################################
 
 resource "ibm_cis" "cis_instance" {

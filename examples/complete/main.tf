@@ -57,5 +57,5 @@ module "cis_glb" {
   glb_enabled        = var.glb_enabled
   session_affinity   = var.session_affinity
   origin_pools       = var.origin_pools
-  monitors           = var.monitors
+  health_checks      = var.health_checks
 }

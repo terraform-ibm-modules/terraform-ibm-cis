@@ -1,3 +1,6 @@
+##############################################################################
+# Add Global Load Balancer
+##############################################################################
 
 resource "ibm_cis_global_load_balancer" "cis_glb" {
   cis_id           = var.cis_instance_id
@@ -27,6 +30,10 @@ resource "ibm_cis_global_load_balancer" "cis_glb" {
   }
 }
 
+##############################################################################
+# Add list of origins
+##############################################################################
+
 resource "ibm_cis_origin_pool" "origin_pool" {
   cis_id   = var.cis_instance_id
   for_each = { for pool in var.origin_pools : pool.name => pool }
@@ -45,13 +52,16 @@ resource "ibm_cis_origin_pool" "origin_pool" {
   enabled            = lookup(each.value, "enabled", null)
   minimum_origins    = lookup(each.value, "minimum_origins", null)
   notification_email = lookup(each.value, "notification_email", null)
-  monitor            = (lookup(each.value, "monitor_name", null) != null ? ibm_cis_healthcheck.health_check[lookup(each.value, "monitor_name")].id : null)
+  monitor            = (lookup(each.value, "health_check_name", null) != null ? ibm_cis_healthcheck.health_check[lookup(each.value, "health_check_name")].id : null)
 }
 
+##############################################################################
+# Add list of health checks
+##############################################################################
 
 resource "ibm_cis_healthcheck" "health_check" {
   cis_id           = var.cis_instance_id
-  for_each         = { for monitor in var.monitors : monitor.name => monitor }
+  for_each         = { for health_check in var.health_checks : health_check.name => health_check }
   description      = each.value.name
   path             = lookup(each.value, "path", "/")
   type             = lookup(each.value, "type", "http")

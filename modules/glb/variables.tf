@@ -16,47 +16,47 @@ variable "glb_name" {
 }
 
 variable "fallback_pool_id" {
-  description = "FallBack Pool ID. Conflicts with fallback_pool_name"
+  description = "ID of the fallback pool. Required if fallback_pool_name is not provided."
   type        = string
   default     = null
 }
 
 variable "default_pool_ids" {
-  description = "Default Pool IDs."
+  description = "List of default pool IDs."
   type        = list(string)
   default     = null
 }
 
 variable "fallback_pool_name" {
-  description = "FallBack Pool Name. Conflicts with fallback_pool_id"
+  description = "FallBack Pool Name. Required if fallback_pool_id is not provided."
   type        = string
 }
 
 variable "glb_description" {
-  description = "Description of CIS Global Load Balancer"
+  description = "Description of CIS Global Load Balancer."
   type        = string
   default     = null
 }
 
 variable "glb_proxied" {
-  description = "Proxy of CIS Global Load Balancer. Default value if false."
+  description = "Set to true if the host name receives origin protection by IBM CIS. Default value is false."
   type        = bool
   default     = false
 }
 
 variable "session_affinity" {
-  description = "Session Affinity of CIS Global Load Balancer"
+  description = "Session Affinity of CIS Global Load Balancer."
   type        = string
   default     = null
 }
 
 variable "glb_enabled" {
-  description = "To enable / disable CIS Global Load Balancer. If set to true, the load balancer is enabled and can receive network traffic."
+  description = "To enable/disable CIS Global Load Balancer. If set to true, the load balancer is enabled and can receive network traffic."
   type        = bool
 }
 
 variable "steering_policy" {
-  description = "Steering Policy of CIS Global Load Balancer"
+  description = "Steering Policy of CIS Global Load Balancer."
   type        = string
   default     = "off"
   validation {
@@ -66,13 +66,13 @@ variable "steering_policy" {
 }
 
 variable "ttl" {
-  description = "time-to-live(TTL) of CIS Global Load Balancer in seconds. Allowed value is 120 or greater if GLB is not in proxy."
+  description = "Time-to-live(TTL) in seconds of CIS Global Load Balancer(GLB). Allowed value is 120 or greater if GLB is not proxied otherwise it is automatically set."
   type        = number
   default     = null
 }
 
 variable "region_pools" {
-  description = "Region Pools of CIS Global Load Balancer"
+  description = "Region Pools of CIS Global Load Balancer."
   type = list(object({
     region   = string
     pool_ids = list(string)
@@ -81,7 +81,7 @@ variable "region_pools" {
 }
 
 variable "pop_pools" {
-  description = "Pop Pools of CIS Global Load Balancer"
+  description = "Pop Pools of CIS Global Load Balancer."
   type = list(object({
     pop      = string
     pool_ids = list(string)
@@ -91,7 +91,7 @@ variable "pop_pools" {
 
 # Pool Variables
 variable "origin_pools" {
-  description = "List of objects of origin pools"
+  description = "List of origins with an associated health check to be created for CIS Global Load Balancer."
   type = list(object({
     name = string
     origins = list(object({
@@ -104,15 +104,15 @@ variable "origin_pools" {
     description        = optional(string)
     check_regions      = list(string) # list of region codes
     minimum_origins    = optional(number)
-    monitor_name       = optional(string)
+    health_check_name  = optional(string)
     notification_email = optional(string)
   }))
   default = []
 }
 
 # Health Check Variables
-variable "monitors" {
-  description = "List of monitors to be created"
+variable "health_checks" {
+  description = "List of health checks to be created for CIS Global Load Balancer."
   type = list(object({
     name             = string
     description      = optional(string)
@@ -129,7 +129,7 @@ variable "monitors" {
     retries          = optional(number)
     headers = optional(list(object({
       header = optional(string)
-      values = optional(string) #Note Header is not currently supported in this version of the provider.
+      values = optional(string)
     })))
   }))
   default = []
