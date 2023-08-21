@@ -71,7 +71,7 @@ variable "is_add_dns_records" {
 variable "is_add_glb" {
   type        = bool
   description = "Set to true if need to add GLB feature in CIS instance."
-  default     = true
+  default     = false
 }
 
 variable "domain_name" {

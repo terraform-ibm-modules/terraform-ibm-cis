@@ -1,17 +1,16 @@
 package test
 
 import (
-	"fmt"
 	"testing"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/terraform-ibm-modules/ibmcloud-terratest-wrapper/testhelper"
 )
 
-const defaultExampleTerraformDir = "examples/cis-glb"
+const defaultExampleTerraformDir = "examples/complete"
 const resourceGroup = "geretain-test-resources"
 
-func setupOptions(t *testing.T, prefix string) *testhelper.TestOptions {
+func setupOptions(t *testing.T, prefix string, plan string, domain_name string) *testhelper.TestOptions {
 	options := testhelper.TestOptionsDefaultWithVars(&testhelper.TestOptions{
 		Testing:       t,
 		TerraformDir:  defaultExampleTerraformDir,
@@ -20,28 +19,28 @@ func setupOptions(t *testing.T, prefix string) *testhelper.TestOptions {
 	})
 
 	options.TerraformVars = map[string]interface{}{
-		"service_name":    fmt.Sprintf("%s-%s", options.Prefix, "cis-new"),
-		"pool_name":       fmt.Sprintf("%s-%s", options.Prefix, "cis-pool"),
-		"steering_policy": "off",
+		"prefix":      options.Prefix,
+		"plan":        plan,
+		"domain_name": domain_name,
 	}
 
 	return options
 }
 
-func TestRunBasicExample(t *testing.T) {
+func TestRunCompleteExample(t *testing.T) {
 	t.Parallel()
 
-	options := setupOptions(t, "cis-new")
+	options := setupOptions(t, "cis-new", "standard-next", "prtest.goldeneye.dev.cloud.ibm.com")
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
 	assert.NotNil(t, output, "Expected some output")
 }
 
-func TestRunUpgradeBasicExample(t *testing.T) {
+func TestRunUpgradeCompleteExample(t *testing.T) {
 	t.Parallel()
 	t.Skip()
-	options := setupOptions(t, "cis-new-upg")
+	options := setupOptions(t, "cis-new-upg", "standard-next", "prtest.goldeneye.dev.cloud.ibm.com")
 
 	output, err := options.RunTestUpgrade()
 	if !options.UpgradeTestSkipped {
