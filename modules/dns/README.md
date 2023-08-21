@@ -61,32 +61,3 @@ No modules.
 |------|-------------|
 | <a name="output_cis_dns_records"></a> [cis\_dns\_records](#output\_cis\_dns\_records) | DNS records of CIS instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
-## Usage
-
-Initialising Provider
-
-Make sure you declare a required providers ibm block to make use of IBM-Cloud Terraform Provider
-
-```terraform
-terraform {
-  required_providers {
-    ibm = {
-      source = "IBM-Cloud/ibm"
-      version = "<version>"  // Specify the version
-    }
-  }
-}
-```
-
-```terraform
-terraform init
-```
-
-```terraform
-terraform plan
-```
-
-```terraform
-terraform apply
-```

@@ -44,32 +44,3 @@ No modules.
 |------|-------------|
 | <a name="output_cis_domain"></a> [cis\_domain](#output\_cis\_domain) | CIS Domain details |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
-## Usage
-
-Initialising Provider
-
-Make sure you declare a required providers ibm block to make use of IBM-Cloud Terraform Provider
-
-```terraform
-terraform {
-  required_providers {
-    ibm = {
-      source = "IBM-Cloud/ibm"
-      version = "<version>"  // Specify the version
-    }
-  }
-}
-```
-
-```terraform
-terraform init
-```
-
-```terraform
-terraform plan
-```
-
-```terraform
-terraform apply
-```

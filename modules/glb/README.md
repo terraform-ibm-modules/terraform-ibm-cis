@@ -1,6 +1,6 @@
 # Module CIS Global Load Balancer (GLB)
 
-This module is used to provision Global Load Balancers, Origin pools and health checks.
+This module is used to provision Global Load Balancers, origin pools and health checks.
 
 ## Example Usage
 
@@ -67,35 +67,3 @@ No modules.
 | <a name="output_health_check_id"></a> [health\_check\_id](#output\_health\_check\_id) | IDs of CIS Health Checks |
 | <a name="output_origin_pool_ids"></a> [origin\_pool\_ids](#output\_origin\_pool\_ids) | IDs of CIS origin pools |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
-### NOTE: To make use of a particular version of module, Set the `version` argument to respective module version
-
-
-## Usage
-
-Initialising Provider
-
-Make sure you declare a required providers ibm block to make use of IBM-Cloud Terraform Provider
-
-```terraform
-terraform {
-  required_providers {
-    ibm = {
-      source = "IBM-Cloud/ibm"
-      version = "<version>"  // Specify the version
-    }
-  }
-}
-```
-
-```terraform
-terraform init
-```
-
-```terraform
-terraform plan
-```
-
-```terraform
-terraform apply
-```
