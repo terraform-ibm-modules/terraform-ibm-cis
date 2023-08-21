@@ -206,10 +206,6 @@ variable "health_checks" {
     allow_insecure   = optional(bool)
     interval         = optional(number)
     retries          = optional(number)
-    headers = optional(list(object({
-      header = optional(string)
-      values = optional(string)
-    })))
   }))
   default = [
     {
