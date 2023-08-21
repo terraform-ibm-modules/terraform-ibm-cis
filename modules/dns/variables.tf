@@ -43,4 +43,10 @@ variable "record_set" {
     }))
   }))
   default = []
+  validation {
+    condition = alltrue([
+      for record in var.record_set : contains(["A", "AAAA", "CNAME", "NS", "MX", "TXT", "LOC", "SRV", "CAA"], record.type)
+    ])
+    error_message = "The specified DNS record type is not a valid selection."
+  }
 }
