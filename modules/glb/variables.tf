@@ -41,11 +41,11 @@ variable "glb_description" {
 variable "glb_proxied" {
   description = "Set to true if the host name receives origin protection by IBM CIS. Default value is false."
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "session_affinity" {
-  description = "Session Affinity of CIS Global Load Balancer."
+  description = "Session Affinity of CIS Global Load Balancer. To make use of session affinity, glb_proxied has to be true."
   type        = string
   default     = null
 }
@@ -127,10 +127,6 @@ variable "health_checks" {
     allow_insecure   = optional(bool)
     interval         = optional(number)
     retries          = optional(number)
-    headers = optional(list(object({
-      header = optional(string)
-      values = optional(string)
-    })))
   }))
   default = []
 }

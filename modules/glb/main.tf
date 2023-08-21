@@ -74,12 +74,4 @@ resource "ibm_cis_healthcheck" "health_check" {
   allow_insecure   = lookup(each.value, "allow_insecure", false)
   interval         = lookup(each.value, "interval", 60)
   retries          = lookup(each.value, "retries", 2)
-
-  # dynamic "headers" {
-  #   for_each = lookup(each.value, "headers")
-  #   content {
-  #     header = lookup(headers.value, "header", null)
-  #     values = lookup(headers.value, "values", null)
-  #   }
-  # }
 }
