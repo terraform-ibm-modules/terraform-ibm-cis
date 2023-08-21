@@ -4,7 +4,7 @@ variable "cis_instance_id" {
   description = "CRN of CIS instance."
 }
 
-variable "domain" {
+variable "domain_name" {
   type        = string
   description = "Domain name of CIS Instance."
 }

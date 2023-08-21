@@ -11,7 +11,7 @@ variable "domain_id" {
 
 # GLB Variables
 variable "glb_name" {
-  description = "Name of CIS Global Load Balancer."
+  description = "The DNS name to associate with CIS Global Load Balancer. It can be a hostname."
   type        = string
 }
 
@@ -41,7 +41,7 @@ variable "glb_description" {
 variable "glb_proxied" {
   description = "Set to true if the host name receives origin protection by IBM CIS. Default value is false."
   type        = bool
-  default     = false
+  default     = true
 }
 
 variable "session_affinity" {

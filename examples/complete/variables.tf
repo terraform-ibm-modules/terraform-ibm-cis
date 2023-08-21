@@ -32,13 +32,56 @@ variable "plan" {
   default     = "trial"
 }
 
-variable "domain" {
+variable "is_cis_instance_exists" {
+  type        = bool
+  description = "Set to true if CIS instance exists already."
+  default     = false
+}
+
+variable "cis_instance_id" {
   type        = string
-  description = "Domain name of CIS Instance."
+  description = "CRN of CIS instance. Required if variable is_cis_instance_exists set to true."
+  default     = null
+}
+
+variable "is_add_domain" {
+  type        = bool
+  description = "Set to true if need to add domain in CIS instance."
+  default     = true
+}
+
+variable "existing_domain_id" {
+  type        = string
+  description = "Domain ID of CIS instance if exists already. Required if variable add_domain set to false."
+  default     = null
+}
+
+variable "existing_domain_name" {
+  type        = string
+  description = "Domain name of CIS instance if exists already. Required if variable add_domain set to false."
+  default     = null
+}
+
+variable "is_add_dns_records" {
+  type        = bool
+  description = "Set to true if need to add DNS records in CIS instance."
+  default     = true
+}
+
+variable "is_add_glb" {
+  type        = bool
+  description = "Set to true if need to add GLB feature in CIS instance."
+  default     = true
+}
+
+variable "domain_name" {
+  type        = string
+  description = "Domain name to be added for CIS Instance."
+  default     = "example.com"
 }
 
 variable "record_set" {
-  description = "List of DNS records of CIS Instance."
+  description = "List of DNS records to be added for CIS Instance."
   type = list(object({
     name     = optional(string)
     type     = string
@@ -72,7 +115,7 @@ variable "record_set" {
   default = [
     {
       type    = "A"
-      name    = "test-example2"
+      name    = "test-example"
       content = "1.2.3.4"
       ttl     = 900
     }
@@ -92,13 +135,19 @@ variable "glb_description" {
 }
 
 variable "glb_enabled" {
-  description = "To enable / disable CIS Global Load Balancer. If set to true, the load balancer is enabled and can receive network traffic."
+  description = "To enable/disable CIS Global Load Balancer. If set to true, the load balancer is enabled and can receive network traffic."
+  type        = bool
+  default     = true
+}
+
+variable "glb_proxied" {
+  description = "Set to true if the host name receives origin protection by IBM CIS. Default value is false."
   type        = bool
   default     = true
 }
 
 variable "session_affinity" {
-  description = "Session Affinity of CIS Global Load Balancer."
+  description = "Session Affinity of CIS Global Load Balancer. To make use of session affinity, glb_proxied has to be true."
   type        = string
   default     = "cookie"
 }

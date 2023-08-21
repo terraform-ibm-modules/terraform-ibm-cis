@@ -3,6 +3,7 @@
 ##############################################################################
 
 module "resource_group" {
+  count   = var.is_cis_instance_exists ? 0 : 1
   source  = "terraform-ibm-modules/resource-group/ibm"
   version = "1.0.5"
   # if an existing resource group is not set (null) create a new one using prefix
@@ -15,9 +16,10 @@ module "resource_group" {
 ##############################################################################
 
 module "cis_instance" {
+  count             = var.is_cis_instance_exists ? 0 : 1
   source            = "../../"
   service_name      = "${var.prefix}-cis"
-  resource_group_id = module.resource_group.resource_group_id
+  resource_group_id = module.resource_group[0].resource_group_id
   tags              = var.resource_tags
   plan              = var.plan
 }
@@ -27,9 +29,10 @@ module "cis_instance" {
 ##############################################################################
 
 module "cis_domain" {
+  count           = var.is_add_domain ? 1 : 0
   source          = "../../modules/domain"
-  domain          = var.domain
-  cis_instance_id = module.cis_instance.cis_instance_id
+  domain_name     = var.domain_name
+  cis_instance_id = var.is_cis_instance_exists ? var.cis_instance_id : module.cis_instance[0].cis_instance_id
 }
 
 ##############################################################################
@@ -37,9 +40,10 @@ module "cis_domain" {
 ##############################################################################
 
 module "cis_dns_records" {
+  count           = var.is_add_dns_records ? 1 : 0
   source          = "../../modules/dns"
-  cis_instance_id = module.cis_instance.cis_instance_id
-  domain_id       = module.cis_domain.cis_domain.domain_id
+  cis_instance_id = var.is_cis_instance_exists ? var.cis_instance_id : module.cis_instance[0].cis_instance_id
+  domain_id       = var.is_add_domain ? module.cis_domain[0].cis_domain.domain_id : var.existing_domain_id
   record_set      = var.record_set
 }
 
@@ -48,13 +52,15 @@ module "cis_dns_records" {
 ##############################################################################
 
 module "cis_glb" {
+  count              = var.is_add_glb ? 1 : 0
   source             = "../../modules/glb"
-  cis_instance_id    = module.cis_instance.cis_instance_id
-  domain_id          = module.cis_domain.cis_domain.domain_id
-  glb_name           = join(".", [var.glb_name, var.domain])
+  cis_instance_id    = var.is_cis_instance_exists ? var.cis_instance_id : module.cis_instance[0].cis_instance_id
+  domain_id          = var.is_add_domain ? module.cis_domain[0].cis_domain.domain_id : var.existing_domain_id
+  glb_name           = var.domain_name != null ? join(".", [var.glb_name, var.domain_name]) : join(".", [var.glb_name, var.existing_domain_name])
   fallback_pool_name = var.origin_pools[0].name
   glb_description    = var.glb_description
   glb_enabled        = var.glb_enabled
+  glb_proxied        = var.glb_proxied
   session_affinity   = var.session_affinity
   origin_pools       = var.origin_pools
   health_checks      = var.health_checks
