@@ -2,21 +2,6 @@
 
 This module is used to provision Global Load Balancers, origin pools and health checks.
 
-## Example Usage
-
-```terraform
-module "cis_glb" {
-  source             = "../../modules/glb"
-  cis_id             = var.cis_instance_id
-  domain_id          = var.domain_id
-  glb_name           = "cis_glb"
-  fallback_pool_name = "cis_fpn"
-  region_pools       = var.region_pools
-  origin_pools       = var.origin_pools
-  health_checks      = var.health_checks
-}
-
-```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements

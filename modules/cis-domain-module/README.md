@@ -2,15 +2,6 @@
 
 This module is used to manage CIS Domains.
 
-## Example Usage
-
-```terraform
-module "cis_domain" {
-  source                = "../../modules/domain"
-  domain                = "sub.cis-terraform.com"
-  cis_id                = var.cis_instance_id
-}
-```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements

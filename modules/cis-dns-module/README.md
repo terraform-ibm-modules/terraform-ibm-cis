@@ -1,40 +1,14 @@
 # Module CIS DNS
 
-This module is used to manage CIS DNS Records.
+This module is used to create and manage CIS DNS Records.
 
-## Example Usage
-
-```terraform
-module "cis_dns_records" {
-  source                = "../../modules/dns"
-  domain_id             = var.domain_id
-  cis_id                = var.cis_instance_id
-  records               = [
-    {
-      type    = "A"
-      name    = "test-example1"
-      content = "1.2.3.4"
-      ttl     = 900
-    },
-    {
-      name    = "test-example.caa"
-      type    = "CAA"
-      ttl     = 900
-      data = {
-        tag   = "http"
-        value = "domain.com"
-      }
-    }
-  ]
-}
-```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.49.0 |
 
 ### Modules

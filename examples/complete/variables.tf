@@ -80,7 +80,7 @@ variable "domain_name" {
   default     = "example.com"
 }
 
-variable "record_set" {
+variable "dns_record_set" {
   description = "List of DNS records to be added for CIS Instance."
   type = list(object({
     name     = optional(string)

@@ -12,20 +12,21 @@ provider "ibm" {
 }
 
 module "cis_instance" {
-  source            = "git::https://github.com/terraform-ibm-modules/terraform-ibm-cis?ref=main"
+  source            = "terraform-ibm-modules/cis/ibm"
+  version           = "latest" # Replace "latest" with a release version to lock into a specific release
   service_name      = "example-cis"
   resource_group_id = "000fb3134f214c3a9017554db4510f70" # pragma: allowlist secret
   plan              = "standard-next"
 }
 
 module "cis_domain" {
-  source                = "modules/domain"
+  source                = "terraform-ibm-modules/cis/ibm//cis-domain-module"
   domain_name           = "sub.cis-terraform.com"
   cis_instance_id       = module.cis_instance.cis_instance_id
 }
 
 module "cis_dns_records" {
-  source          = "modules/dns"
+  source          = "terraform-ibm-modules/cis/ibm//cis-dns-module"
   cis_instance_id = module.cis_instance.cis_instance_id
   domain_id       = module.cis_domain.cis_domain.domain_id
   record_set      = [
@@ -39,7 +40,7 @@ module "cis_dns_records" {
 }
 
 module "cis_glb" {
-  source             = "modules/glb"
+  source             = "terraform-ibm-modules/cis/ibm//cis-glb-module"
   cis_id             = module.cis_instance.cis_instance_id
   domain_id          = module.cis_domain.cis_domain.domain_id
   glb_name           = "cis_glb"
@@ -126,4 +127,5 @@ No modules.
 | <a name="output_cis_instance_guid"></a> [cis\_instance\_guid](#output\_cis\_instance\_guid) | GUID of CIS instance |
 | <a name="output_cis_instance_id"></a> [cis\_instance\_id](#output\_cis\_instance\_id) | CRN of CIS instance |
 | <a name="output_cis_instance_name"></a> [cis\_instance\_name](#output\_cis\_instance\_name) | CIS instance name |
+| <a name="output_cis_instance_status"></a> [cis\_instance\_status](#output\_cis\_instance\_status) | Status of CIS instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

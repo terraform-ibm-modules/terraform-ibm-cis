@@ -30,7 +30,7 @@ module "cis_instance" {
 
 module "cis_domain" {
   count           = var.is_add_domain ? 1 : 0
-  source          = "../../modules/domain"
+  source          = "../../modules/cis-domain-module"
   domain_name     = var.domain_name
   cis_instance_id = var.is_cis_instance_exists ? var.cis_instance_id : module.cis_instance[0].cis_instance_id
 }
@@ -41,10 +41,10 @@ module "cis_domain" {
 
 module "cis_dns_records" {
   count           = var.is_add_dns_records ? 1 : 0
-  source          = "../../modules/dns"
+  source          = "../../modules/cis-dns-module"
   cis_instance_id = var.is_cis_instance_exists ? var.cis_instance_id : module.cis_instance[0].cis_instance_id
   domain_id       = var.is_add_domain ? module.cis_domain[0].cis_domain.domain_id : var.existing_domain_id
-  record_set      = var.record_set
+  dns_record_set  = var.dns_record_set
 }
 
 ##############################################################################
@@ -53,7 +53,7 @@ module "cis_dns_records" {
 
 module "cis_glb" {
   count              = var.is_add_glb ? 1 : 0
-  source             = "../../modules/glb"
+  source             = "../../modules/cis-glb-module"
   cis_instance_id    = var.is_cis_instance_exists ? var.cis_instance_id : module.cis_instance[0].cis_instance_id
   domain_id          = var.is_add_domain ? module.cis_domain[0].cis_domain.domain_id : var.existing_domain_id
   glb_name           = var.domain_name != null ? join(".", [var.glb_name, var.domain_name]) : join(".", [var.glb_name, var.existing_domain_name])

@@ -17,4 +17,9 @@ output "cis_instance_id" {
   value       = ibm_cis.cis_instance.id
 }
 
+output "cis_instance_status" {
+  description = "Status of CIS instance"
+  value       = ibm_cis.cis_instance.status
+}
+
 ##############################################################################

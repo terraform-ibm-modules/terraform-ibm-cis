@@ -94,6 +94,16 @@
         "line": 5
       },
       "type": "TypeString"
+    },
+    "cis_instance_status": {
+      "name": "cis_instance_status",
+      "description": "Status of CIS instance",
+      "value": "ibm_cis.cis_instance.status",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 20
+      },
+      "type": "TypeString"
     }
   },
   "required_core": [
