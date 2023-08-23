@@ -27,9 +27,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of CIS Service Instance. | `string` | n/a | yes |
+| <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of an existing CIS Instance. | `string` | n/a | yes |
 | <a name="input_default_pool_ids"></a> [default\_pool\_ids](#input\_default\_pool\_ids) | List of default pool IDs. | `list(string)` | `null` | no |
-| <a name="input_domain_id"></a> [domain\_id](#input\_domain\_id) | Domain ID of CIS Service Instance. | `string` | n/a | yes |
+| <a name="input_domain_id"></a> [domain\_id](#input\_domain\_id) | Existing domain ID of the CIS Instance. | `string` | n/a | yes |
 | <a name="input_fallback_pool_id"></a> [fallback\_pool\_id](#input\_fallback\_pool\_id) | ID of the fallback pool. Required if fallback\_pool\_name is not provided. | `string` | `null` | no |
 | <a name="input_fallback_pool_name"></a> [fallback\_pool\_name](#input\_fallback\_pool\_name) | FallBack Pool Name. Required if fallback\_pool\_id is not provided. | `string` | n/a | yes |
 | <a name="input_glb_description"></a> [glb\_description](#input\_glb\_description) | Description of CIS Global Load Balancer. | `string` | `null` | no |
