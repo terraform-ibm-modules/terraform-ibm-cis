@@ -9,7 +9,7 @@ For more information see [Getting started with IBM Cloud Internet Services](http
 * [terraform-ibm-cis](#terraform-ibm-cis)
 * [Submodules](./modules)
     * [cis-domain-module](./modules/cis-domain-module)
-    * [cis-dns-profile](./modules/cis-dns-module)
+    * [cis-dns-module](./modules/cis-dns-module)
     * [cis-glb-module](./modules/cis-glb-module)
 * [Examples](./examples)
     * [Complete example](./examples/complete)
@@ -42,7 +42,7 @@ module "cis_dns_records" {
   source          = "terraform-ibm-modules/cis/ibm//cis-dns-module"
   cis_instance_id = module.cis_instance.cis_instance_id
   domain_id       = module.cis_domain.cis_domain.domain_id
-  record_set      = [
+  dns_record_set      = [
     {
       type    = "A"
       name    = "test-example"
@@ -54,7 +54,7 @@ module "cis_dns_records" {
 
 module "cis_glb" {
   source             = "terraform-ibm-modules/cis/ibm//cis-glb-module"
-  cis_id             = module.cis_instance.cis_instance_id
+  cis_instance_id    = module.cis_instance.cis_instance_id
   domain_id          = module.cis_domain.cis_domain.domain_id
   glb_name           = "cis_glb"
   fallback_pool_name = "cis_fpn"
@@ -95,7 +95,7 @@ You need the following permissions to run this module.
 
 - Account Management
   - **Resource Group** services
-    - `Viewer` platform access
+    - `Editor` platform access
 - IAM Services
   - **Cloud Internet** service
     - `Editor` platform access
@@ -103,7 +103,7 @@ You need the following permissions to run this module.
 
 ## Examples
 
-* [Complete example that creates CIS instance and add features](examples/complete)
+* [Complete example that creates CIS instance and add domain, dns records, global load balancer](examples/complete)
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
