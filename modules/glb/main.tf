@@ -4,7 +4,7 @@
 
 locals {
   # tflint-ignore: terraform_unused_declarations
-  validate_inputs = (var.glb_proxied != null && var.ttl != null) ? tobool ("Variables glb_proxied and ttl conflicts with each other so both cannot have non-null value.") : null
+  validate_inputs = (var.glb_proxied != null && var.ttl != null) ? tobool("Variables glb_proxied and ttl conflict with each other so both cannot have non-null value.") : null
 }
 
 resource "ibm_cis_global_load_balancer" "cis_glb" {

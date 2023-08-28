@@ -3,6 +3,7 @@
 This module is used to manage CIS Domain.
 
 **Note:**
+
 After successful execution of this module, the domain configured with the CIS instance will be in `pending` state. The domain will not become `active` until the DNS Registrar is updated with the name servers that are assigned to the CIS instance. The information regarding the name servers assigned to the CIS instance is available as variable `name_servers` in output. This step involves manual invervention and as soon as the configuration on the DNS registrar is performed, its status moves to `active`.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

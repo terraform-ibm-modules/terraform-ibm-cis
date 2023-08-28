@@ -33,13 +33,13 @@ module "cis_instance" {
 }
 
 module "cis_domain" {
-  source                = "terraform-ibm-modules/cis/ibm//cis-domain-module"
+  source                = "terraform-ibm-modules/cis/ibm//domain"
   domain_name           = "sub.cis-terraform.com"
   cis_instance_id       = module.cis_instance.cis_instance_id
 }
 
 module "cis_dns_records" {
-  source          = "terraform-ibm-modules/cis/ibm//cis-dns-module"
+  source          = "terraform-ibm-modules/cis/ibm//dns"
   cis_instance_id = module.cis_instance.cis_instance_id
   domain_id       = module.cis_domain.cis_domain.domain_id
   dns_record_set      = [
@@ -53,7 +53,7 @@ module "cis_dns_records" {
 }
 
 module "cis_glb" {
-  source             = "terraform-ibm-modules/cis/ibm//cis-glb-module"
+  source             = "terraform-ibm-modules/cis/ibm//glb"
   cis_instance_id    = module.cis_instance.cis_instance_id
   domain_id          = module.cis_domain.cis_domain.domain_id
   glb_name           = "cis_glb"
