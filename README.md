@@ -8,9 +8,9 @@ For more information see [Getting started with IBM Cloud Internet Services](http
 ## Overview
 * [terraform-ibm-cis](#terraform-ibm-cis)
 * [Submodules](./modules)
-    * [cis-domain-module](./modules/cis-domain-module)
-    * [cis-dns-module](./modules/cis-dns-module)
-    * [cis-glb-module](./modules/cis-glb-module)
+    * [domain](./modules/domain)
+    * [dns](./modules/dns)
+    * [glb](./modules/glb)
 * [Examples](./examples)
     * [Complete example](./examples/complete)
 

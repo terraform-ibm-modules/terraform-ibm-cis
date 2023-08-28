@@ -39,9 +39,9 @@ variable "glb_description" {
 }
 
 variable "glb_proxied" {
-  description = "Set to true if the host name receives origin protection by IBM CIS. Default value is false."
+  description = "Set to true if the host name receives origin protection by IBM CIS."
   type        = bool
-  default     = false
+  default     = null
 }
 
 variable "session_affinity" {

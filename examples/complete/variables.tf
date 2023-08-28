@@ -32,48 +32,6 @@ variable "plan" {
   default     = "trial"
 }
 
-variable "is_cis_instance_exists" {
-  type        = bool
-  description = "Set to true if CIS instance exists already."
-  default     = false
-}
-
-variable "cis_instance_id" {
-  type        = string
-  description = "CRN of CIS instance. Required if variable is_cis_instance_exists set to true."
-  default     = null
-}
-
-variable "is_add_domain" {
-  type        = bool
-  description = "Set to true if need to add domain in CIS instance."
-  default     = true
-}
-
-variable "existing_domain_id" {
-  type        = string
-  description = "Domain ID of CIS instance if exists already. Required if variable add_domain set to false."
-  default     = null
-}
-
-variable "existing_domain_name" {
-  type        = string
-  description = "Domain name of CIS instance if exists already. Required if variable add_domain set to false."
-  default     = null
-}
-
-variable "is_add_dns_records" {
-  type        = bool
-  description = "Set to true if need to add DNS records in CIS instance."
-  default     = true
-}
-
-variable "is_add_glb" {
-  type        = bool
-  description = "Set to true if need to add GLB feature in CIS instance."
-  default     = false
-}
-
 variable "domain_name" {
   type        = string
   description = "Domain name to be added for CIS Instance."
