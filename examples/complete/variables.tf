@@ -98,16 +98,10 @@ variable "glb_enabled" {
   default     = true
 }
 
-variable "glb_proxied" {
-  description = "Set to true if the host name receives origin protection by IBM CIS. Default value is false."
-  type        = bool
-  default     = true
-}
-
-variable "session_affinity" {
-  description = "Session Affinity of CIS Global Load Balancer. To make use of session affinity, glb_proxied has to be true."
-  type        = string
-  default     = "cookie"
+variable "ttl" {
+  description = "Time-to-live(TTL) in seconds of CIS Global Load Balancer(GLB). Allowed value is 120 or greater if GLB is not proxied otherwise it is automatically set."
+  type        = number
+  default     = 120
 }
 
 variable "origin_pools" {
