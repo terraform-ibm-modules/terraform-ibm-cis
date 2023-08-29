@@ -18,7 +18,7 @@ variable "plan" {
   default     = "trial"
   validation {
     condition     = contains(["standard-next", "trial"], var.plan)
-    error_message = "Only the trial and standard-next plan is supported currently"
+    error_message = "Only the trial and standard-next plans are supported currently"
   }
 }
 

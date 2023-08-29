@@ -1,12 +1,12 @@
 
 variable "cis_instance_id" {
   type        = string
-  description = "CRN of CIS instance."
+  description = "CRN of an existing CIS instance."
 }
 
-variable "domain" {
+variable "domain_name" {
   type        = string
-  description = "Domain name of CIS Instance."
+  description = "DNS domain name to add to the CIS instance."
 }
 
 variable "domain_type" {

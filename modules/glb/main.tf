@@ -2,6 +2,11 @@
 # Add Global Load Balancer
 ##############################################################################
 
+locals {
+  # tflint-ignore: terraform_unused_declarations
+  validate_inputs = (var.glb_proxied != null && var.ttl != null) ? tobool("The variable glb_proxied conflicts with ttl so both cannot have non-null value.") : null
+}
+
 resource "ibm_cis_global_load_balancer" "cis_glb" {
   cis_id           = var.cis_instance_id
   domain_id        = var.domain_id
@@ -24,8 +29,8 @@ resource "ibm_cis_global_load_balancer" "cis_glb" {
   dynamic "pop_pools" {
     for_each = var.pop_pools
     content {
-      pop      = region_pools.value.pop
-      pool_ids = lookup(region_pools.value, "pool_names", null) != null ? [for pool in lookup(region_pools.value, "pool_names") : ibm_cis_origin_pool.origin_pool[pool].id] : lookup(region_pools.value, "pool_ids", null)
+      pop      = pop_pools.value.pop
+      pool_ids = lookup(pop_pools.value, "pool_names", null) != null ? [for pool in lookup(pop_pools.value, "pool_names") : ibm_cis_origin_pool.origin_pool[pool].id] : lookup(pop_pools.value, "pool_ids", null)
     }
   }
 }
@@ -74,12 +79,4 @@ resource "ibm_cis_healthcheck" "health_check" {
   allow_insecure   = lookup(each.value, "allow_insecure", false)
   interval         = lookup(each.value, "interval", 60)
   retries          = lookup(each.value, "retries", 2)
-
-  # dynamic "headers" {
-  #   for_each = lookup(each.value, "headers")
-  #   content {
-  #     header = lookup(headers.value, "header", null)
-  #     values = lookup(headers.value, "values", null)
-  #   }
-  # }
 }

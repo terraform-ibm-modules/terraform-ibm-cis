@@ -32,13 +32,14 @@ variable "plan" {
   default     = "trial"
 }
 
-variable "domain" {
+variable "domain_name" {
   type        = string
-  description = "Domain name of CIS Instance."
+  description = "Domain name to be added for CIS Instance."
+  default     = "example.com"
 }
 
-variable "record_set" {
-  description = "List of DNS records of CIS Instance."
+variable "dns_record_set" {
+  description = "List of DNS records to be added for CIS Instance."
   type = list(object({
     name     = optional(string)
     type     = string
@@ -72,7 +73,7 @@ variable "record_set" {
   default = [
     {
       type    = "A"
-      name    = "test-example2"
+      name    = "test-example"
       content = "1.2.3.4"
       ttl     = 900
     }
@@ -92,15 +93,15 @@ variable "glb_description" {
 }
 
 variable "glb_enabled" {
-  description = "To enable / disable CIS Global Load Balancer. If set to true, the load balancer is enabled and can receive network traffic."
+  description = "To enable/disable CIS Global Load Balancer. If set to true, the load balancer is enabled and can receive network traffic."
   type        = bool
   default     = true
 }
 
-variable "session_affinity" {
-  description = "Session Affinity of CIS Global Load Balancer."
-  type        = string
-  default     = "cookie"
+variable "ttl" {
+  description = "Time-to-live(TTL) in seconds of CIS Global Load Balancer(GLB). Allowed value is 120 or greater if GLB is not proxied otherwise it is automatically set."
+  type        = number
+  default     = 120
 }
 
 variable "origin_pools" {
@@ -157,10 +158,6 @@ variable "health_checks" {
     allow_insecure   = optional(bool)
     interval         = optional(number)
     retries          = optional(number)
-    headers = optional(list(object({
-      header = optional(string)
-      values = optional(string)
-    })))
   }))
   default = [
     {

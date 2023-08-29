@@ -1,18 +1,18 @@
 
 variable "cis_instance_id" {
   type        = string
-  description = "CRN of the CIS instance."
+  description = "CRN of the existing CIS instance."
 }
 
 variable "domain_id" {
   type        = string
-  description = "ID of the domain to add a DNS record."
+  description = "ID of the existing domain to add a DNS record."
 }
 
-variable "record_set" {
+variable "dns_record_set" {
   description = "List of DNS records to be created."
   type = list(object({
-    name     = optional(string)
+    name     = string
     type     = string
     ttl      = optional(number) # in unit seconds, starts with value 120
     content  = optional(string)
@@ -43,11 +43,10 @@ variable "record_set" {
     }))
   }))
   default = []
-
   validation {
     condition = alltrue([
-      for record in var.record_set : contains(["A", "AAAA", "CNAME", "NS", "MX", "TXT", "LOC", "SRV", "CAA"], record.type)
+      for record in var.dns_record_set : contains(["A", "AAAA", "CNAME", "NS", "MX", "TXT", "LOC", "SRV", "CAA"], record.type)
     ])
-    error_message = "The specified DNS type is not a valid selection."
+    error_message = "The specified DNS record type is not valid."
   }
 }
