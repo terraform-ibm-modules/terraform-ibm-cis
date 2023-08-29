@@ -1,10 +1,10 @@
-# Module CIS Domain
+# CIS Domain Module
 
 This module is used to manage CIS Domain.
 
 **Note:**
 
-After successful execution of this module, the domain configured with the CIS instance will be in `pending` state. The domain will not become `active` until the DNS Registrar is updated with the name servers that are assigned to the CIS instance. The information regarding the name servers assigned to the CIS instance is available as variable `name_servers` in output. This step involves manual invervention and as soon as the configuration on the DNS registrar is performed, its status moves to `active`.
+After successful execution of this module, the domain configured in the CIS instance will be in `pending` state and will become `active` after the authoritative name servers assigned to the domain are configured correctly at the DNS provider or registrar. The information regarding the name servers assigned can be found in the output of this module as variable `name_servers`. This step involves manual invervention and once the configuration at the DNS registrar is completed, its status moves to `active`. Refer [this](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts) to get more information.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements

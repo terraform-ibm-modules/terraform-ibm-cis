@@ -1,6 +1,9 @@
-# IBM Cloud Internet Services Module
+# IBM Cloud Internet Services (CIS) Module
 
-You can use this module to provision an IBM Cloud Internet Services (CIS) instance and then add domain, dns records, global load balancer (GLB), origin pools and health checks for GLB for the provisioned CIS.
+This module provisions an IBM Cloud Internet Services (CIS) instance and allows to add the following into the CIS instance.
+* Domain
+* DNS records
+* Global Load Balancer (GLB) - load balancers, origing pools, health checks
 
 For more information see [Getting started with IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-getting-started).
 
@@ -11,8 +14,7 @@ For more information see [Getting started with IBM Cloud Internet Services](http
     * [domain](./modules/domain)
     * [dns](./modules/dns)
     * [glb](./modules/glb)
-* [Examples](./examples)
-    * [Complete example](./examples/complete)
+
 
 ## terraform-ibm-cis
 <!-- END AND_OVERVIEW HOOK -->
