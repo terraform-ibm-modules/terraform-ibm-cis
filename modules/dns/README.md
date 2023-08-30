@@ -4,26 +4,7 @@ This module is used to create and manage CIS DNS Records.
 
 **Note:**
 
-1. For SRV record, you need to provide record name repeatedly as shown in the below example.
-
-    ```
-    {
-        type = "SRV"
-        ttl  = 900
-        name = "test-example.srv"
-        data = {
-            name     = "test-example.srv"
-            port     = 1
-            priority = 1
-            proto    = "_udp"
-            service  = "_sip"
-            target   = "domain.com"
-            weight   = 1
-        }
-        }
-    ```
-
-2. Though SRV record name is provided in the variable, it gets stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target` More information is available [here](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/). Hence, when `terraform plan` is run after a successful `terraform apply`, you will receive the following message but your infrastructure will remain intact.
+1. Though SRV record name is provided in the variable, it gets stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target` More information is available [here](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/). Hence, when `terraform plan` is run after a successful `terraform apply`, you will receive the following message but your infrastructure will remain intact.
 
     ```
     # module.cis_dns_records[0].ibm_cis_dns_record.dns_records["NAME/SRV"] will be updated in-place
