@@ -11,6 +11,6 @@ resource "ibm_cis_dns_record" "dns_records" {
   content   = lookup(each.value, "content", null)
   ttl       = lookup(each.value, "ttl", null)
   priority  = lookup(each.value, "priority", null)
-  data      = lookup(each.value, "data", null)
+  data      = ((each.value.data != null) && (each.value.type == "SRV")) ? merge(each.value.data, { "name" : lookup(each.value, "name", "") }) : lookup(each.value, "data", null)
   proxied   = lookup(each.value, "proxied", false)
 }
