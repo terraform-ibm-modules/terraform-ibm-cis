@@ -1,6 +1,6 @@
 
 variable "cis_instance_id" {
-  description = "CRN of an existing CIS Instance."
+  description = "CRN of the existing CIS Instance."
   type        = string
 }
 
@@ -11,7 +11,7 @@ variable "domain_id" {
 
 # GLB Variables
 variable "glb_name" {
-  description = "The DNS name to associate with CIS Global Load Balancer. It can be a hostname."
+  description = "The DNS name to associate with CIS global load balancer. It can be a hostname."
   type        = string
 }
 
@@ -33,30 +33,30 @@ variable "fallback_pool_name" {
 }
 
 variable "glb_description" {
-  description = "Description of CIS Global Load Balancer."
+  description = "Description of the CIS global load balancer."
   type        = string
   default     = null
 }
 
 variable "glb_proxied" {
-  description = "Set to true if the host name receives origin protection by IBM CIS."
+  description = "Set to true if the host name receives origin protection by IBM CIS instance."
   type        = bool
   default     = null
 }
 
 variable "session_affinity" {
-  description = "Session Affinity of CIS Global Load Balancer. To make use of session affinity, glb_proxied has to be true."
+  description = "Session Affinity of the CIS global load balancer. To make use of session affinity, glb_proxied has to be true."
   type        = string
   default     = null
 }
 
 variable "glb_enabled" {
-  description = "To enable/disable CIS Global Load Balancer. If set to true, the load balancer is enabled and can receive network traffic."
+  description = "Whether the CIS global load balancer is enabled. If set to true, the load balancer is enabled and can receive network traffic."
   type        = bool
 }
 
 variable "steering_policy" {
-  description = "Steering Policy of CIS Global Load Balancer."
+  description = "Steering Policy of the CIS global load balancer."
   type        = string
   default     = "off"
   validation {
@@ -66,13 +66,13 @@ variable "steering_policy" {
 }
 
 variable "ttl" {
-  description = "Time-to-live(TTL) in seconds of CIS Global Load Balancer(GLB). Allowed value is 120 or greater if GLB is not proxied otherwise it is automatically set."
+  description = "Time-to-live (TTL) in seconds of the CIS global load balancer. If the GLB is proxied, set a minimum value of 120. If not proxied, the value is set automatically."
   type        = number
   default     = null
 }
 
 variable "region_pools" {
-  description = "Region Pools of CIS Global Load Balancer."
+  description = "Region pools of the CIS global load balancer."
   type = list(object({
     region   = string
     pool_ids = list(string)
@@ -81,7 +81,7 @@ variable "region_pools" {
 }
 
 variable "pop_pools" {
-  description = "Pop Pools of CIS Global Load Balancer."
+  description = "Pop pools of the CIS global load balancer."
   type = list(object({
     pop      = string
     pool_ids = list(string)
@@ -91,7 +91,7 @@ variable "pop_pools" {
 
 # Pool Variables
 variable "origin_pools" {
-  description = "List of origins with an associated health check to be created for CIS Global Load Balancer."
+  description = "List of origins with an associated health check to be created for the CIS global load balancer."
   type = list(object({
     name = string
     origins = list(object({
@@ -112,7 +112,7 @@ variable "origin_pools" {
 
 # Health Check Variables
 variable "health_checks" {
-  description = "List of health checks to be created for CIS Global Load Balancer."
+  description = "List of health checks to be created for the CIS global load balancer."
   type = list(object({
     name             = string
     description      = optional(string)

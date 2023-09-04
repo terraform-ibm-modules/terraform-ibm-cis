@@ -6,11 +6,11 @@ variable "cis_instance_id" {
 
 variable "domain_id" {
   type        = string
-  description = "ID of the existing domain to add a DNS record."
+  description = "ID of the existing domain to add a DNS record to the CIS instance."
 }
 
 variable "dns_record_set" {
-  description = "List of DNS records to be created."
+  description = "List of DNS records to be added for the CIS Instance."
   type = list(object({
     name     = string
     type     = string

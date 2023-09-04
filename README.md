@@ -3,9 +3,9 @@
 This module provisions an IBM Cloud Internet Services (CIS) instance and allows to add the following into the CIS instance.
 * Domain
 * DNS records
-* Global Load Balancer (GLB) - load balancers, origing pools, health checks
+* Global load balancer (GLB) - load balancers, origin pools, health checks
 
-For more information see [Getting started with IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-getting-started).
+For more information see, [Getting started with IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-getting-started).
 
 <!-- BEGIN ADD_OVERVIEW HOOK -->
 ## Overview
@@ -105,7 +105,7 @@ You need the following permissions to run this module.
 
 ## Examples
 
-* [Complete example that creates CIS instance and add domain, dns records, global load balancer](examples/complete)
+* [End-to-end example](examples/complete)
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
@@ -130,10 +130,10 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_plan"></a> [plan](#input\_plan) | Plan for the CIS instance. Standard-next or trial. | `string` | `"trial"` | no |
-| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | Resource group ID where CIS instance will be created. | `string` | n/a | yes |
+| <a name="input_plan"></a> [plan](#input\_plan) | The type of plan for the CIS instance: standard-next or trial. | `string` | n/a | yes |
+| <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The resource group ID to provision the CIS instance. | `string` | n/a | yes |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Name of the CIS instance. | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | List of tags to be associated to CIS instance. | `list(string)` | `[]` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | List of tags to be associated to the CIS instance. | `list(string)` | `[]` | no |
 
 ### Outputs
 

@@ -1,10 +1,16 @@
-# CIS Domain Module
+# CIS domain module
 
-This module is used to manage CIS Domain.
+This module is used to manage the IBM Cloud Internet Services (CIS) domain.
 
-**Note:**
 
-After successful execution of this module, the domain configured in the CIS instance will be in `pending` state and will become `active` after the authoritative name servers assigned to the domain are configured correctly at the DNS provider or registrar. The information regarding the name servers assigned can be found in the output of this module as variable `name_servers`. This step involves manual invervention and once the configuration at the DNS registrar is completed, its status moves to `active`. Refer [this](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts) to get more information.
+After this module run successfully, the status of the domain that is configured in the CIS instance is set to `pending`. You then configure the name servers that are assigned to the domain at the DNS provider or registrar.
+
+You can find the assigned name servers in the `name_servers` variable of the module output.
+
+The status changes to `active` after the name servers are configured correctly at the DNS provider or registrar.
+
+For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts).
+
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
@@ -28,9 +34,9 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of an existing CIS instance. | `string` | n/a | yes |
-| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | DNS domain name to add to the CIS instance. | `string` | n/a | yes |
-| <a name="input_domain_type"></a> [domain\_type](#input\_domain\_type) | Type of domain to be created. Default value is full for regular domains. To create a partial domain for CNAME setup, set this variable to partial. | `string` | `"full"` | no |
+| <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of the existing CIS instance. | `string` | n/a | yes |
+| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name to be added to the CIS instance. | `string` | n/a | yes |
+| <a name="input_domain_type"></a> [domain\_type](#input\_domain\_type) | The type of domain for the CIS instance: full or partial. Default value is full for regular domains. | `string` | `"full"` | no |
 
 ### Outputs
 

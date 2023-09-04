@@ -1,8 +1,8 @@
 # End-to-end example
 
-An end-to-end complete example that will provision the following:
-- Create a new resource group if one is not passed in.
-- Create a new Cloud Internet Services (CIS) instance.
-- Add domain in CIS.
-- Add DNS records in CIS.
-- Add Global Load Balancer (GLB), list of origins and health checks in CIS.
+An end-to-end example that provisions the following infrastructure:
+- Creates a new resource group, if one is not passed in.
+- Creates a Cloud Internet Services (CIS) instance.
+- Adds a domain to the CIS instance.
+- Adds DNS records to the CIS instance.
+- Adds a global load balancer including the origin pools and health checks to the CIS instance.

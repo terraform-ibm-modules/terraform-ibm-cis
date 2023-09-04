@@ -4,8 +4,7 @@
     "plan": {
       "name": "plan",
       "type": "string",
-      "description": "Plan for the CIS instance. Standard-next or trial.",
-      "default": "trial",
+      "description": "The type of plan for the CIS instance: standard-next or trial.",
       "required": true,
       "source": [
         "ibm_cis.cis_instance.plan"
@@ -18,7 +17,7 @@
     "resource_group_id": {
       "name": "resource_group_id",
       "type": "string",
-      "description": "Resource group ID where CIS instance will be created.",
+      "description": "The resource group ID to provision the CIS instance.",
       "required": true,
       "source": [
         "ibm_cis.cis_instance.resource_group_id"
@@ -47,14 +46,14 @@
     "tags": {
       "name": "tags",
       "type": "list(string)",
-      "description": "List of tags to be associated to CIS instance.",
+      "description": "List of tags to be associated to the CIS instance.",
       "default": [],
       "source": [
         "ibm_cis.cis_instance.tags"
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 25
+        "line": 24
       },
       "min_length": 1,
       "max_length": 128,

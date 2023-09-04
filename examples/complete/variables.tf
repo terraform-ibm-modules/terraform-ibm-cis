@@ -16,7 +16,7 @@ variable "prefix" {
 
 variable "resource_group" {
   type        = string
-  description = "The name of an existing resource group to provision resources in to. If not set a new resource group will be created using the prefix variable"
+  description = "The name of an existing resource group to provision resources to. If not set, a new resource group is created that uses the prefix variable"
   default     = null
 }
 
@@ -28,18 +28,18 @@ variable "resource_tags" {
 
 variable "plan" {
   type        = string
-  description = "Plan for the CIS instance. standard-next or trial."
+  description = "The type of plan for the CIS instance: standard-next or trial."
   default     = "trial"
 }
 
 variable "domain_name" {
   type        = string
-  description = "Domain name to be added for CIS Instance."
+  description = "Domain name to be added for the CIS Instance."
   default     = "example.com"
 }
 
 variable "dns_record_set" {
-  description = "List of DNS records to be added for CIS Instance."
+  description = "List of DNS records to be added for the CIS Instance."
   type = list(object({
     name     = optional(string)
     type     = string
@@ -81,31 +81,31 @@ variable "dns_record_set" {
 }
 
 variable "glb_name" {
-  description = "Name of CIS Global Load Balancer."
+  description = "Name of the CIS global load balancer."
   type        = string
   default     = "glb"
 }
 
 variable "glb_description" {
-  description = "Description of CIS Global Load Balancer."
+  description = "Description of the CIS global load balancer."
   type        = string
   default     = "Load Balancer"
 }
 
 variable "glb_enabled" {
-  description = "To enable/disable CIS Global Load Balancer. If set to true, the load balancer is enabled and can receive network traffic."
+  description = "Whether the CIS global load balancer is enabled. If set to true, the load balancer is enabled and can receive network traffic."
   type        = bool
   default     = true
 }
 
 variable "ttl" {
-  description = "Time-to-live(TTL) in seconds of CIS Global Load Balancer(GLB). Allowed value is 120 or greater if GLB is not proxied otherwise it is automatically set."
+  description = "Time-to-live (TTL) in seconds of the CIS global load balancer. If the GLB is proxied, set a minimum value of 120. If not proxied, the value is set automatically."
   type        = number
   default     = 120
 }
 
 variable "origin_pools" {
-  description = "List of origins with an associated health check to be created for CIS Global Load Balancer."
+  description = "List of origins with an associated health check to be created for the CIS global load balancer."
   type = list(object({
     name = string
     origins = list(object({
@@ -143,7 +143,7 @@ variable "origin_pools" {
 }
 
 variable "health_checks" {
-  description = "List of health checks to be created for CIS Global Load Balancer."
+  description = "List of health checks to be created for the CIS global load balancer."
   type = list(object({
     name             = string
     description      = optional(string)
