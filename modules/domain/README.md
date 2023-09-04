@@ -1,6 +1,6 @@
 # CIS domain module
 
-This module is used to manage the IBM Cloud Internet Services (CIS) domain.
+This module is used to configure the IBM Cloud Internet Services (CIS) domain.
 
 
 After this module run successfully, the status of the domain that is configured in the CIS instance is set to `pending`. You then configure the name servers that are assigned to the domain at the DNS provider or registrar.
