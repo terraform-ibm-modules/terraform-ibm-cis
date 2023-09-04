@@ -35,7 +35,6 @@ variable "dns_record_set" {
       value          = optional(string) # required for CAA type of record
       target         = optional(string) # required for SRV type of record
       priority       = optional(number) # required for SRV type of record
-      name           = optional(string) # required for SRV type of record
       port           = optional(number) # mandatory for SRV type of record
       proto          = optional(string) # mandatory for SRV type of record
       service        = optional(string) # mandatory for SRV type of record, starts with an '_'
@@ -45,7 +44,7 @@ variable "dns_record_set" {
   default = []
   validation {
     condition = alltrue([
-      for record in var.dns_record_set : contains(["A", "AAAA", "CNAME", "NS", "MX", "TXT", "LOC", "SRV", "CAA"], record.type)
+      for record in var.dns_record_set : contains(["A", "AAAA", "CNAME", "NS", "MX", "TXT", "LOC", "SRV", "CAA", "SPF", "PTR"], record.type)
     ])
     error_message = "The specified DNS record type is not valid."
   }
