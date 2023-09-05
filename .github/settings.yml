@@ -24,4 +24,4 @@ repository:
   # and update the description to the current repo description.
   description: "Terraform module to create and work with internet services on IBM Cloud"
 
-  topics: core-team, terraform, ibm-cloud, terraform-module, cloud-internet-services, cis
+  topics: core-team, terraform, ibm-cloud, terraform-module, cloud-internet-services, cis, supported, graduated
