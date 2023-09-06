@@ -1,11 +1,11 @@
 # CIS global load balancer (GLB) module
 
-This module is used to provision global load balancer that include load balancers, origin pools and health checks.
+This module provisions a global load balancer that includes load balancers, origin pools, and health checks.
 
 
 When `glb_proxied` is set as `true`, then `ttl` is automatically set and cannot be updated.
 
-This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the ttl value requires an update, as shown in the following example. However, your infrastructure will not be affected.
+This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `ttl` value requires an update, as shown in the following example. However, your infrastructure will not be affected.
 
 ```
 # module.cis_glb[0].ibm_cis_global_load_balancer.cis_glb will be updated in-place
@@ -54,7 +54,7 @@ No modules.
 | <a name="input_region_pools"></a> [region\_pools](#input\_region\_pools) | Region pools of the CIS global load balancer. | <pre>list(object({<br>    region   = string<br>    pool_ids = list(string)<br>  }))</pre> | `[]` | no |
 | <a name="input_session_affinity"></a> [session\_affinity](#input\_session\_affinity) | Session Affinity of the CIS global load balancer. To make use of session affinity, glb\_proxied has to be true. | `string` | `null` | no |
 | <a name="input_steering_policy"></a> [steering\_policy](#input\_steering\_policy) | Steering Policy of the CIS global load balancer. | `string` | `"off"` | no |
-| <a name="input_ttl"></a> [ttl](#input\_ttl) | Time-to-live (TTL) in seconds of the CIS global load balancer. If the GLB is proxied, set a minimum value of 120. If not proxied, the value is set automatically. | `number` | `null` | no |
+| <a name="input_ttl"></a> [ttl](#input\_ttl) | Time to live (TTL) for the CIS global load balancer (GLB), in seconds. If the GLB is proxied, set a minimum value of 120. If not proxied, the value is set automatically. | `number` | `null` | no |
 
 ### Outputs
 
