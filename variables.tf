@@ -4,7 +4,7 @@
 
 variable "resource_group_id" {
   type        = string
-  description = "Resource group ID where CIS instance will be created."
+  description = "The resource group ID to provision the CIS instance."
 }
 
 variable "service_name" {
@@ -14,8 +14,7 @@ variable "service_name" {
 
 variable "plan" {
   type        = string
-  description = "Plan for the CIS instance. Standard-next or trial."
-  default     = "trial"
+  description = "The type of plan for the CIS instance: standard-next or trial."
   validation {
     condition     = contains(["standard-next", "trial"], var.plan)
     error_message = "Only the trial and standard-next plans are supported currently"
@@ -24,7 +23,7 @@ variable "plan" {
 
 variable "tags" {
   type        = list(string)
-  description = "List of tags to be associated to CIS instance."
+  description = "List of tags to be associated to the CIS instance."
   default     = []
 }
 ##############################################################################
