@@ -44,7 +44,7 @@ variable "dns_record_set" {
   default = []
   validation {
     condition = alltrue([
-      for record in var.dns_record_set : contains(["A", "AAAA", "CNAME", "NS", "MX", "TXT", "LOC", "SRV", "CAA", "SPF", "PTR"], record.type)
+      for record in var.dns_record_set : contains(["A", "AAAA", "CNAME", "NS", "MX", "TXT", "LOC", "SRV", "CAA", "PTR"], record.type)
     ])
     error_message = "The specified DNS record type is not valid."
   }
