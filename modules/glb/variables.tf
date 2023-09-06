@@ -66,7 +66,7 @@ variable "steering_policy" {
 }
 
 variable "ttl" {
-  description = "Time-to-live (TTL) in seconds of the CIS global load balancer. If the GLB is proxied, set a minimum value of 120. If not proxied, the value is set automatically."
+  description = "Time to live (TTL) for the CIS global load balancer (GLB), in seconds. If the GLB is proxied, set a minimum value of 120. If not proxied, the value is set automatically."
   type        = number
   default     = null
 }

@@ -1,11 +1,10 @@
 # IBM Cloud Internet Services (CIS) Module
 
-This module provisions an IBM Cloud Internet Services (CIS) instance.
+This module provisions an IBM Cloud Internet Services (CIS) instance. The module includes the sub-modules to add the following features to the CIS instance.
 
-It includes the sub-modules that allows to add the following into the CIS instance.
 * Domain
 * DNS records
-* Global load balancer (GLB) including origin pools and health checks
+* Global load balancer (GLB) including load balancers, origin pools and health checks
 
 For more information see, [Getting started with IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-getting-started).
 
