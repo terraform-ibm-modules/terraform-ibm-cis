@@ -1,6 +1,6 @@
 # IBM Cloud Internet Services (CIS) Module
 
-This module provisions an IBM Cloud Internet Services (CIS) instance. The module includes the sub-modules to add the following features to the CIS instance.
+This module provisions an IBM Cloud Internet Services (CIS) instance. The module includes the submodules to add the following features to the CIS instance.
 
 * Domain
 * DNS records

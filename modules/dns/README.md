@@ -1,4 +1,4 @@
-# CIS DNS Module
+# CIS DNS module
 
 This module is used to create and manage IBM Cloud Internet Services (CIS) DNS records.
 
