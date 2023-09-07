@@ -9,6 +9,7 @@ import (
 
 const defaultExampleTerraformDir = "examples/complete"
 const resourceGroup = "geretain-test-resources"
+const domainName = "prtest.goldeneye.dev.cloud.ibm.com"
 
 func setupOptions(t *testing.T, prefix string, domain_name string) *testhelper.TestOptions {
 	options := testhelper.TestOptionsDefaultWithVars(&testhelper.TestOptions{
@@ -29,7 +30,7 @@ func setupOptions(t *testing.T, prefix string, domain_name string) *testhelper.T
 func TestRunCompleteExample(t *testing.T) {
 	t.Parallel()
 
-	options := setupOptions(t, "cis-new", "prtest.goldeneye.dev.cloud.ibm.com")
+	options := setupOptions(t, "cis-new", domainName)
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
@@ -39,7 +40,7 @@ func TestRunCompleteExample(t *testing.T) {
 func TestRunUpgradeCompleteExample(t *testing.T) {
 	t.Parallel()
 	t.Skip()
-	options := setupOptions(t, "cis-new-upg", "prtest.goldeneye.dev.cloud.ibm.com")
+	options := setupOptions(t, "cis-new-upg", domainName)
 
 	output, err := options.RunTestUpgrade()
 	if !options.UpgradeTestSkipped {
