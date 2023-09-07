@@ -10,7 +10,7 @@ import (
 const defaultExampleTerraformDir = "examples/complete"
 const resourceGroup = "geretain-test-resources"
 
-func setupOptions(t *testing.T, prefix string, plan string, domain_name string) *testhelper.TestOptions {
+func setupOptions(t *testing.T, prefix string, domain_name string) *testhelper.TestOptions {
 	options := testhelper.TestOptionsDefaultWithVars(&testhelper.TestOptions{
 		Testing:       t,
 		TerraformDir:  defaultExampleTerraformDir,
@@ -20,7 +20,6 @@ func setupOptions(t *testing.T, prefix string, plan string, domain_name string) 
 
 	options.TerraformVars = map[string]interface{}{
 		"prefix":      options.Prefix,
-		"plan":        plan,
 		"domain_name": domain_name,
 	}
 
@@ -30,7 +29,7 @@ func setupOptions(t *testing.T, prefix string, plan string, domain_name string) 
 func TestRunCompleteExample(t *testing.T) {
 	t.Parallel()
 
-	options := setupOptions(t, "cis-new", "standard-next", "prtest.goldeneye.dev.cloud.ibm.com")
+	options := setupOptions(t, "cis-new", "prtest.goldeneye.dev.cloud.ibm.com")
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
@@ -40,7 +39,7 @@ func TestRunCompleteExample(t *testing.T) {
 func TestRunUpgradeCompleteExample(t *testing.T) {
 	t.Parallel()
 	t.Skip()
-	options := setupOptions(t, "cis-new-upg", "standard-next", "prtest.goldeneye.dev.cloud.ibm.com")
+	options := setupOptions(t, "cis-new-upg", "prtest.goldeneye.dev.cloud.ibm.com")
 
 	output, err := options.RunTestUpgrade()
 	if !options.UpgradeTestSkipped {
