@@ -19,7 +19,7 @@ module "cis_instance" {
   service_name      = "${var.prefix}-cis"
   resource_group_id = module.resource_group.resource_group_id
   tags              = []
-  plan              = "trial"
+  plan              = "standard-next"
 }
 
 ##############################################################################

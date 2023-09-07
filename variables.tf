@@ -15,6 +15,7 @@ variable "service_name" {
 variable "plan" {
   type        = string
   description = "The type of plan for the CIS instance: standard-next or trial."
+  default     = "trial"
   validation {
     condition     = contains(["standard-next", "trial"], var.plan)
     error_message = "Only the trial and standard-next plans are supported currently"

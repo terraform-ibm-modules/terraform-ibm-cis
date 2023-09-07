@@ -5,6 +5,7 @@
       "name": "plan",
       "type": "string",
       "description": "The type of plan for the CIS instance: standard-next or trial.",
+      "default": "trial",
       "required": true,
       "source": [
         "ibm_cis.cis_instance.plan"
@@ -53,7 +54,7 @@
       ],
       "pos": {
         "filename": "variables.tf",
-        "line": 24
+        "line": 25
       },
       "min_length": 1,
       "max_length": 128,
