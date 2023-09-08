@@ -1,5 +1,12 @@
 # IBM Cloud Internet Services (CIS) Module
 
+[![Graduated (Supported)](https://img.shields.io/badge/Status-Graduated%20(Supported)-brightgreen)](https://terraform-ibm-modules.github.io/documentation/#/badge-status)
+[![latest release](https://img.shields.io/github/v/release/terraform-ibm-modules/terraform-ibm-cis?logo=GitHub&sort=semver)](https://github.com/terraform-ibm-modules/terraform-ibm-cis/releases/latest)
+[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit&logoColor=white)](https://github.com/pre-commit/pre-commit)
+[![Renovate enabled](https://img.shields.io/badge/renovate-enabled-brightgreen.svg)](https://renovatebot.com/)
+[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
+
+
 This module provisions an IBM Cloud Internet Services (CIS) instance and configures domain to the CIS instance. The module includes the submodules to add the following features to a CIS instance.
 
 * Domain
@@ -8,17 +15,20 @@ This module provisions an IBM Cloud Internet Services (CIS) instance and configu
 
 For more information see, [Getting started with IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-getting-started).
 
-<!-- BEGIN ADD_OVERVIEW HOOK -->
+<!-- BEGIN OVERVIEW HOOK -->
 ## Overview
 * [terraform-ibm-cis](#terraform-ibm-cis)
 * [Submodules](./modules)
-    * [domain](./modules/domain)
     * [dns](./modules/dns)
+    * [domain](./modules/domain)
     * [glb](./modules/glb)
-
+* [Examples](./examples)
+    * [End-to-end example](./examples/complete)
+    * [End-to-end example](./examples/complete_backup)
+* [Contributing](#contributing)
 
 ## terraform-ibm-cis
-<!-- END AND_OVERVIEW HOOK -->
+<!-- END OVERVIEW HOOK -->
 
 ## Usage
 
@@ -144,3 +154,10 @@ You need the following permissions to run this module.
 | <a name="output_cis_instance_name"></a> [cis\_instance\_name](#output\_cis\_instance\_name) | CIS instance name |
 | <a name="output_cis_instance_status"></a> [cis\_instance\_status](#output\_cis\_instance\_status) | Status of CIS instance |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
+
+<!-- Leave this section as is so that your module has a link to local development environment set up steps for contributors to follow -->
+## Contributing
+
+You can report issues and request features for this module in GitHub issues in the module repo. See [Report an issue or request a feature](https://github.com/terraform-ibm-modules/.github/blob/main/.github/SUPPORT.md).
+
+To set up your local development environment, see [Local development setup](https://terraform-ibm-modules.github.io/documentation/#/local-dev-setup) in the project documentation.
