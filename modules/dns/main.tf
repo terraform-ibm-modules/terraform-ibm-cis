@@ -2,6 +2,11 @@
 # Add DNS records
 ##############################################################################
 
+locals {
+  # tflint-ignore: terraform_unused_declarations
+  validate_inputs = [for record in var.dns_record_set : (record.type == "SRV" || record.type == "LOC" || record.type == "CAA") ? (record.data != null ? null : tobool("The dns_record_set data block cannot have null value.")) : null]
+}
+
 resource "ibm_cis_dns_record" "dns_records" {
   cis_id    = var.cis_instance_id
   domain_id = var.domain_id
