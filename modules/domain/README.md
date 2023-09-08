@@ -42,5 +42,5 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_cis_domain"></a> [cis\_domain](#output\_cis\_domain) | CIS Domain details |
+| <a name="output_cis_domain_details"></a> [cis\_domain\_details](#output\_cis\_domain\_details) | CIS Domain details |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

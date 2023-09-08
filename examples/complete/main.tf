@@ -11,7 +11,7 @@ module "resource_group" {
 }
 
 ##############################################################################
-# CIS instance
+# Create CIS instance and add domain
 ##############################################################################
 
 module "cis_instance" {
@@ -20,16 +20,7 @@ module "cis_instance" {
   resource_group_id = module.resource_group.resource_group_id
   tags              = []
   plan              = "standard-next"
-}
-
-##############################################################################
-# Add domain to CIS instance
-##############################################################################
-
-module "cis_domain" {
-  source          = "../../modules/domain"
-  domain_name     = var.domain_name
-  cis_instance_id = module.cis_instance.cis_instance_id
+  domain_name       = var.domain_name
 }
 
 ##############################################################################
@@ -39,7 +30,7 @@ module "cis_domain" {
 module "cis_dns_records" {
   source          = "../../modules/dns"
   cis_instance_id = module.cis_instance.cis_instance_id
-  domain_id       = module.cis_domain.cis_domain.domain_id
+  domain_id       = module.cis_instance.cis_domain.domain_id
   dns_record_set = [
     {
       type    = "A"
@@ -57,7 +48,7 @@ module "cis_dns_records" {
 module "cis_glb" {
   source             = "../../modules/glb"
   cis_instance_id    = module.cis_instance.cis_instance_id
-  domain_id          = module.cis_domain.cis_domain.domain_id
+  domain_id          = module.cis_instance.cis_domain.domain_id
   glb_name           = join(".", [var.glb_name, var.domain_name])
   fallback_pool_name = "glb1"
   glb_description    = "Load Balancer"

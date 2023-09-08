@@ -1,6 +1,19 @@
 {
   "path": ".",
   "variables": {
+    "domain_name": {
+      "name": "domain_name",
+      "type": "string",
+      "description": "The domain name to be added to the CIS instance.",
+      "required": true,
+      "source": [
+        "module.cis_domain.ibm_cis_domain.cis_domain.domain"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 31
+      }
+    },
     "plan": {
       "name": "plan",
       "type": "string",
@@ -66,6 +79,15 @@
     }
   },
   "outputs": {
+    "cis_domain": {
+      "name": "cis_domain_details",
+      "description": "CIS Domain details",
+      "value": "module.cis_domain.cis_domain_details",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 25
+      }
+    },
     "cis_instance_guid": {
       "name": "cis_instance_guid",
       "description": "GUID of CIS instance",
@@ -138,5 +160,48 @@
     }
   },
   "data_resources": {},
-  "module_calls": {}
+  "module_calls": {
+    "cis_domain": {
+      "name": "cis_domain",
+      "source": "./modules/domain",
+      "attributes": {
+        "domain_name": "domain_name"
+      },
+      "managed_resources": {
+        "ibm_cis_domain.cis_domain": {
+          "mode": "managed",
+          "type": "ibm_cis_domain",
+          "name": "cis_domain",
+          "attributes": {
+            "cis_id": "cis_instance_id",
+            "domain": "domain_name",
+            "type": "domain_type"
+          },
+          "provider": {
+            "name": "ibm"
+          },
+          "pos": {
+            "filename": "modules/domain/main.tf",
+            "line": 5
+          }
+        }
+      },
+      "data_resources": {},
+      "outputs": {
+        "cis_domain_details": {
+          "name": "cis_domain_details",
+          "description": "CIS Domain details",
+          "value": "ibm_cis_domain.cis_domain",
+          "pos": {
+            "filename": "modules/domain/outputs.tf",
+            "line": 2
+          }
+        }
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 23
+      }
+    }
+  }
 }

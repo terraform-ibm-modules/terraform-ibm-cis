@@ -22,4 +22,8 @@ output "cis_instance_status" {
   value       = ibm_cis.cis_instance.status
 }
 
+output "cis_domain" {
+  description = "CIS Domain details"
+  value       = module.cis_domain.cis_domain_details
+}
 ##############################################################################

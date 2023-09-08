@@ -1,5 +1,5 @@
 ##############################################################################
-# List of input varaibles - example
+# List of input varaibles
 ##############################################################################
 
 variable "resource_group_id" {
@@ -26,5 +26,10 @@ variable "tags" {
   type        = list(string)
   description = "List of tags to be associated to the CIS instance."
   default     = []
+}
+
+variable "domain_name" {
+  type        = string
+  description = "The domain name to be added to the CIS instance."
 }
 ##############################################################################

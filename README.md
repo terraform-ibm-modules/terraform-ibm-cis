@@ -1,6 +1,6 @@
 # IBM Cloud Internet Services (CIS) Module
 
-This module provisions an IBM Cloud Internet Services (CIS) instance. The module includes the submodules to add the following features to the CIS instance.
+This module provisions an IBM Cloud Internet Services (CIS) instance and configures domain to the CIS instance. The module includes the submodules to add the following features to a CIS instance.
 
 * Domain
 * DNS records
@@ -33,18 +33,13 @@ module "cis_instance" {
   service_name      = "example-cis"
   resource_group_id = "000fb3134f214c3a9017554db4510f70" # pragma: allowlist secret
   plan              = "standard-next"
-}
-
-module "cis_domain" {
-  source                = "terraform-ibm-modules/cis/ibm//domain"
-  domain_name           = "sub.cis-terraform.com"
-  cis_instance_id       = module.cis_instance.cis_instance_id
+  domain_name       = "sub.cis-terraform.com"
 }
 
 module "cis_dns_records" {
   source          = "terraform-ibm-modules/cis/ibm//dns"
   cis_instance_id = module.cis_instance.cis_instance_id
-  domain_id       = module.cis_domain.cis_domain.domain_id
+  domain_id       = module.cis_instance.cis_domain.domain_id
   dns_record_set      = [
     {
       type    = "A"
@@ -58,7 +53,7 @@ module "cis_dns_records" {
 module "cis_glb" {
   source             = "terraform-ibm-modules/cis/ibm//glb"
   cis_instance_id    = module.cis_instance.cis_instance_id
-  domain_id          = module.cis_domain.cis_domain.domain_id
+  domain_id          = module.cis_instance.cis_domain.domain_id
   glb_name           = "cis_glb"
   fallback_pool_name = "cis_fpn"
   glb_enabled        = true
@@ -119,7 +114,9 @@ You need the following permissions to run this module.
 
 ### Modules
 
-No modules.
+| Name | Source | Version |
+|------|--------|---------|
+| <a name="module_cis_domain"></a> [cis\_domain](#module\_cis\_domain) | ./modules/domain | n/a |
 
 ### Resources
 
@@ -131,6 +128,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name to be added to the CIS instance. | `string` | n/a | yes |
 | <a name="input_plan"></a> [plan](#input\_plan) | The type of plan for the CIS instance: standard-next or trial. | `string` | `"trial"` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The resource group ID to provision the CIS instance. | `string` | n/a | yes |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Name of the CIS instance. | `string` | n/a | yes |
@@ -140,6 +138,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
+| <a name="output_cis_domain"></a> [cis\_domain](#output\_cis\_domain) | CIS Domain details |
 | <a name="output_cis_instance_guid"></a> [cis\_instance\_guid](#output\_cis\_instance\_guid) | GUID of CIS instance |
 | <a name="output_cis_instance_id"></a> [cis\_instance\_id](#output\_cis\_instance\_id) | CRN of CIS instance |
 | <a name="output_cis_instance_name"></a> [cis\_instance\_name](#output\_cis\_instance\_name) | CIS instance name |
