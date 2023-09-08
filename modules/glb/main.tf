@@ -1,15 +1,24 @@
+##############################################################################
+# Add Global Load Balancer
+##############################################################################
+
+locals {
+  # tflint-ignore: terraform_unused_declarations
+  validate_inputs = (var.glb_proxied != null && var.ttl != null) ? tobool("The variable glb_proxied conflicts with ttl so both cannot have non-null value.") : null
+}
+
 resource "ibm_cis_global_load_balancer" "cis_glb" {
-  cis_id           = var.cis_id
+  cis_id           = var.cis_instance_id
   domain_id        = var.domain_id
   name             = var.glb_name
   fallback_pool_id = (var.fallback_pool_id == null ? ibm_cis_origin_pool.origin_pool[var.fallback_pool_name].id : var.fallback_pool_id)
   default_pool_ids = (var.default_pool_ids == null ? [for pool in ibm_cis_origin_pool.origin_pool : pool.id] : var.default_pool_ids)
-  description      = (var.glb_description != null ? var.glb_description : null)
-  proxied          = (var.glb_proxied != null ? var.glb_proxied : null)
-  session_affinity = (var.session_affinity != null ? var.session_affinity : null)
-  ttl              = (var.ttl != null ? var.ttl : null)
-  steering_policy  = (var.steering_policy != null ? var.steering_policy : "off")
-  enabled          = (var.glb_enabled != null ? var.glb_enabled : null)
+  description      = var.glb_description
+  proxied          = var.glb_proxied
+  session_affinity = var.session_affinity
+  ttl              = var.ttl
+  steering_policy  = var.steering_policy
+  enabled          = var.glb_enabled
   dynamic "region_pools" {
     for_each = var.region_pools
     content {
@@ -20,14 +29,18 @@ resource "ibm_cis_global_load_balancer" "cis_glb" {
   dynamic "pop_pools" {
     for_each = var.pop_pools
     content {
-      pop      = region_pools.value.pop
-      pool_ids = lookup(region_pools.value, "pool_names", null) != null ? [for pool in lookup(region_pools.value, "pool_names") : ibm_cis_origin_pool.origin_pool[pool].id] : lookup(region_pools.value, "pool_ids", null)
+      pop      = pop_pools.value.pop
+      pool_ids = lookup(pop_pools.value, "pool_names", null) != null ? [for pool in lookup(pop_pools.value, "pool_names") : ibm_cis_origin_pool.origin_pool[pool].id] : lookup(pop_pools.value, "pool_ids", null)
     }
   }
 }
 
+##############################################################################
+# Add list of origins
+##############################################################################
+
 resource "ibm_cis_origin_pool" "origin_pool" {
-  cis_id   = var.cis_id
+  cis_id   = var.cis_instance_id
   for_each = { for pool in var.origin_pools : pool.name => pool }
   name     = each.value.name
   dynamic "origins" {
@@ -44,31 +57,26 @@ resource "ibm_cis_origin_pool" "origin_pool" {
   enabled            = lookup(each.value, "enabled", null)
   minimum_origins    = lookup(each.value, "minimum_origins", null)
   notification_email = lookup(each.value, "notification_email", null)
-  monitor            = (lookup(each.value, "monitor_name", null) != null ? ibm_cis_healthcheck.health_check[lookup(each.value, "monitor_name")].id : lookup(each.value, "monitor_id", null))
+  monitor            = (lookup(each.value, "health_check_name", null) != null ? ibm_cis_healthcheck.health_check[lookup(each.value, "health_check_name")].id : null)
 }
 
+##############################################################################
+# Add list of health checks
+##############################################################################
 
 resource "ibm_cis_healthcheck" "health_check" {
-  cis_id           = var.cis_id
-  for_each         = { for monitor in var.monitors : monitor.name => monitor }
+  cis_id           = var.cis_instance_id
+  for_each         = { for health_check in var.health_checks : health_check.name => health_check }
   description      = each.value.name
   path             = lookup(each.value, "path", "/")
   type             = lookup(each.value, "type", "http")
   port             = lookup(each.value, "port", null)
-  expected_body    = lookup(each.value, "expected_body", null)
-  expected_codes   = each.value.expected_codes
+  expected_body    = lookup(each.value, "expected_body", "")
+  expected_codes   = lookup(each.value, "expected_codes", "200")
   method           = lookup(each.value, "method", "GET")
   timeout          = lookup(each.value, "timeout", 5)
   follow_redirects = lookup(each.value, "follow_redirects", false)
   allow_insecure   = lookup(each.value, "allow_insecure", false)
   interval         = lookup(each.value, "interval", 60)
   retries          = lookup(each.value, "retries", 2)
-
-  dynamic "headers" {
-    for_each = lookup(each.value, "headers", [])
-    content {
-      header = lookup(headers.value, "header", null)
-      values = lookup(headers.value, "values", null)
-    }
-  }
 }
