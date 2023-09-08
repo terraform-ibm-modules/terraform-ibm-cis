@@ -1,12 +1,207 @@
 {
   "path": ".",
-  "variables": {},
-  "outputs": {},
+  "variables": {
+    "domain_name": {
+      "name": "domain_name",
+      "type": "string",
+      "description": "The domain name to be added to the CIS instance.",
+      "required": true,
+      "source": [
+        "module.cis_domain.ibm_cis_domain.cis_domain.domain"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 31
+      }
+    },
+    "plan": {
+      "name": "plan",
+      "type": "string",
+      "description": "The type of plan for the CIS instance: standard-next or trial.",
+      "default": "trial",
+      "required": true,
+      "source": [
+        "ibm_cis.cis_instance.plan"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 15
+      }
+    },
+    "resource_group_id": {
+      "name": "resource_group_id",
+      "type": "string",
+      "description": "The resource group ID to provision the CIS instance.",
+      "required": true,
+      "source": [
+        "ibm_cis.cis_instance.resource_group_id"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 5
+      },
+      "cloud_data_type": "resource_group",
+      "immutable": true,
+      "computed": true
+    },
+    "service_name": {
+      "name": "service_name",
+      "type": "string",
+      "description": "Name of the CIS instance.",
+      "required": true,
+      "source": [
+        "ibm_cis.cis_instance.name"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 10
+      }
+    },
+    "tags": {
+      "name": "tags",
+      "type": "list(string)",
+      "description": "List of tags to be associated to the CIS instance.",
+      "default": [],
+      "source": [
+        "ibm_cis.cis_instance.tags"
+      ],
+      "pos": {
+        "filename": "variables.tf",
+        "line": 25
+      },
+      "min_length": 1,
+      "max_length": 128,
+      "matches": "^[A-Za-z0-9:_ .-]+$",
+      "computed": true,
+      "elem": {
+        "type": "TypeString"
+      }
+    }
+  },
+  "outputs": {
+    "cis_domain": {
+      "name": "cis_domain_details",
+      "description": "CIS Domain details",
+      "value": "module.cis_domain.cis_domain_details",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 25
+      }
+    },
+    "cis_instance_guid": {
+      "name": "cis_instance_guid",
+      "description": "GUID of CIS instance",
+      "value": "ibm_cis.cis_instance.guid",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 10
+      },
+      "type": "TypeString"
+    },
+    "cis_instance_id": {
+      "name": "cis_instance_id",
+      "description": "CRN of CIS instance",
+      "value": "ibm_cis.cis_instance.id",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 15
+      }
+    },
+    "cis_instance_name": {
+      "name": "cis_instance_name",
+      "description": "CIS instance name",
+      "value": "ibm_cis.cis_instance.name",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 5
+      },
+      "type": "TypeString"
+    },
+    "cis_instance_status": {
+      "name": "cis_instance_status",
+      "description": "Status of CIS instance",
+      "value": "ibm_cis.cis_instance.status",
+      "pos": {
+        "filename": "outputs.tf",
+        "line": 20
+      },
+      "type": "TypeString"
+    }
+  },
   "required_core": [
     "\u003e= 1.3.0"
   ],
-  "required_providers": {},
-  "managed_resources": {},
+  "required_providers": {
+    "ibm": {
+      "source": "IBM-Cloud/ibm",
+      "version_constraints": [
+        "\u003e= 1.49.0, \u003c 2.0.0"
+      ]
+    }
+  },
+  "managed_resources": {
+    "ibm_cis.cis_instance": {
+      "mode": "managed",
+      "type": "ibm_cis",
+      "name": "cis_instance",
+      "attributes": {
+        "name": "service_name",
+        "plan": "plan",
+        "resource_group_id": "resource_group_id",
+        "tags": "tags"
+      },
+      "provider": {
+        "name": "ibm"
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 5
+      }
+    }
+  },
   "data_resources": {},
-  "module_calls": {}
+  "module_calls": {
+    "cis_domain": {
+      "name": "cis_domain",
+      "source": "./modules/domain",
+      "attributes": {
+        "domain_name": "domain_name"
+      },
+      "managed_resources": {
+        "ibm_cis_domain.cis_domain": {
+          "mode": "managed",
+          "type": "ibm_cis_domain",
+          "name": "cis_domain",
+          "attributes": {
+            "cis_id": "cis_instance_id",
+            "domain": "domain_name",
+            "type": "domain_type"
+          },
+          "provider": {
+            "name": "ibm"
+          },
+          "pos": {
+            "filename": "modules/domain/main.tf",
+            "line": 5
+          }
+        }
+      },
+      "data_resources": {},
+      "outputs": {
+        "cis_domain_details": {
+          "name": "cis_domain_details",
+          "description": "CIS Domain details",
+          "value": "ibm_cis_domain.cis_domain",
+          "pos": {
+            "filename": "modules/domain/outputs.tf",
+            "line": 2
+          }
+        }
+      },
+      "pos": {
+        "filename": "main.tf",
+        "line": 23
+      }
+    }
+  }
 }
