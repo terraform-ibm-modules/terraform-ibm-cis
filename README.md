@@ -24,7 +24,6 @@ For more information see, [Getting started with IBM Cloud Internet Services](htt
     * [glb](./modules/glb)
 * [Examples](./examples)
     * [End-to-end example](./examples/complete)
-    * [End-to-end example](./examples/complete_backup)
 * [Contributing](#contributing)
 
 ## terraform-ibm-cis
@@ -108,10 +107,6 @@ You need the following permissions to run this module.
   - **Cloud Internet** service
     - `Editor` platform access
 
-
-## Examples
-
-* [End-to-end example](examples/complete)
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
