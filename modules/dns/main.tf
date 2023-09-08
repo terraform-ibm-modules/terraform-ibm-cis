@@ -4,7 +4,7 @@
 
 locals {
   # tflint-ignore: terraform_unused_declarations
-  validate_inputs = [for record in var.dns_record_set : (record.type == "SRV" || record.type == "LOC" || record.type == "CAA") ? (record.data != null ? null : tobool("The dns_record_set data block cannot have null value for the following DNS record type - ${record.type}.")) : null]
+  validate_inputs = [for record in var.dns_record_set : (record.type == "SRV" || record.type == "LOC" || record.type == "CAA") ? (record.data != null ? null : tobool("The dns_record_set data block cannot have null value for the following DNS record - ${record.name}")) : null]
 }
 
 resource "ibm_cis_dns_record" "dns_records" {
