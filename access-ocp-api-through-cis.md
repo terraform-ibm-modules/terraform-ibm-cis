@@ -15,15 +15,12 @@
 2. Open the CIS service created earlier. Navigate to `DNS` tab under `Reliability`.
  
 3. Go to `DNS records` and add a new record:
-
+   ```
    Type: CNAME
-   
-   Name: < any name >
-
+   Name: <any name>
    TTL: Automatic
-
-   Alias domain name: < openshift_route >  ## example: router-default.xxx-3b5bf5f75xxxx21c8c35ad277-0000.us-south.containers.appdomain.cloud
-
+   Alias domain name: <openshift_route>  ## example: router-default.xxx-3b5bf5f75xxxx21c8c35ad277-0000.us-south.containers.appdomain.cloud
+   ```
    
 4. You must have appropriate SSL certificates to redirect to `https` endpoint. The SSL certificates can be generated using [Secrets Manager](https://cloud.ibm.com/catalog/services/secrets-manager) service on IBM Cloud. Order a certificate in Secrets Manager:
 
@@ -47,14 +44,37 @@
     * Review your selections and click on Add.
     Create Pub certs using secret manager and DNS provider as CIS
 
-5. Download the certificates in Secrets Manager. It has `< cert_name >.key` and `< cert_name >.pem` file.
+5. Download the certificates in Secrets Manager. It has `<cert_name>.key` and `<cert_name>.pem` file.
 6. Create secrets in OpenShift using the downloaded certificates.
    ```
    oc project openshift-ingress
-   oc create secret tls < secret_name > --cert=< path of pem file > --key=< path of key file >
+   oc create secret tls <secret_name> --cert=<path_of_pem_file> --key=<path_of_key_file>
    ```
 7. Create ingress for the endpoint using CIS CNAME as host and tls secret generated in previous step.
-8. It creates the route for the endpoint. Get the route.
+   ```
+   apiVersion: networking.k8s.io/v1 
+   kind: Ingress
+   metadata:
+     name: myingressresource
+   spec:
+    tls:
+    - hosts:
+      - <cis_dns_domain_name>
+     secretName: <secret_name>
+   rules:
+   - host: <cis_dns_domain_name> 
+     http:
+      paths:
+      - path: /healthz
+        pathType: ImplementationSpecific
+        backend:
+            service:
+                name: router-internal-default
+                port:
+                    number: 1936
+   ```
+   
+8. It creates the route for the endpoint. You can validate the route as:
    ```
    oc get routes
    ```
