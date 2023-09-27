@@ -46,9 +46,18 @@
     * Click Next.
     * Review your selections and click on Add.
     Create Pub certs using secret manager and DNS provider as CIS
-    Create secrets using the certs generated in secrets manager
-    Create ingress for the endpoint using CIS CNAME as host and tls secret generated in previous step
-    Ingress create the route for the endpoint
-    Now access the endpoint using the CIS CNAME URL. It works.
+
+5. Download the certificates in Secrets Manager. It has `< cert_name >.key` and `< cert_name >.pem` file.
+6. Create secrets in OpenShift using the downloaded certificates.
+   ```
+   oc project openshift-ingress
+   oc create secret tls < secret_name > --cert=< path of pem file > --key=< path of key file >
+   ```
+7. Create ingress for the endpoint using CIS CNAME as host and tls secret generated in previous step.
+8. It creates the route for the endpoint. Get the route.
+   ```
+   oc get routes
+   ```
+9. Now access the endpoint using the CIS CNAME URL. It works.
 
 
