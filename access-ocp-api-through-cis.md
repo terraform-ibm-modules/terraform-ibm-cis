@@ -11,9 +11,9 @@
    ```
 
    Alternatively you deploy your app and create the NodePort service for the application endpoint.
-   
+
 2. Open the CIS service and navigate to `DNS` tab under `Reliability`.
- 
+
 3. Go to `DNS records` and add a new record:
    ```
    Type: CNAME
@@ -36,9 +36,9 @@
    curl: (35) LibreSSL/3.3.6: error:1404B410:SSL routines:ST_CONNECT:sslv3 alert handshake failure
    ```
 
-   It is because the client or server is not able to establish a secure connection. 
+   It is because the client or server is not able to establish a secure connection.
 
-    
+
 5. To establish a secure connection between client and server, you need to have appropriate SSL certificates. The SSL certificates can be generated using [Secrets Manager](https://cloud.ibm.com/catalog/services/secrets-manager) service on IBM Cloud. Order a certificate in Secrets Manager:
 
     * Open the Secrets Manager service and select `Secrets` on the left.
@@ -67,10 +67,10 @@
    oc project openshift-ingress
    oc create secret tls <secret_name> --cert=<path_of_pem_file> --key=<path_of_key_file>
    ```
-   
+
 8. Create ingress for the endpoint using CIS CNAME as host and tls secret generated in previous step.
    ```
-   apiVersion: networking.k8s.io/v1 
+   apiVersion: networking.k8s.io/v1
    kind: Ingress
    metadata:
      name: myingressresource
@@ -80,7 +80,7 @@
       - test.example.com
      secretName: <secret_name>
    rules:
-   - host: test.example.com 
+   - host: test.example.com
      http:
       paths:
       - path: /healthz
@@ -91,16 +91,14 @@
                 port:
                     number: 1936
    ```
-   
+
 9. It creates the route for the endpoint. You can validate the route as:
    ```
    oc get routes
    ```
-   
+
 10. You can access the endpoint using the CIS CNAME URL `https://test.example.com/<api_endpoint>`.
     ```
     % curl https://test.example.com/healthz
     ok
     ```
-
-
