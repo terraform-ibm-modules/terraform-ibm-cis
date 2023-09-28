@@ -8,29 +8,29 @@ Although the SRV record name is provided in the variable, it is stored as `_serv
 
 The changed name means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. However, your infrastructure will not be affected.
 
-    ```
+    
     # module.cis_dns_records[0].ibm_cis_dns_record.dns_records["NAME/SRV"] will be updated in-place
     ~ resource "ibm_cis_dns_record" "dns_records" {
         id          = "a5177ec049fc2973a33df1441e869a27:9684838a87ecxxx5518:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644axxx4f55b3880e:6ee7ec9a-5e68-4b6f-af9a-5714xxx4d::"
-        ~ name        = "_sip._udp.test-example.srv.test**.**.com" -> "test-example.srv"
+        ~ name      = "_sip._udp.test-example.srv.test**.**.com" -> "test-example.srv"
         # (13 unchanged attributes hidden)
         }
-    ```
+    
 If a record of type CAA is added, the flags parameter is augmented in the data object. More information on the flags parameter can be found [here](https://developers.cloudflare.com/api/operations/dns-records-for-a-zone-create-dns-record).
 
 The addition of flags parameter means that when when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. However, your infrastructure will not be affected.
 
-    ```
+    
     # module.cis_dns_records.ibm_cis_dns_record.dns_records["test-exmple.caa/CAA"] will be updated in-place
     ~ resource "ibm_cis_dns_record" "dns_records" {
         ~ data        = {
             - "flags" = "0" -> null
                 # (2 unchanged elements hidden)
             }
-            id          = "fcef7410xxxxxxbad23c5fd0e7581b7c:7e66xxxxxecc7e12ac908ca75445ad21:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644axxxxx6e44f55b3880e:06240432-xxxx-40e7-9f9c-594dfbdfe208::"
+            id        = "fcef7410xxxxxxbad23c5fd0e7581b7c:7e66xxxxxecc7e12ac908ca75445ad21:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644axxxxx6e44f55b3880e:06240432-xxxx-40e7-9f9c-594dfbdfe208::"
             # (12 unchanged attributes hidden)
         }
-    ```
+    
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
