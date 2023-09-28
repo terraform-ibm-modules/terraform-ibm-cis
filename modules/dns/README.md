@@ -18,7 +18,7 @@ The changed name means that when you run a `terraform plan` command after a succ
 
 If a record of type CAA is added, the flags parameter is augmented in the data object. More information on the flags parameter can be found [here](https://developers.cloudflare.com/api/operations/dns-records-for-a-zone-create-dns-record).
 
-The addition of flags parameter means that when when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. However, your infrastructure will not be affected.
+The addition of flags parameter means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. However, your infrastructure will not be affected.
 
 
     # module.cis_dns_records.ibm_cis_dns_record.dns_records["test-exmple.caa/CAA"] will be updated in-place
