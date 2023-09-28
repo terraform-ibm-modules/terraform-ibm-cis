@@ -3,10 +3,10 @@
 This module is used to create and manage IBM Cloud Internet Services (CIS) DNS records.
 
 
-1. Although the SRV record name is provided in the variable, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
+Although the SRV record name is provided in the variable, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
 
 
-    The changed name means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. However, your infrastructure will not be affected.
+The changed name means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. However, your infrastructure will not be affected.
 
     ```
     # module.cis_dns_records[0].ibm_cis_dns_record.dns_records["NAME/SRV"] will be updated in-place
@@ -16,9 +16,9 @@ This module is used to create and manage IBM Cloud Internet Services (CIS) DNS r
         # (13 unchanged attributes hidden)
         }
     ```
-2. When a DNS record of CAA type is added, the `flags` is automatically assigned.
+If a record of type CAA is added, the flags parameter is augmented in the data object. More information on the flags parameter can be found [here](https://developers.cloudflare.com/api/operations/dns-records-for-a-zone-create-dns-record).
 
-    The assignment of flags means when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. However, your infrastructure will not be affected.
+The addition of flags parameter means that when when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. However, your infrastructure will not be affected.
 
     ```
     # module.cis_dns_records.ibm_cis_dns_record.dns_records["test-exmple.caa/CAA"] will be updated in-place
