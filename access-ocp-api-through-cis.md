@@ -1,20 +1,23 @@
-## Accessing the api endpoint deployed on OpenShift through CIS
+## Accessing the application deployed on OpenShift through CIS
 
-1. Setup an OpenShift cluster with ingress. The cluster comes with a default endpoint `/healthz` that is accessible as:
-   ```
-   % oc get routes -n openshift-ingress
-   NAME                                      HOST/PORT                                                                               PATH       SERVICES                  PORT   TERMINATION     WILDCARD
-   route.route.openshift.io/router-default   router-default.xxx-3b5bf5f75xxxx21c8c35ad277-0000.us-south.containers.appdomain.cloud   /healthz   router-internal-default   1936   edge/Redirect   None
+### Before you begin
 
-   % curl https://router-default.xxx-3b5bf5f75xxxx21c8c35ad277-0000.us-south.containers.appdomain.cloud/healthz
-   ok
-   ```
+***OpenShift Configuration***
 
-   Alternatively you deploy your app and create the NodePort service for the application endpoint.
+* Create a [RedHat OpenShift on IBM Cloud](https://cloud.ibm.com/docs/openshift?topic=openshift-getting-started&interface=ui).
+* Deploy an app on the OpenShift cluster and create the service for the application endpoint. This document reuses a `/healthz` end point which comes with the default deployment.
 
-2. Open the CIS service and navigate to `DNS` tab under `Reliability`.
+***CIS Configuration***
+* Create CIS instance. You can use the [terraform module](https://github.com/terraform-ibm-modules/terraform-ibm-cis) to create and configure CIS.
+* An active domain of CIS instance.
 
-3. Go to `DNS records` and add a new record:
+
+### Steps
+
+1. Login to [IBM Cloud](https://cloud.ibm.com) and click on your CIS instance under `Resources List`. Navigate to `DNS` tab under `Reliability`.
+
+2. Go to `DNS records` and add a new record:
+
    ```
    Type: CNAME
    Name: <any name>
@@ -22,24 +25,11 @@
    Alias domain name: <openshift_route>  ## example: router-default.xxx-3b5bf5f75xxxx21c8c35ad277-0000.us-south.containers.appdomain.cloud
    ```
 
-4. If CIS domain is `example.com` and DNS record name provided in step 3 is `test` then the endpoint can be accessed via `https://test.example.com/<api_endpoint>`. If you access the link now, you will get `ssl handshake failure` error as below.
-   ```
-   % curl -v https://test.example.com/<api_endpoint>
-   *   Trying [2606:4000:10::xy43:xy0]:443...
-   * Connected to test.example.com (2606:4000:10::xy43:xy0) port 443 (#0)
-   * ALPN: offers h2,http/1.1
-   * (304) (OUT), TLS handshake, Client hello (1):
-   *  CAfile: /etc/ssl/cert.pem
-   *  CApath: none
-   * LibreSSL/3.3.6: error:1404B410:SSL routines:ST_CONNECT:sslv3 alert handshake failure
-   * Closing connection 0
-   curl: (35) LibreSSL/3.3.6: error:1404B410:SSL routines:ST_CONNECT:sslv3 alert handshake failure
-   ```
+   Make a note of the CIS domain and DNS record name. It will be used to access the application from CIS.
 
-   It is because the client or server is not able to establish a secure connection.
+   >If CIS domain is `example.com` and DNS record name is `test` then the endpoint will be `https://test.example.com/<api_endpoint>`. In this case, it is `https://test.example.com/healthz`.  This endpoint is not accessible because the certificates are not set for https protocol and you will get ssl handshake failure error.
 
-
-5. To establish a secure connection between client and server, you need to have appropriate SSL certificates. The SSL certificates can be generated using [Secrets Manager](https://cloud.ibm.com/catalog/services/secrets-manager) service on IBM Cloud. Order a certificate in Secrets Manager:
+3. To establish a secure connection between client and server, you need to have appropriate SSL certificates. The SSL certificates can be generated using [Secrets Manager](https://cloud.ibm.com/catalog/services/secrets-manager) service on IBM Cloud. Order a certificate in Secrets Manager:
 
     * Open the Secrets Manager service and select `Secrets` on the left.
     * Click `Add`.
@@ -60,15 +50,20 @@
     * Click `Next`.
     * Review your selections and click on `Add`.
 
-6. Download the certificates in Secrets Manager. It has `<cert_name>.key` and `<cert_name>.pem` file.
 
-7. Create secrets in OpenShift using the downloaded certificates.
+4. Download the certificates in Secrets Manager. It has `<cert_name>.key` and `<cert_name>.pem` file.
+
+5. Open a terminal and run the following commands to create secrets in OpenShift using the downloaded certificates.
+
    ```
-   oc project openshift-ingress
+   ibmcloud login --apikey <apikey>
+   ibmcloud oc cluster config -c <your_openshift_cluster_id> --admin
+   oc project openshift-ingress  #switch to the project where your application is deployed
    oc create secret tls <secret_name> --cert=<path_of_pem_file> --key=<path_of_key_file>
    ```
 
-8. Create ingress for the endpoint using CIS CNAME as host and tls secret generated in previous step.
+6. Create ingress for the endpoint using CIS CNAME as host and tls secret generated in previous step. Save the following configuration as `ingress.yaml` and update according to your domain, secret, path, service and port.
+
    ```
    apiVersion: networking.k8s.io/v1
    kind: Ingress
@@ -92,12 +87,20 @@
                     number: 1936
    ```
 
-9. It creates the route for the endpoint. You can validate the route as:
+   Apply the configuration.
+
+   ```
+   oc apply -f ingress.yaml
+   ```
+
+7. It creates the route for the endpoint. You can validate the route as:
+
    ```
    oc get routes
    ```
 
-10. You can access the endpoint using the CIS CNAME URL `https://test.example.com/<api_endpoint>`.
+8. Access your application endpoint noted in step 2 to verify success.
+
     ```
     % curl https://test.example.com/healthz
     ok
