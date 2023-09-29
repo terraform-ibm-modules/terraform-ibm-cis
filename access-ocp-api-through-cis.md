@@ -53,7 +53,7 @@
 
 4. Download the certificates in Secrets Manager. It has `<cert_name>.key` and `<cert_name>.pem` file.
 
-5. Open a terminal and run the following commands to create secrets in OpenShift using the downloaded certificates.
+5. Run the following commands on the command line to create secrets in your cluster that use the downloaded certificates.
 
    ```
    ibmcloud login --apikey <apikey>
