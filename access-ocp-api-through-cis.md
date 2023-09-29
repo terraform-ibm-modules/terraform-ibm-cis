@@ -12,7 +12,7 @@
 * An active domain of CIS instance.
 
 
-### Steps
+## Add a DNS entry
 
 1. Login to [IBM Cloud](https://cloud.ibm.com) and click on your CIS instance under `Resources List`. Navigate to `DNS` tab under `Reliability`.
 
