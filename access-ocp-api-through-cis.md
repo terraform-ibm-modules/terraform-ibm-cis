@@ -27,7 +27,7 @@
 
    Make a note of the CIS domain and DNS record name. It will be used to access the application from CIS.
 
-   >If CIS domain is `example.com` and DNS record name is `test` then the endpoint will be `https://test.example.com/<api_endpoint>`. In this case, it is `https://test.example.com/healthz`.  This endpoint is not accessible because the certificates are not set for https protocol and you will get ssl handshake failure error.
+   >If CIS domain is `example.com`, DNS record name is `test` and application endpoint is `/healthz` then the URL to access will be `https://test.example.com/healthz`.  This endpoint is not accessible this time because the certificates are not set for https protocol and you will get ssl handshake failure error.
 
 3. To establish a secure connection between client and server, you need to have appropriate SSL certificates. The SSL certificates can be generated using [Secrets Manager](https://cloud.ibm.com/catalog/services/secrets-manager) service on IBM Cloud. Order a certificate in Secrets Manager:
 
@@ -99,7 +99,7 @@
    oc get routes
    ```
 
-8. Access your application endpoint noted in step 2 to verify success.
+8. Access your application endpoint noted in step 2 to verify success as shown in the following example.
 
     ```
     % curl https://test.example.com/healthz
