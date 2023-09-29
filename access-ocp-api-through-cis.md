@@ -99,7 +99,7 @@
    oc get routes
    ```
 
-8. Access your application endpoint noted in step 2 to verify success as shown in the following example.
+8. Verify that you can access your application at the endpoint that you created in [Add a DNS entry](#add-a-dns-entry). For example, 
 
     ```
     % curl https://test.example.com/healthz
