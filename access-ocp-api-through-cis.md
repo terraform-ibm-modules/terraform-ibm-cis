@@ -91,7 +91,7 @@ To establish a secure connection between the client and server, you need to an S
                     number: 1936
    ```
 
-   Apply the configuration.
+1. Apply the configuration by running the following OpenShift CLI command:
 
    ```
    oc apply -f ingress.yaml
