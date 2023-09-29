@@ -16,7 +16,7 @@ The changed name means that when you run a `terraform plan` command after a succ
         # (13 unchanged attributes hidden)
         }
 
-If you add a CAA record, a `flags` parameter is returned in the data object. The work is being tracked on this issue [here](IBM-Cloud/terraform-provider-ibm#4792).
+If you add a CAA record, a `flags` parameter is returned in the data object. The work is being tracked in `IBM-Cloud/terraform-provider-ibm` [issue 4792] (https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4792).
 
 The returned `flags` parameter means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. You can ignore that message. Your infrastructure will not be affected.
 
