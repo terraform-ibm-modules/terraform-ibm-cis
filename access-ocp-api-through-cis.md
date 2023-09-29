@@ -5,19 +5,17 @@ Hosting web applications is a common deployment pattern for public cloud. You ca
 
 ## Before you begin
 
-- You need a RedHat OpenShift cluster on IBM Cloud with an app deployed in the cluster. For more information, see [Deploying apps in Red Hat OpenShift clusters](https://cloud.ibm.com/docs/openshift?topic=openshift-deploy_app&interface=ui)
+- You need a Red Hat OpenShift cluster on IBM Cloud with an app deployed in the cluster. For more information, see [Deploying apps in Red Hat OpenShift clusters](https://cloud.ibm.com/docs/openshift?topic=openshift-deploy_app&interface=ui).
 - You also need an instance of Cloud Internet Services with an active domain name. You can use this [CIS module](https://github.com/terraform-ibm-modules/terraform-ibm-cis) to create and configure the instance.
 - Make sure that you have the [OpenShift CLI installed](https://cloud.ibm.com/docs/openshift?topic=openshift-cli-install).
 - Make sure that you have the [IBM Cloud CLI installed](https://cloud.ibm.com/docs/cli?topic=cli-getting-started).
 
-
 ## Add a DNS entry
 
-1. Login to [IBM Cloud](https://cloud.ibm.com) and click on your CIS instance under `Resources List`. Navigate to `DNS` tab under `Reliability`.
+1. Log in to [IBM Cloud](https://cloud.ibm.com) and click your CIS instance under "Resources List". Navigate to the DNS tab under Reliability.
+1. Go to `DNS records` and add a record:
 
-2. Go to `DNS records` and add a new record:
-
-   ```
+   ```text
    Type: CNAME
    Name: <any name>
    TTL: Automatic
@@ -26,7 +24,7 @@ Hosting web applications is a common deployment pattern for public cloud. You ca
 
    Make a note of the CIS domain and DNS record name. You need it later to access the application from CIS.
 
-   >For example, the CIS domain is `example.com`, the DNS record name is `test`, and the application endpoint is `/healthz`. The URL to access will be `https://test.example.com/healthz`.  If you try to connect to your URL, you get an SSL handshake error because the SSL certificates are not yet set up.
+   For example, the CIS domain is `example.com`, the DNS record name is `test`, and the application endpoint is `/healthz`. The URL to access will be `https://test.example.com/healthz`.  If you try to connect to your URL, you get an SSL handshake error because the SSL certificates are not yet set up.
 
 ## Configuring your SSL certificate
 
@@ -34,29 +32,23 @@ To establish a secure connection between the client and server, you need to an S
 
 1. Order a certificate in Secrets Manager:
 
-    * Open the Secrets Manager service and select `Secrets` on the left.
-    * Click `Add`.
-    * If you are using a new Secrets Manager instance you will need to configure it prior to ordering your certificate. Follow the steps outlined under [Preparing to order public certificates](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates&interface=ui).
-    * Click on `Public certificate` and then click on `Next`.
-    * Complete the form:
-      ```
-        Name - provide a name.
-        Description - enter a description of your choice.
-        Click on Next.
-        Under Certificate authority select your configured Let's Encrypt certificate authority engine.
-        Under Key algorithm, pick your preferred algorithm,
-        Bundle certificates - leave off
-        Automatic certificate rotation - leave off
-        Under DNS provider select your configured DNS provider instance.
-        Click on Select domains, check the subdomain and click on Done.
-      ```
-    * Click `Next`.
-    * Review your selections and click on `Add`.
-
-
-2. Download the certificates in Secrets Manager. It has `<cert_name>.key` and `<cert_name>.pem` file.
-
-3. Run the following commands on the command line to create secrets in your cluster that use the downloaded certificates.
+    1. Open the Secrets Manager service and select `Secrets` on the left.
+    1. Click **Add**.
+    1. If you are using a new Secrets Manager instance, you need to configure it before you order your certificate. Follow the steps that are outlined under [Preparing to order public certificates](https://cloud.ibm.com/docs/secrets-manager?topic=secrets-manager-prepare-order-certificates&interface=ui).
+    1. Click **Public certificate**, and then click **Next**.
+    1. Complete the form. Add a name and description.
+    1. Click **Next**.
+    1. Select your configured Let's Encrypt certificate authority engine.
+    1. Select the key algorithm to use to generate the key for your certificate.
+    1. Enable advanced options for the certificate.
+        - Make sure that the bundle is toggled off.
+        - Make sure that the automatic certificate rotation is toggled off.
+    1. Select your configured DNS provider instance.
+    1. Add the domains to include in your request. Check the subdomain, and then click **Done**.
+    1. Click **Next**.
+    1. Review your selections and click **Add**.
+1. Download the certificates in Secrets Manager. It has `<cert_name>.key` and `<cert_name>.pem` file.
+1. Run the following commands on the command line to create secrets in your cluster that use the downloaded certificates.
 
    ```sh
    ibmcloud login --apikey <apikey>
@@ -74,7 +66,7 @@ You create an ingress for the endpoint that uses the CIS CNAME as the host and t
 1. Update the following configuration to match your domain, secret, path, service, and port.
    Save the file with the name `ingress.yaml`.
 
-   ```
+   ```yaml
    apiVersion: networking.k8s.io/v1
    kind: Ingress
    metadata:
@@ -96,10 +88,9 @@ You create an ingress for the endpoint that uses the CIS CNAME as the host and t
                 port:
                     number: 1936
    ```
+1. Apply the configuration by running the following OpenShift CLI command:
 
-2. Apply the configuration by running the following OpenShift CLI command:
-
-   ```
+   ```sh
    oc apply -f ingress.yaml
    ```
 
@@ -110,15 +101,14 @@ You create an ingress for the endpoint that uses the CIS CNAME as the host and t
        ```sh
        oc get routes
        ```
-
-3. Verify that you can access your application at the endpoint that you created in [Add a DNS entry](#add-a-dns-entry). For example,
+1. Verify that you can access your application at the endpoint that you created in [Add a DNS entry](#add-a-dns-entry). For example,
 
     ```sh
     curl https://test.example.com/healthz
     ok
     ```
 
-   If you find any issue in connecting to the endpoint, refer [the doc](https://cloud.ibm.com/docs/cis?topic=cis-troubleshoot-your-cis-network-connection) that will help you to troubleshoot your connection.
+   If you have issues connecting to the endpoint, see [Troubleshooting your CIS network connection](https://cloud.ibm.com/docs/cis?topic=cis-troubleshoot-your-cis-network-connection) for possible solutions.
 
 
-You have created a secure connection to your application endpoint through CIS.
+You created a secure connection to your application endpoint through CIS.
