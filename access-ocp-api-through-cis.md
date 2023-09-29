@@ -1,4 +1,4 @@
-## Accessing the application deployed on OpenShift through CIS
+# Configuring access to an application deployed on Red Hat OpenShift through CIS
 
 ### Before you begin
 
