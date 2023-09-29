@@ -25,7 +25,7 @@
    Alias domain name: <openshift_route>  ## example: router-default.xxx-3b5bf5f75xxxx21c8c35ad277-0000.us-south.containers.appdomain.cloud
    ```
 
-   Make a note of the CIS domain and DNS record name. It will be used to access the application from CIS.
+   Make a note of the CIS domain and DNS record name. You need it later to access the application from CIS.
 
    >If CIS domain is `example.com`, DNS record name is `test` and application endpoint is `/healthz` then the URL to access will be `https://test.example.com/healthz`.  This endpoint is not accessible this time because the certificates are not set for https protocol and you will get ssl handshake failure error.
 
