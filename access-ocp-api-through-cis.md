@@ -66,7 +66,14 @@ To establish a secure connection between the client and server, you need to an S
    oc create secret tls <secret_name> --cert=<path_of_pem_file> --key=<path_of_key_file>
    ```
 
-6. Create ingress for the endpoint using CIS CNAME as host and tls secret generated in previous step. Save the following configuration as `ingress.yaml` and update according to your domain, secret, path, service and port.
+## Create an ingress and the route
+
+An ingress defines rules to allow external access to services in a cluster. You create an ingress for your URL.
+
+You create an ingress for the endpoint that uses the CIS CNAME as the host and the TLS secret that you generated in the previous step. 
+
+1. Update the following configuration to match your domain, secret, path, service, and port.
+1. Save the file with the name `ingress.yaml`.
 
    ```
    apiVersion: networking.k8s.io/v1
