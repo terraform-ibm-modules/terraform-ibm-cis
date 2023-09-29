@@ -1,6 +1,6 @@
 # Configuring access to an application deployed on Red Hat OpenShift through CIS
 
-### Before you begin
+## Before you begin
 
 ***OpenShift Configuration***
 
