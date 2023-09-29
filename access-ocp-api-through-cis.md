@@ -104,11 +104,13 @@ You create an ingress for the endpoint that uses the CIS CNAME as the host and t
    oc apply -f ingress.yaml
    ```
 
-7. It creates the route for the endpoint. You can validate the route as:
+   The command creates the route for the endpoint. 
+   
+   You can validate the route by running the following command:
 
-   ```
-   oc get routes
-   ```
+       ```sh
+       oc get routes
+       ```
 
 8. Verify that you can access your application at the endpoint that you created in [Add a DNS entry](#add-a-dns-entry). For example, 
 
