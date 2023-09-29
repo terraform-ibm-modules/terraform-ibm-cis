@@ -55,7 +55,7 @@
 
 5. Run the following commands on the command line to create secrets in your cluster that use the downloaded certificates.
 
-   ```
+   ```sh
    ibmcloud login --apikey <apikey>
    ibmcloud oc cluster config -c <your_openshift_cluster_id> --admin
    oc project openshift-ingress  #switch to the project where your application is deployed
