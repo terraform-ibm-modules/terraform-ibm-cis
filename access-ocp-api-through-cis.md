@@ -101,7 +101,7 @@
 
 8. Verify that you can access your application at the endpoint that you created in [Add a DNS entry](#add-a-dns-entry). For example, 
 
-    ```
-    % curl https://test.example.com/healthz
+    ```sh
+    curl https://test.example.com/healthz
     ok
     ```
