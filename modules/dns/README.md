@@ -6,7 +6,7 @@ This module is used to create and manage IBM Cloud Internet Services (CIS) DNS r
 Although the SRV record name is provided in the variable, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
 
 
-The changed name means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. However, your infrastructure will not be affected.
+The changed name means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. You can ignore that message. Your infrastructure will not be affected.
 
 
     # module.cis_dns_records[0].ibm_cis_dns_record.dns_records["NAME/SRV"] will be updated in-place
@@ -16,9 +16,9 @@ The changed name means that when you run a `terraform plan` command after a succ
         # (13 unchanged attributes hidden)
         }
 
-If a record of type CAA is added, the flags parameter is augmented in the data object. More information on the flags parameter can be found [here](https://developers.cloudflare.com/api/operations/dns-records-for-a-zone-create-dns-record).
+If you add a CAA record, a `flags` parameter is returned in the data object. The work is being tracked on this issue [here](IBM-Cloud/terraform-provider-ibm#4792).
 
-The addition of flags parameter means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. However, your infrastructure will not be affected.
+The returned `flags` parameter means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. You can ignore that message. Your infrastructure will not be affected.
 
 
     # module.cis_dns_records.ibm_cis_dns_record.dns_records["test-exmple.caa/CAA"] will be updated in-place
