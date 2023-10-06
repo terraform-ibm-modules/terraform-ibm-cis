@@ -25,11 +25,11 @@ For more information see, [Getting started with IBM Cloud Internet Services](htt
 * [Examples](./examples)
     * [End-to-end example](./examples/complete)
 * [Contributing](#contributing)
-
-## terraform-ibm-cis
 <!-- END OVERVIEW HOOK -->
 
-## Usage
+## terraform-ibm-cis
+
+### Usage
 
 ```terraform
 provider "ibm" {
@@ -38,7 +38,7 @@ provider "ibm" {
 
 module "cis_instance" {
   source            = "terraform-ibm-modules/cis/ibm"
-  version           = "latest" # Replace "latest" with a release version to lock into a specific release
+  version           = "X.X.X" # Replace "X.X.X" with a release version to lock into a specific release
   service_name      = "example-cis"
   resource_group_id = "000fb3134f214c3a9017554db4510f70" # pragma: allowlist secret
   plan              = "standard-next"
@@ -95,8 +95,7 @@ module "cis_glb" {
 }
 ```
 
-
-## Required IAM access policies
+### Required IAM access policies
 
 You need the following permissions to run this module.
 
