@@ -88,3 +88,16 @@ module "cis_glb" {
     }
   ]
 }
+
+##############################################################################
+# Add web application firewall to CIS instance
+##############################################################################
+
+module "cis_domain_settings" {
+  source          = "../../modules/waf"
+  cis_instance_id = module.cis_instance.cis_instance_id
+  domain_id       = module.cis_instance.cis_domain.domain_id
+  waf             = "on"
+  ssl             = "full"
+  min_tls_version = "1.2"
+}
