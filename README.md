@@ -22,6 +22,7 @@ For more information see, [Getting started with IBM Cloud Internet Services](htt
     * [dns](./modules/dns)
     * [domain](./modules/domain)
     * [glb](./modules/glb)
+    * [waf](./modules/waf)
 * [Examples](./examples)
     * [End-to-end example](./examples/complete)
 * [Contributing](#contributing)
