@@ -1,6 +1,6 @@
 # CIS web application firewall (WAF) module
 
-This module enables the web application firewall of the domain.
+This module enable/disable the web application firewall of the domain.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
@@ -26,9 +26,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of the existing CIS instance. | `string` | n/a | yes |
 | <a name="input_domain_id"></a> [domain\_id](#input\_domain\_id) | ID of the existing domain to add a DNS record to the CIS instance. | `string` | n/a | yes |
-| <a name="input_min_tls_version"></a> [min\_tls\_version](#input\_min\_tls\_version) | The minimum TLS version that you want to allow. Allowed values are 1.1, 1.2, or 1.3. | `string` | n/a | yes |
-| <a name="input_ssl"></a> [ssl](#input\_ssl) | Allowed values: off, flexible, full, strict, origin\_pull. | `string` | n/a | yes |
-| <a name="input_waf"></a> [waf](#input\_waf) | Enable a web application firewall (WAF). Supported values are off and on. | `string` | n/a | yes |
+| <a name="input_waf"></a> [waf](#input\_waf) | Enable/disable a web application firewall (WAF). Supported values are off and on. | `string` | n/a | yes |
 
 ### Outputs
 
