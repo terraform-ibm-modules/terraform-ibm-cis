@@ -49,3 +49,8 @@ variable "dns_record_set" {
     error_message = "The specified DNS record type is not valid."
   }
 }
+
+variable "dns_records_file" {
+  type        = string
+  description = "The DNS zone file that contains the details of the DNS records."
+}

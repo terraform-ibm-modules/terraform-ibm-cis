@@ -21,3 +21,9 @@ resource "ibm_cis_dns_record" "dns_records" {
   data      = ((each.value.data != null) && (each.value.type == "SRV")) ? merge(each.value.data, { "name" : lookup(each.value, "name", "") }) : lookup(each.value, "data", null)
   proxied   = lookup(each.value, "proxied", false)
 }
+
+resource "ibm_cis_dns_records_import" "dns_record_import" {
+  cis_id    = var.cis_instance_id
+  domain_id = var.domain_id
+  file      = var.dns_records_file
+}
