@@ -90,7 +90,7 @@ module "cis_glb" {
 }
 
 ##############################################################################
-# Add web application firewall to CIS instance
+# Enables web application firewall(WAF) to CIS instance
 ##############################################################################
 
 module "cis_domain_settings" {

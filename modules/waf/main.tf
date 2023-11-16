@@ -1,5 +1,5 @@
 ##############################################################################
-# Enable Web Application Firewall for a domain
+# To enable/disable Web Application Firewall(WAF) for a domain
 ##############################################################################
 
 resource "ibm_cis_domain_settings" "domain_settings" {
