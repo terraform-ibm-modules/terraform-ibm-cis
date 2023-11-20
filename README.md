@@ -15,6 +15,14 @@ This module provisions an IBM Cloud Internet Services (CIS) instance and configu
 
 For more information see, [Getting started with IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-getting-started).
 
+###  Distributed Denial of Service(DDOS)
+
+A distributed denial of service (DDoS) attack is a malicious attempt to disrupt normal traffic of a server, service, or network by overwhelming the target or its surrounding infrastructure with a flood of internet traffic. IBM Cloud Internet Service(CIS) provides unlimited DDoS mitigation without any additional cost. To activate the DDoS protection the following conditions must be met-
+
+  * The domain must be active.
+  * The global load balancer(GLB) or DNS records needs to be proxied as mentioned in the [documentation](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
+  * In case of DNS records, CIS module only proxies traffic for `A`, `AAAA`, and `CNAME` records as described [here](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record).
+
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
 * [terraform-ibm-cis](#terraform-ibm-cis)
