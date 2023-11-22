@@ -1,19 +1,6 @@
 # CIS global load balancer (GLB) module
 
-This module provisions a global load balancer that includes load balancers, origin pools, and health checks.
-
-
-When `glb_proxied` is set as `true`, then `ttl` is automatically set and cannot be updated.
-
-This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `ttl` value requires an update, as shown in the following example. However, your infrastructure will not be affected.
-
-```
-# module.cis_glb[0].ibm_cis_global_load_balancer.cis_glb will be updated in-place
-~ resource "ibm_cis_global_load_balancer" "cis_glb" {
-    id               = "xxx:crn:v1:bluemix:public:internet-svcs:global:a/xxxe:xxx509::"
-    name             = "glb.***.com"
-    ~ ttl              = 0 -> 60
-```
+This module provisions a global load balancer that includes load balancers, origin pools, and health checks. For more information about this module see this [documentation](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements

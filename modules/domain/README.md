@@ -1,15 +1,6 @@
 # CIS domain module
 
-This module is used to configure the IBM Cloud Internet Services (CIS) domain.
-
-
-After this module run successfully, the status of the domain that is configured in the CIS instance is set to `pending`. You then configure the name servers that are assigned to the domain at the DNS provider or registrar.
-
-You can find the assigned name servers in the `name_servers` variable of the module output.
-
-The status changes to `active` after the name servers are configured correctly at the DNS provider or registrar.
-
-For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts).
+This module is used to configure the IBM Cloud Internet Services (CIS) domain. For more information regarding how to activate domain visit [here](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md).
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
