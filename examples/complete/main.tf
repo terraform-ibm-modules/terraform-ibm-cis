@@ -98,4 +98,5 @@ module "cis_domain_settings" {
   cis_instance_id = module.cis_instance.cis_instance_id
   domain_id       = module.cis_instance.cis_domain.domain_id
   waf             = "on"
+  min_tls_version = "1.2"
 }
