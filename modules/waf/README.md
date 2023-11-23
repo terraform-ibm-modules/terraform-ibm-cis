@@ -2,8 +2,6 @@
 
 This module enables/disables the web application firewall (WAF) of the domain.
 
-> When the `waf` is enabled then the `min_tls_version` is automatically modified to `1.1`.
-
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
 
