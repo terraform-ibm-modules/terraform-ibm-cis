@@ -17,12 +17,3 @@ variable "waf" {
     error_message = "Provided value of waf is not allowed. Supported values are off and on."
   }
 }
-
-variable "min_tls_version" {
-  type        = string
-  description = "The minimum TLS version that you want to allow. Allowed values are 1.1, 1.2, or 1.3"
-  validation {
-    condition     = contains(["1.1", "1.2", "1.3"], var.min_tls_version)
-    error_message = "Provided value of min_tls_version is not allowed. Supported values are '1.1', '1.2', or '1.3'."
-  }
-}
