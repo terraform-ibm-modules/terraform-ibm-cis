@@ -3,7 +3,9 @@ IBM Cloud® Internet Services, powered by Cloudflare, provides a fast, highly pe
 
 ## Domain Name System(DNS)
 
-The [DNS module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) within the IBM CIS module provides the terraform resource for creating and managing DNS records in a CIS instance in an IBM Cloud account. This inclues the ability to create dns records such as `A`, `CNAME`, `AAAA`, `SRV`, `CAA` other types of [DNS records](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis) for a domain in a CIS instance.
+The Domain Name System (DNS) is the backbone of the everyday internet experience. Operating seamlessly behind the scenes, it translates user-friendly website names into computer-readable numerical IP addresses, adhering to the internet's standards like [RFC 1918 for IPv4 and RFC 4193 for IPv6](https://en.wikipedia.org/wiki/Private_network). Essentially, DNS servers pair domain names, like ibm.com, with their corresponding IP addresses. For more information see, [DNS concepts](https://cloud.ibm.com/docs/cis?topic=cis-dns-concepts).
+
+The [DNS module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) within the CIS module provides the terraform resource for creating and managing DNS records in a CIS instance. This inclues the ability to create dns records such as `A`, `CNAME`, `AAAA`, `SRV`, `CAA` other types of [DNS records](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis) in a CIS instance.
 
 Some of the limitations of the dns-module is as follows:
 * Although the SRV record name is provided in the variable, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
@@ -34,7 +36,7 @@ Some of the limitations of the dns-module is as follows:
 
 ## Domain
 
-The [domain module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) within the CIS module provides the terraform resources required to adda and configure a domain in a cis instance. After the module run successfully-
+The [domain module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) within the CIS module provides the terraform resources required to add and configure a domain in a cis instance. After the module run successfully-
 
 * The status of the domain that is configured in the CIS instance is set to `pending`.
 * You then configure the name servers that are assigned to the domain at the DNS provider or registrar.
@@ -45,7 +47,11 @@ For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs
 
 ## Global Load Balancer(GLB)
 
-The [glb module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/glb/) provides terraform resources to create and manage global load balancers in a CIS instance in an IBM Cloud account. It also allows to configure health checks and other settings. For more information see [global load balancer concepts](https://cloud.ibm.com/docs/cis?topic=cis-global-load-balancer-glb-concepts).
+The global load balancing service efficiently allocates your traffic among numerous servers by utilizing a blend of origin pools, health checks, and a load balancer. Global load balancing encompasses the following functionalities:
+- Load balancing options with both proxy and non-proxy configurations.
+- Utilization of origin pools and health checks.
+
+The [glb module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/glb/) within the CIS module provides terraform resources to create and manage global load balancers in a CIS instance. It also allows to configure health checks and other settings. For more information see [global load balancer concepts](https://cloud.ibm.com/docs/cis?topic=cis-global-load-balancer-glb-concepts).
 
 * The module runs without any error but when `glb_proxied` is set as `true`, then `ttl` is automatically set and cannot be updated.
 
@@ -58,6 +64,12 @@ The [glb module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob
         name             = "glb.***.com"
         ~ ttl              = 0 -> 60
     ```
+
+## Web Application Firewall(WAF)
+
+A Web Application Firewall (WAF) safeguards web applications by scrutinizing and overseeing HTTP traffic that flows between a web application and the internet. Installing a WAF in the forefront of a web application is akin to inserting a protective barrier between the web application and the internet. WAF is implemented through two rule sets: [OWASP](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and [CIS](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf). For more information see, [Web Application Firewall concepts](https://cloud.ibm.com/docs/cis?topic=cis-waf-q-and-a).
+
+Currently, the [waf module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) within the CIS module provides terraform resources to enable and disable WAF with default policies in a CIS instance.
 
 ##  Distributed Denial of Service(DDOS)
 
