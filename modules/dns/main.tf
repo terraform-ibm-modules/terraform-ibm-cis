@@ -23,8 +23,14 @@ resource "ibm_cis_dns_record" "dns_records" {
 }
 
 resource "ibm_cis_dns_records_import" "dns_record_import" {
-  count     = var.dns_records_file != null ? 1 : 0
+  depends_on = [ local_file.dns_record_file ]
+  count     = length(var.base64_encoded_dns_file) !=0 ? 1 : 0
   cis_id    = var.cis_instance_id
   domain_id = var.domain_id
-  file      = var.dns_records_file
+  file      = local_file.dns_record_file.filename
+}
+
+resource "local_file" "dns_record_file" {
+  content_base64 = var.base64_encoded_dns_file
+  filename = "${path.module}/dns_records.txt"
 }

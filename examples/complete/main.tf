@@ -39,7 +39,7 @@ module "cis_dns_records" {
       ttl     = 900
     }
   ]
-  dns_records_file = null
+  base64_encoded_dns_file = ""
 }
 
 ##############################################################################
