@@ -4,8 +4,8 @@ IBM Cloud® Internet Services, powered by Cloudflare, provides a fast, highly pe
 ## Domain Name System(DNS)
 
 The [DNS module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) within the IBM CIS module provides the terraform resource for creating and managing DNS records in a CIS instance in an IBM Cloud account. This inclues the ability to create dns records such as `A`, `CNAME`, `AAAA`, `SRV`, `CAA` other types of [DNS records](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis) for a domain in a CIS instance.
- 
-Some of the limitations of the dns-module is as follows: 
+
+Some of the limitations of the dns-module is as follows:
 * Although the SRV record name is provided in the variable, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
 
 
@@ -32,11 +32,11 @@ Some of the limitations of the dns-module is as follows:
                 # (12 unchanged attributes hidden)
             }
 
-## Domain 
+## Domain
 
-The [domain module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) within the CIS module provides the terraform resources required to adda and configure a domain in a cis instance. After the module run successfully- 
+The [domain module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) within the CIS module provides the terraform resources required to adda and configure a domain in a cis instance. After the module run successfully-
 
-* The status of the domain that is configured in the CIS instance is set to `pending`. 
+* The status of the domain that is configured in the CIS instance is set to `pending`.
 * You then configure the name servers that are assigned to the domain at the DNS provider or registrar.
 * You can find the assigned name servers in the `name_servers` variable of the module output.
 * The status changes to `active` after the name servers are configured correctly at the DNS provider or registrar.
@@ -66,5 +66,3 @@ A distributed denial of service (DDoS) attack is a malicious attempt to disrupt 
   * The domain must be active.
   * The global load balancer(GLB) or DNS records needs to be proxied as mentioned in the [documentation](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
   * In case of DNS records, CIS module only proxies traffic for `A`, `AAAA`, and `CNAME` records as described [here](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record).
-
-
