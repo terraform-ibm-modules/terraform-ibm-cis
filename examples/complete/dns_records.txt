@@ -1,0 +1,2 @@
+;; AAAA Records
+test-ar.aaaa.example.dev.cloud.ibm.com.	900	IN	AAAA	2001::4

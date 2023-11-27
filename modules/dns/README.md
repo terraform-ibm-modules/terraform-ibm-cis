@@ -31,6 +31,16 @@ The returned `flags` parameter means that when you run a `terraform plan` comman
             # (12 unchanged attributes hidden)
         }
 
+The DNS records also can be imported using a file in IBM Cloud Internet Services. This module allows the import of DNS records in two ways:
+- Directly importing the `dns_record.txt` in BIND format.
+- Do base64 encoding on the `dns_record.txt` in BIND format and pass it as a string.
+
+For converting the dns_record text file to Base64 encoding.
+```sh
+cat dns_records.txt | base64
+```
+
+
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
@@ -59,6 +69,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_base64_encoded_dns_file"></a> [base64\_encoded\_dns\_file](#input\_base64\_encoded\_dns\_file) | The base64 encoded DNS zone file in BIND format that contains the details of the DNS records. For more information about the import format see, [managing DNS records](https://cloud.ibm.com/docs/dns-svcs?topic=dns-svcs-managing-dns-records&interface=ui). | `string` | `""` | no |
 | <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of the existing CIS instance. | `string` | n/a | yes |
+| <a name="input_dns_file"></a> [dns\_file](#input\_dns\_file) | The DNS file in text format that contains the details of the DNS records. | `string` | n/a | yes |
 | <a name="input_dns_record_set"></a> [dns\_record\_set](#input\_dns\_record\_set) | List of DNS records to be added for the CIS Instance. | <pre>list(object({<br>    name     = string<br>    type     = string<br>    ttl      = optional(number) # in unit seconds, starts with value 120<br>    content  = optional(string)<br>    priority = optional(number) # mandatory for SRV type of record<br>    proxied  = optional(bool)   # default value is false<br>    data = optional(object({<br>      altitude       = optional(number) # mandatory for LOC type of record<br>      lat_degrees    = optional(number) # mandatory for LOC type of record<br>      lat_direction  = optional(string) # mandatory for LOC type of record<br>      lat_minutes    = optional(number) # mandatory for LOC type of record<br>      lat_seconds    = optional(number) # mandatory for LOC type of record<br>      long_degrees   = optional(number) # mandatory for LOC type of record<br>      long_direction = optional(string) # mandatory for LOC type of record<br>      long_minutes   = optional(number) # mandatory for LOC type of record<br>      long_seconds   = optional(number) # mandatory for LOC type of record<br>      precision_horz = optional(number) # mandatory for LOC type of record<br>      precision_vert = optional(number) # mandatory for LOC type of record<br>      size           = optional(number) # mandatory for LOC type of record<br>      tag            = optional(string) # required for CAA type of record<br>      value          = optional(string) # required for CAA type of record<br>      target         = optional(string) # required for SRV type of record<br>      priority       = optional(number) # required for SRV type of record<br>      port           = optional(number) # mandatory for SRV type of record<br>      proto          = optional(string) # mandatory for SRV type of record<br>      service        = optional(string) # mandatory for SRV type of record, starts with an '_'<br>      weight         = optional(number) # mandatory for SRV type of record<br>    }))<br>  }))</pre> | `[]` | no |
 | <a name="input_domain_id"></a> [domain\_id](#input\_domain\_id) | ID of the existing domain to add a DNS record to the CIS instance. | `string` | n/a | yes |
 
