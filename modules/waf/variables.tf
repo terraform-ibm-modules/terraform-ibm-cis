@@ -9,11 +9,7 @@ variable "domain_id" {
   description = "ID of the existing domain to add a DNS record to the CIS instance."
 }
 
-variable "waf" {
-  type        = string
-  description = "Enables/disables a web application firewall (WAF). Supported values are off and on."
-  validation {
-    condition     = contains(["on", "off"], var.waf)
-    error_message = "Provided value of waf is not allowed. Supported values are off and on."
-  }
+variable "enable_waf" {
+  type        = bool
+  description = "To control whether the web application firewall (WAF) is enabled or disabled for a CIS instance."
 }

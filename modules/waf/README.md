@@ -26,7 +26,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of the existing CIS instance. | `string` | n/a | yes |
 | <a name="input_domain_id"></a> [domain\_id](#input\_domain\_id) | ID of the existing domain to add a DNS record to the CIS instance. | `string` | n/a | yes |
-| <a name="input_waf"></a> [waf](#input\_waf) | Enables/disables a web application firewall (WAF). Supported values are off and on. | `string` | n/a | yes |
+| <a name="input_enable_waf"></a> [enable\_waf](#input\_enable\_waf) | To control whether the web application firewall (WAF) is enabled or disabled for a CIS instance. | `bool` | n/a | yes |
 
 ### Outputs
 

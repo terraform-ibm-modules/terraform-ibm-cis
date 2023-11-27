@@ -97,5 +97,5 @@ module "cis_domain_settings" {
   source          = "../../modules/waf"
   cis_instance_id = module.cis_instance.cis_instance_id
   domain_id       = module.cis_instance.cis_domain.domain_id
-  waf             = "on"
+  enable_waf      = true
 }
