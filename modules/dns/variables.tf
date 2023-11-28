@@ -59,4 +59,5 @@ variable "base64_encoded_dns_file" {
 variable "dns_file" {
   type        = string
   description = "The DNS file in text format that contains the details of the DNS records."
+  default     = null
 }

@@ -23,13 +23,15 @@ resource "ibm_cis_dns_record" "dns_records" {
 }
 
 resource "ibm_cis_dns_records_import" "dns_record_import" {
+  count      = (length(var.base64_encoded_dns_file) != 0 || var.dns_file != null) ? 1 : 0
   depends_on = [local_file.dns_record_file]
   cis_id     = var.cis_instance_id
   domain_id  = var.domain_id
-  file       = length(var.base64_encoded_dns_file) != 0 ? local_file.dns_record_file.filename : var.dns_file
+  file       = length(var.base64_encoded_dns_file) != 0 ? local_file.dns_record_file[0].filename : var.dns_file
 }
 
 resource "local_file" "dns_record_file" {
+  count          = length(var.base64_encoded_dns_file) != 0 ? 1 : 0
   content_base64 = var.base64_encoded_dns_file
-  filename       = "${path.module}/dns_records.txt"
+  filename       = "${path.module}/dns_record.txt"
 }
