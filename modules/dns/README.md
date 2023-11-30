@@ -78,7 +78,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [ibm_cis_dns_record.dns_records](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis_dns_record) | resource |
-| [ibm_cis_dns_records_import.dns_record_import](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis_dns_records_import) | resource |
+| [ibm_cis_dns_records_import.dns_record](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis_dns_records_import) | resource |
 | [local_file.dns_record_file](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
 
 ### Inputs
