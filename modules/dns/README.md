@@ -31,28 +31,29 @@ The returned `flags` parameter means that when you run a `terraform plan` comman
             # (12 unchanged attributes hidden)
         }
 
-The DNS records also can be imported using a file in IBM Cloud Internet Services. This module allows the import of DNS records in two ways:
-- Directly importing the `dns_record.txt` in BIND format.
-- Do base64 encoding on the `dns_record.txt` in BIND format and pass it as a string.
+The DNS records can be imported from a file in IBM Cloud Internet Services. This module allows the import of DNS records in two ways:
 
-For converting the dns_record text file to Base64 encoding.
+* using the local file path (if accessible)
+* using the base64 encoded string for the file
+
+To convert the records text file to base64 encoded string:
 ```sh
 cat dns_records.txt | base64
 ```
 
-When the `dns_records` are successfully added through file import by any of the above methods then `records_added` and `total_records_parsed` is not set in the configuration.
+When the dns_records are successfully imported then it sets the value of `records_added` and `total_records_parsed`.
 
-This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `records_added` and `total_records_parsed` value requires an update according to the number of records added through the file, as shown in the following example. However, your infrastructure will not be affected.
+This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `records_added` and `total_records_parsed` value requires an update according to the number of records imported, as shown in the following example. However, your infrastructure will not be affected.
 
     # Changes to Outputs:
         ~ cis_dns_records = {
-        ~ cis_dns_records_import = [
-            ~ {
-                    id                   = "2:2:../../modules/dns/dns_record.txt:6e64xxxxf5afbbxxxxx5e8cd80c7b208:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644xxxxxc6e44f55b3880e:8xxxx3b0-d688-46bf-83e5-f4b2xxxxxc95::"
-                ~ records_added        = null -> 2
-                ~ total_records_parsed = null -> 2
-                    # (3 unchanged attributes hidden)
-                },
+            ~ cis_imported_dns_records = [
+                ~ {
+                        id  = "3:3:dns_records.txt:8671d9xxxxxc47ffc1axxxxxff410071:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06xxxxa9cabc6exxxxxb3880e:6xxxxdef-8xx2-4xx1-bxx1-6cxxxxx80bf6::"
+                    ~ records_added        = null -> 3
+                    ~ total_records_parsed = null -> 3
+                        # (3 unchanged attributes hidden)
+                    },
             ]
             # (1 unchanged attribute hidden)
         }
@@ -84,7 +85,7 @@ No modules.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| <a name="input_base64_encoded_dns_file"></a> [base64\_encoded\_dns\_file](#input\_base64\_encoded\_dns\_file) | The base64 encoded DNS zone file in BIND format that contains the details of the DNS records. For more information about the import format see, [managing DNS records](https://cloud.ibm.com/docs/dns-svcs?topic=dns-svcs-managing-dns-records&interface=ui). | `string` | `""` | no |
+| <a name="input_base64_encoded_dns_file"></a> [base64\_encoded\_dns\_file](#input\_base64\_encoded\_dns\_file) | The base64 encoded DNS zone file in BIND format that contains the details of the DNS records. For more information about the import format, refer https://cloud.ibm.com/docs/dns-svcs?topic=dns-svcs-managing-dns-records&interface=ui | `string` | `""` | no |
 | <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of the existing CIS instance. | `string` | n/a | yes |
 | <a name="input_dns_file"></a> [dns\_file](#input\_dns\_file) | The DNS file in text format that contains the details of the DNS records. | `string` | `null` | no |
 | <a name="input_dns_record_set"></a> [dns\_record\_set](#input\_dns\_record\_set) | List of DNS records to be added for the CIS Instance. | <pre>list(object({<br>    name     = string<br>    type     = string<br>    ttl      = optional(number) # in unit seconds, starts with value 120<br>    content  = optional(string)<br>    priority = optional(number) # mandatory for SRV type of record<br>    proxied  = optional(bool)   # default value is false<br>    data = optional(object({<br>      altitude       = optional(number) # mandatory for LOC type of record<br>      lat_degrees    = optional(number) # mandatory for LOC type of record<br>      lat_direction  = optional(string) # mandatory for LOC type of record<br>      lat_minutes    = optional(number) # mandatory for LOC type of record<br>      lat_seconds    = optional(number) # mandatory for LOC type of record<br>      long_degrees   = optional(number) # mandatory for LOC type of record<br>      long_direction = optional(string) # mandatory for LOC type of record<br>      long_minutes   = optional(number) # mandatory for LOC type of record<br>      long_seconds   = optional(number) # mandatory for LOC type of record<br>      precision_horz = optional(number) # mandatory for LOC type of record<br>      precision_vert = optional(number) # mandatory for LOC type of record<br>      size           = optional(number) # mandatory for LOC type of record<br>      tag            = optional(string) # required for CAA type of record<br>      value          = optional(string) # required for CAA type of record<br>      target         = optional(string) # required for SRV type of record<br>      priority       = optional(number) # required for SRV type of record<br>      port           = optional(number) # mandatory for SRV type of record<br>      proto          = optional(string) # mandatory for SRV type of record<br>      service        = optional(string) # mandatory for SRV type of record, starts with an '_'<br>      weight         = optional(number) # mandatory for SRV type of record<br>    }))<br>  }))</pre> | `[]` | no |
@@ -95,5 +96,5 @@ No modules.
 | Name | Description |
 |------|-------------|
 | <a name="output_cis_dns_records"></a> [cis\_dns\_records](#output\_cis\_dns\_records) | DNS records of CIS instance |
-| <a name="output_cis_dns_records_import"></a> [cis\_dns\_records\_import](#output\_cis\_dns\_records\_import) | DNS records imported through a file |
+| <a name="output_cis_imported_dns_records"></a> [cis\_imported\_dns\_records](#output\_cis\_imported\_dns\_records) | Imported DNS records from a file. |
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->

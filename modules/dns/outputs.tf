@@ -4,7 +4,7 @@ output "cis_dns_records" {
   value       = ibm_cis_dns_record.dns_records
 }
 
-output "cis_dns_records_import" {
-  description = "DNS records imported through a file"
+output "cis_imported_dns_records" {
+  description = "Imported DNS records from a file."
   value       = ibm_cis_dns_records_import.dns_record_import
 }

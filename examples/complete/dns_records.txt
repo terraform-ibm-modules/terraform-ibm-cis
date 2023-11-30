@@ -1,2 +1,8 @@
 ;; AAAA Records
-test-ar.aaaa.example.dev.cloud.ibm.com.	900	IN	AAAA	2001::4
+test-ex.aaaa.example.dev.cloud.ibm.com.	900	IN	AAAA	2001::4
+
+;; A Records
+test-ex.example.dev.cloud.ibm.com.	1	IN	A	1.2.3.4
+
+;; CNAME Records
+test-ex.example.dev.cloud.ibm.com.      900       IN      CNAME   domain.com
