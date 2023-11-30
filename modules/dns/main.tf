@@ -25,7 +25,7 @@ resource "ibm_cis_dns_record" "dns_records" {
 ##############################################################################
 # Import DNS records from a file
 ##############################################################################
-resource "ibm_cis_dns_records_import" "dns_record_import" {
+resource "ibm_cis_dns_records_import" "dns_record" {
   count      = (length(var.base64_encoded_dns_file) != 0 || var.dns_file != null) ? 1 : 0
   depends_on = [local_file.dns_record_file]
   cis_id     = var.cis_instance_id
