@@ -23,7 +23,7 @@ variable "resource_group" {
 variable "domain_name" {
   type        = string
   description = "Domain name to be added for the CIS Instance."
-  default     = "example.com"
+  default     = "example.cloud.ibm.com"
 }
 
 variable "glb_name" {

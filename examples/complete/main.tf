@@ -39,7 +39,7 @@ module "cis_dns_records" {
       ttl     = 900
     }
   ]
-  dns_file = "dns_records.txt"
+  dns_records_file = "dns_records.txt"
 }
 
 ##############################################################################
