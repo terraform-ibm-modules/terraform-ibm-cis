@@ -80,6 +80,7 @@ No modules.
 | [ibm_cis_dns_record.dns_records](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis_dns_record) | resource |
 | [ibm_cis_dns_records_import.import_dns_records](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis_dns_records_import) | resource |
 | [local_file.dns_record_file](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
+| [null_resource.delete_dns_record_file](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
 
 ### Inputs
 
