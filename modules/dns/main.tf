@@ -48,6 +48,6 @@ resource "null_resource" "delete_dns_record_file" {
     command = "rm -f ${path.module}/dns_record.txt"
   }
   triggers = {
-    always_run = "${timestamp()}"
+    always_run = timestamp()
   }
 }

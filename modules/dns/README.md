@@ -68,6 +68,7 @@ This means that when you run a `terraform plan` command after a successful `terr
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0, <1.6.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.49.0 |
 | <a name="requirement_local"></a> [local](#requirement\_local) | >= 2.4.0 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | 3.2.2 |
 
 ### Modules
 
@@ -80,7 +81,7 @@ No modules.
 | [ibm_cis_dns_record.dns_records](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis_dns_record) | resource |
 | [ibm_cis_dns_records_import.import_dns_records](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis_dns_records_import) | resource |
 | [local_file.dns_record_file](https://registry.terraform.io/providers/hashicorp/local/latest/docs/resources/file) | resource |
-| [null_resource.delete_dns_record_file](https://registry.terraform.io/providers/hashicorp/null/latest/docs/resources/resource) | resource |
+| [null_resource.delete_dns_record_file](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
 
 ### Inputs
 
