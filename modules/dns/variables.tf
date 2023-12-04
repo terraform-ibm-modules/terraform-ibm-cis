@@ -52,12 +52,12 @@ variable "dns_record_set" {
 
 variable "base64_encoded_dns_records_file" {
   type        = string
-  description = "The base64 encoded DNS zone file in BIND format that contains the details of the DNS records. For more information about the import format, refer https://cloud.ibm.com/docs/dns-svcs?topic=dns-svcs-managing-dns-records&interface=ui"
+  description = "The base64 encoded DNS zone file in BIND format that contains the details of the DNS records. For more information about the import format, refer https://cloud.ibm.com/docs/dns-svcs?topic=dns-svcs-managing-dns-records&interface=ui. Required if dns_records_file is not passed."
   default     = ""
 }
 
 variable "dns_records_file" {
   type        = string
-  description = "The DNS file in text format that contains the details of the DNS records."
+  description = "The DNS file in text format that contains the details of the DNS records. Required if base64_encoded_dns_records_file is not passed."
   default     = null
 }

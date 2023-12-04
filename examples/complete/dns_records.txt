@@ -2,7 +2,7 @@
 test-example.aaaa.example.cloud.ibm.com.	900	IN	AAAA	2001::4
 
 ;; CNAME Records
-test-example.cname.com.example.cloud.ibm.com.	900	IN	CNAME	domain.com.
+test-example.cname.example.cloud.ibm.com.	900	IN	CNAME	domain.com.
 
 ;; TXT Records
 test-example.txt.example.cloud.ibm.com.	1	IN	TXT	"test"

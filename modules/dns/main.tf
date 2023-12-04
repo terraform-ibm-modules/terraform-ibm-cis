@@ -47,7 +47,4 @@ resource "null_resource" "delete_dns_record_file" {
   provisioner "local-exec" {
     command = "rm -f ${path.module}/dns_record.txt"
   }
-  triggers = {
-    always_run = timestamp()
-  }
 }
