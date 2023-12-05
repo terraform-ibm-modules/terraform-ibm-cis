@@ -11,22 +11,6 @@ The [domain submodule](https://github.com/terraform-ibm-modules/terraform-ibm-ci
 
 For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts).
 
-## Global Load Balancer(GLB)
-
-The [glb submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/glb/) provides terraform resources to create and manage global load balancers in a CIS instance. It also allows to configure health checks, origin pools and proxy settings. For more information see [global load balancer concepts](https://cloud.ibm.com/docs/cis?topic=cis-global-load-balancer-glb-concepts).
-
-* When `glb_proxied` is set as `true`, then `ttl` is automatically set and cannot be updated.
-
-* This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `ttl` value requires an update, as shown in the following example. However, your infrastructure will not be affected.
-
-    ```
-    # module.cis_glb[0].ibm_cis_global_load_balancer.cis_glb will be updated in-place
-    ~ resource "ibm_cis_global_load_balancer" "cis_glb" {
-        id               = "xxx:crn:v1:bluemix:public:internet-svcs:global:a/xxxe:xxx509::"
-        name             = "glb.***.com"
-        ~ ttl              = 0 -> 60
-    ```
-
 ## Domain Name System(DNS)
 
 The [DNS submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) provides the terraform resource for creating and managing DNS records in a CIS instance. For more information, read [this](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis).
@@ -57,9 +41,25 @@ The [DNS submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/t
                 # (12 unchanged attributes hidden)
             }
 
+## Global Load Balancer(GLB)
+
+The [glb submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/glb/) provides terraform resources to create and manage global load balancers in a CIS instance. It also allows to configure health checks, origin pools and proxy settings. For more information see [global load balancer concepts](https://cloud.ibm.com/docs/cis?topic=cis-global-load-balancer-glb-concepts).
+
+* When `glb_proxied` is set as `true`, then `ttl` is automatically set and cannot be updated.
+
+* This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `ttl` value requires an update, as shown in the following example. However, your infrastructure will not be affected and you can ignore that message.
+
+    ```
+    # module.cis_glb[0].ibm_cis_global_load_balancer.cis_glb will be updated in-place
+    ~ resource "ibm_cis_global_load_balancer" "cis_glb" {
+        id               = "xxx:crn:v1:bluemix:public:internet-svcs:global:a/xxxe:xxx509::"
+        name             = "glb.***.com"
+        ~ ttl              = 0 -> 60
+    ```
+
 ## Web Application Firewall(WAF)
 
-The [WAF submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the terraform resources to enable and disable WAF with the default rule sets [OWASP](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and[CIS](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf) in a CIS instance.
+The [WAF submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the terraform resources to enable and disable WAF with the default rule sets: [OWASP](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and [CIS](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf) in an IBM Cloud CIS instance.
 
 ##  Distributed Denial of Service(DDOS)
 
@@ -67,4 +67,4 @@ To activate the DDoS protection the following conditions must be met-
 
   * The domain must be active.
   * The global load balancer(GLB) or DNS records needs to be proxied as mentioned in the [documentation](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
-  * In case of DNS records, CIS module only proxies traffic for `A`, `AAAA`, and `CNAME` records as described [here](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record).
+  * The CIS module provides DDoS protection by proxying traffic for some specific types of DNS records, such as `A`, `AAAA`, and `CNAME` records as mentioned [here](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record).

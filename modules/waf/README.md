@@ -1,6 +1,6 @@
 # CIS web application firewall (WAF) module
 
-This module enables/disables the web application firewall (WAF) of the domain.
+This module enables/disables the web application firewall (WAF) of the domain. For more information, refer [here](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
