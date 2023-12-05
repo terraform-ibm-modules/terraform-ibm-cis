@@ -12,6 +12,7 @@ This module provisions an IBM Cloud Internet Services (CIS) instance and configu
 * Domain
 * DNS records
 * Global load balancer (GLB) including load balancers, origin pools and health checks
+* Web Application Firewall (WAF)
 
 For more information see, [Getting started with IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-getting-started).
 
@@ -22,6 +23,7 @@ For more information see, [Getting started with IBM Cloud Internet Services](htt
     * [dns](./modules/dns)
     * [domain](./modules/domain)
     * [glb](./modules/glb)
+    * [waf](./modules/waf)
 * [Examples](./examples)
     * [End-to-end example](./examples/complete)
 * [Contributing](#contributing)
