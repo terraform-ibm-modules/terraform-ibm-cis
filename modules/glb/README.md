@@ -1,6 +1,6 @@
 # CIS global load balancer (GLB) module
 
-This module provisions a global load balancer that includes load balancers, origin pools, and health checks. For more information about this module see this [documentation](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md).
+This module provisions a global load balancer that includes load balancers, origin pools, and health checks. For more information about this module, check [this](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
