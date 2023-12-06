@@ -68,4 +68,4 @@ To activate the DDoS protection the following conditions must be met-
   * The domain must be active.
   * The global load balancer(GLB) or DNS records needs to be proxied as mentioned in the [documentation](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
 
-> The CIS module provides DDoS protection by proxying traffic for some specific types of DNS records, such as `A`, `AAAA`, and `CNAME` records as mentioned [here](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record).
+> The CIS provides DDoS protection by proxying traffic for some specific types of DNS records, such as `A`, `AAAA`, and `CNAME` records as mentioned [here](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record).
