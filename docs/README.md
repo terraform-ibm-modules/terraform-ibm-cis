@@ -59,7 +59,7 @@ This means that when you run a `terraform plan` command after a successful `terr
 
 ## Web Application Firewall(WAF)
 
-The [WAF submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the terraform resources to enable and disable WAF with the default rule sets: [OWASP](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and [CIS](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf) in an IBM Cloud CIS instance.
+The [WAF submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the terraform resources that allow you to turn on and off WAF. CIS includes the default rule sets for WAF: [OWASP rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and [CIS rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf). Currently this module allows you to either enable or disable the WAF with these default rule sets.
 
 ##  Distributed Denial of Service(DDOS)
 
