@@ -15,23 +15,23 @@ For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs
 
 The [DNS submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) provides the terraform resource for creating and managing DNS records in a CIS instance. For more information, read [this](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis).
 
-* Although the SRV record name is provided in the variable, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
+If you add a **SRV record**, though the record name is provided in the variable, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
 
 
-* The changed name means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. You can ignore that message. Your infrastructure will not be affected.
+The changed name means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. You can ignore that message. Your infrastructure will not be affected.
 
-        # module.cis_dns_records[0].ibm_cis_dns_record.dns_records["NAME/SRV"] will be updated in-place
+    # module.cis_dns_records[0].ibm_cis_dns_record.dns_records["NAME/SRV"] will be updated in-place
         ~ resource "ibm_cis_dns_record" "dns_records" {
             id          = "a5177ec049fc2973a33df1441e869a27:9684838a87ecxxx5518:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644axxx4f55b3880e:6ee7ec9a-5e68-4b6f-af9a-5714xxx4d::"
             ~ name      = "_sip._udp.test-example.srv.test**.**.com" -> "test-example.srv"
             # (13 unchanged attributes hidden)
             }
 
-* If you add a CAA record, a `flags` parameter is returned in the data object. The work is being tracked in `IBM-Cloud/terraform-provider-ibm` [issue 4792](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4792).
+If you add a **CAA record**, a `flags` parameter is returned in the data object. The work is being tracked [here](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4792).
 
-* The returned `flags` parameter means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. You can ignore that message. Your infrastructure will not be affected.
+The returned `flags` parameter means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. You can ignore that message. Your infrastructure will not be affected.
 
-        # module.cis_dns_records.ibm_cis_dns_record.dns_records["test-exmple.caa/CAA"] will be updated in-place
+    # module.cis_dns_records.ibm_cis_dns_record.dns_records["test-exmple.caa/CAA"] will be updated in-place
         ~ resource "ibm_cis_dns_record" "dns_records" {
             ~ data        = {
                 - "flags" = "0" -> null
@@ -45,17 +45,17 @@ The [DNS submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/t
 
 The [glb submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/glb/) provides terraform resources to create and manage global load balancers in a CIS instance. It also allows to configure health checks, origin pools and proxy settings. For more information see [global load balancer concepts](https://cloud.ibm.com/docs/cis?topic=cis-global-load-balancer-glb-concepts).
 
-* When `glb_proxied` is set as `true`, then `ttl` is automatically set and cannot be updated.
+When `glb_proxied` is set as `true`, then `ttl` is automatically set and cannot be updated.
 
-* This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `ttl` value requires an update, as shown in the following example. However, your infrastructure will not be affected and you can ignore that message.
+This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `ttl` value requires an update, as shown in the following example. However, your infrastructure will not be affected and you can ignore that message.
 
-    ```
-    # module.cis_glb[0].ibm_cis_global_load_balancer.cis_glb will be updated in-place
+```
+# module.cis_glb[0].ibm_cis_global_load_balancer.cis_glb will be updated in-place
     ~ resource "ibm_cis_global_load_balancer" "cis_glb" {
         id               = "xxx:crn:v1:bluemix:public:internet-svcs:global:a/xxxe:xxx509::"
         name             = "glb.***.com"
         ~ ttl              = 0 -> 60
-    ```
+```
 
 ## Web Application Firewall(WAF)
 
@@ -67,4 +67,5 @@ To activate the DDoS protection the following conditions must be met-
 
   * The domain must be active.
   * The global load balancer(GLB) or DNS records needs to be proxied as mentioned in the [documentation](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
-  * The CIS module provides DDoS protection by proxying traffic for some specific types of DNS records, such as `A`, `AAAA`, and `CNAME` records as mentioned [here](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record).
+
+> The CIS module provides DDoS protection by proxying traffic for some specific types of DNS records, such as `A`, `AAAA`, and `CNAME` records as mentioned [here](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record).
