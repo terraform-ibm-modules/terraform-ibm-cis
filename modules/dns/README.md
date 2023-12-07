@@ -63,26 +63,12 @@ This means that when you run a `terraform plan` command after a successful `terr
         ~ cis_imported_dns_records = [
           ~ {
               ~ file                 = "../../examples/complete/dns_records_2023-12-07T09:28:41Z.txt" -> (known after apply)
-              ~ id                   = "3:3:../../examples/complete/dns_records_2023-12-07T09:28:41Z.txt:cd4b8ba2b708xxxxxxx3214016ddb:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644a9cabxxxxxx5b3880e:e6fxxxxc-bxx4-4xx9-axx6-756xxxxx7ec9::" -> (known after apply)
+              ~ id                   = "3:3:../../examples/complete/dns_records_2023-12-07T09:28:41Z.txt:cdxxxxa2b708xxxxxxx32140xxxdb:crn:v1:bluemix:public:internet-svcs:global:a/abac0dxxxx644a9cabxxxxxx5b3880e:e6fxxxxc-bxx4-4xx9-axx6-756xxxxx7ec9::" -> (known after apply)
               + records_added        = (known after apply)
               + total_records_parsed = (known after apply)
                 # (2 unchanged attributes hidden)
             },
         ]
-        # (1 unchanged attribute hidden)
-
-    # Changes to Outputs:
-        ~ cis_dns_records = {
-            ~ cis_imported_dns_records = [
-                ~ {
-                        id  = "3:3:dns_records.txt:8671d9xxxxxc47ffc1axxxxxff410071:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06xxxxa9cabc6exxxxxb3880e:6xxxxdef-8xx2-4xx1-bxx1-6cxxxxx80bf6::"
-                    ~ records_added        = null -> 3
-                    ~ total_records_parsed = null -> 3
-                        # (3 unchanged attributes hidden)
-                    },
-            ]
-            # (1 unchanged attribute hidden)
-        }
 
 
 
