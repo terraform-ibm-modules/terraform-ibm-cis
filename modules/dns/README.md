@@ -41,9 +41,35 @@ To convert the records text file to base64 encoded string:
 cat dns_records.txt | base64
 ```
 
-When the dns_records are successfully imported then it sets the value of `records_added` and `total_records_parsed`.
+When the dns_records are successfully imported then the `local_file` tries to replace the file.
 
-This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `records_added` and `total_records_parsed` value requires an update according to the number of records imported, as shown in the following example. However, your infrastructure will not be affected.
+This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `ibm_cis_dns_records_import` and `local_file` needs to be forcefully replaced, as shown in the following example. This happens because the `local_file` generates a unique `filename` everytime for the records to get imported. However, when you do `terraform apply` without modifying the `base64_encoded_dns_records_file` the DNS records will not get duplicated and infrastructure remains same.
+
+     # module.cis_dns_records.ibm_cis_dns_records_import.import_dns_records[0] must be replaced
+    -/+ resource "ibm_cis_dns_records_import" "import_dns_records" {
+      ~ file                 = "../../examples/complete/dns_records_2023-12-07T09" # forces replacement -> (known after apply)
+      ~ records_added        = 3 -> (known after apply)
+      ~ total_records_parsed = 3 -> (known after apply)
+    }
+    # module.cis_dns_records.local_file.dns_record_file[0] must be replaced
+    -/+ resource "local_file" "dns_record_file" {
+      ~ filename             = "../../examples/complete/dns_records_2023-12-07T09:28:41Z.txt" # forces replacement -> (known after apply) # forces replacement
+      ~ id                   = "de87dcxxxxfec671eexxxxxxxxx30accaxxxxa13" -> (known after apply)
+        # (3 unchanged attributes hidden)
+    }
+        Plan: 2 to add, 0 to change, 2 to destroy.
+    Changes to Outputs:
+    ~ cis_dns_records     = {
+        ~ cis_imported_dns_records = [
+          ~ {
+              ~ file                 = "../../examples/complete/dns_records_2023-12-07T09:28:41Z.txt" -> (known after apply)
+              ~ id                   = "3:3:../../examples/complete/dns_records_2023-12-07T09:28:41Z.txt:cd4b8ba2b708xxxxxxx3214016ddb:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644a9cabxxxxxx5b3880e:e6fxxxxc-bxx4-4xx9-axx6-756xxxxx7ec9::" -> (known after apply)
+              + records_added        = (known after apply)
+              + total_records_parsed = (known after apply)
+                # (2 unchanged attributes hidden)
+            },
+        ]
+        # (1 unchanged attribute hidden)
 
     # Changes to Outputs:
         ~ cis_dns_records = {
