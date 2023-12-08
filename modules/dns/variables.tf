@@ -58,6 +58,6 @@ variable "base64_encoded_dns_records_file" {
 
 variable "dns_records_file" {
   type        = string
-  description = "The DNS file in text format that contains the details of the DNS records. Required if base64_encoded_dns_records_file is not passed."
+  description = "The DNS file in text format that contains the details of the DNS records. Required if `base64_encoded_dns_records_file` is not specified."
   default     = null
 }
