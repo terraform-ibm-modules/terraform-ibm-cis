@@ -41,11 +41,9 @@ To convert the records text file to base64 encoded string:
 cat dns_records.txt | base64
 ```
 
-When the dns_records are successfully imported then the `local_file` tries to replace the file.
+If you successfully import DNS records using the base64 encoded string method, and then run a `terraform plan` command, you will receive a message stating that the `ibm_cis_dns_records_import` resource and the `local_file` resource need to be forcefully replaced as shown below. This happens because the `local_file` resource block generates a unique filename everytime and therefore needs to be updated. However, if you do `terraform apply` then the DNS records will not get duplicated and infrastructure remains the same.
 
-This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `ibm_cis_dns_records_import` and `local_file` needs to be forcefully replaced, as shown in the following example. This happens because the `local_file` generates a unique `filename` everytime for the records to get imported. However, when you do `terraform apply` without modifying the `base64_encoded_dns_records_file` the DNS records will not get duplicated and infrastructure remains same.
-
-     # module.cis_dns_records.ibm_cis_dns_records_import.import_dns_records[0] must be replaced
+    # module.cis_dns_records.ibm_cis_dns_records_import.import_dns_records[0] must be replaced
     -/+ resource "ibm_cis_dns_records_import" "import_dns_records" {
       ~ file                 = "../../examples/complete/dns_records_2023-12-07T09" # forces replacement -> (known after apply)
       ~ records_added        = 3 -> (known after apply)
@@ -58,6 +56,10 @@ This means that when you run a `terraform plan` command after a successful `terr
         # (3 unchanged attributes hidden)
     }
         Plan: 2 to add, 0 to change, 2 to destroy.
+
+
+It also shows changes to output as below. You can ignore that message. Your infrastructure will not be affected.
+
     Changes to Outputs:
     ~ cis_dns_records     = {
         ~ cis_imported_dns_records = [
@@ -69,6 +71,7 @@ This means that when you run a `terraform plan` command after a successful `terr
                 # (2 unchanged attributes hidden)
             },
         ]
+
 
 
 

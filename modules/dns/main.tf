@@ -31,7 +31,7 @@ resource "ibm_cis_dns_record" "dns_records" {
 resource "local_file" "dns_record_file" {
   count          = var.base64_encoded_dns_records_file != null ? 1 : 0
   content_base64 = var.base64_encoded_dns_records_file
-  filename       = "../../examples/complete/dns_records_${timestamp()}.txt"
+  filename       = "${path.module}/dns_records_${timestamp()}.txt"
 }
 
 resource "ibm_cis_dns_records_import" "import_dns_records" {
