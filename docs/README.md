@@ -60,9 +60,9 @@ This means that when you run a `terraform plan` command after a successful `terr
         ~ ttl              = 0 -> 60
 ```
 
-## Web Application Firewall(WAF)
+## About the WAF submodule
 
-The [WAF submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the terraform resources that allow you to turn on and off WAF. CIS includes the default rule sets for WAF: [OWASP rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and [CIS rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf). Currently this module allows you to either enable or disable the WAF with these default rule sets.
+The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to turn WAF on and off. CIS includes the default rule sets for WAF: the [OWASP rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and the [CIS rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf). You can either enable or disable the WAF with these default rule sets.
 
 ##  Distributed Denial of Service(DDOS)
 
