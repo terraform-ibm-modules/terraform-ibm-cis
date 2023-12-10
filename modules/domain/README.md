@@ -1,6 +1,6 @@
 # CIS domain module
 
-This module is used to configure the IBM Cloud Internet Services (CIS) domain. For more information regarding how to activate domain, [read](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md).
+This module is used to configure the IBM Cloud Internet Services (CIS) domain. For more information, see the [main readme file](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md) for this module.
 
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
