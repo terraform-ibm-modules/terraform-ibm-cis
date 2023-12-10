@@ -5,9 +5,9 @@ Through this CIS module, you can manage the domain, configure DNS records, set u
 
 ## Domain
 
-The [domain submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) provides the Terraform resources that are required to add and configure a domain in a CIS instance. 
+The [domain submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) provides the Terraform resources that are required to add and configure a domain in a CIS instance.
 
-The module implements this infrastructure: 
+The module adds and configure the domain for the CIS instance:
 
 * Sets the status of the domain that is configured in the CIS instance to `pending`.
 * Configures the name servers that are assigned to the domain at the DNS provider or registrar, and then finds the assigned name servers in the `name_servers` variable of the module output.
@@ -15,7 +15,7 @@ The module implements this infrastructure:
 
 For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts).
 
-## About the DNS module 
+## About the DNS module
 
 The [Domain name system (DNS) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) provides the Terraform resources to create and manage DNS records in a CIS instance. For more information, see [Setting up your Domain Name System for CIS](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis).
 
@@ -71,6 +71,6 @@ CIS can provide protection against distributed denial of service (DDoS) attacks 
 Activating DDoS protection requires that you set the following conditions:
 
   * The domain must be active.
-  * The global load balancer( GLB) or DNS records must be proxied. 
-  
+  * The global load balancer( GLB) or DNS records must be proxied.
+
       For more information proxy options, see [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
