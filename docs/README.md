@@ -5,11 +5,13 @@ Through this CIS module, you can manage the domain, configure DNS records, set u
 
 ## Domain
 
-The [domain submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) provides the terraform resources required to add and configure a domain in a CIS instance. After the module run successfully-
+The [domain submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) provides the Terraform resources that are required to add and configure a domain in a CIS instance. 
 
-* The status of the domain that is configured in the CIS instance is set to `pending`.
-* Configure the name servers that are assigned to the domain at the DNS provider or registrar and then find the assigned name servers in the `name_servers` variable of the module output.
-* The status of the domain changes to `active` after the name servers are configured correctly at the DNS provider or registrar.
+The module implements this infrastructure: 
+
+* Sets the status of the domain that is configured in the CIS instance to `pending`.
+* Configures the name servers that are assigned to the domain at the DNS provider or registrar, and then finds the assigned name servers in the `name_servers` variable of the module output.
+* Sets the status of the domain changes to `active` after the name servers are configured correctly at the DNS provider or registrar.
 
 For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts).
 
