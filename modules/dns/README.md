@@ -45,13 +45,13 @@ If you successfully import DNS records using the base64 encoded string method, a
 
     # module.cis_dns_records.ibm_cis_dns_records_import.import_dns_records[0] must be replaced
     -/+ resource "ibm_cis_dns_records_import" "import_dns_records" {
-      ~ file                 = "../../examples/complete/dns_records_2023-12-07T09" # forces replacement -> (known after apply)
+      ~ file                 = "../../modules/dns/dns_records_2023-12-10T09" # forces replacement -> (known after apply) #
       ~ records_added        = 3 -> (known after apply)
       ~ total_records_parsed = 3 -> (known after apply)
     }
     # module.cis_dns_records.local_file.dns_record_file[0] must be replaced
     -/+ resource "local_file" "dns_record_file" {
-      ~ filename             = "../../examples/complete/dns_records_2023-12-07T09:28:41Z.txt" # forces replacement -> (known after apply) # forces replacement
+      ~ filename             = "../../modules/dns/dns_records_2023-12-10T09:29:24Z.txt"-> (known after apply) # forces replacement
       ~ id                   = "de87dcxxxxfec671eexxxxxxxxx30accaxxxxa13" -> (known after apply)
         # (3 unchanged attributes hidden)
     }
@@ -63,14 +63,14 @@ It also shows changes to output as below. You can ignore that message. Your infr
     Changes to Outputs:
     ~ cis_dns_records     = {
         ~ cis_imported_dns_records = [
-          ~ {
-              ~ file                 = "../../examples/complete/dns_records_2023-12-07T09:28:41Z.txt" -> (known after apply)
-              ~ id                   = "3:3:../../examples/complete/dns_records_2023-12-07T09:28:41Z.txt:cdxxxxa2b708xxxxxxx32140xxxdb:crn:v1:bluemix:public:internet-svcs:global:a/abac0dxxxx644a9cabxxxxxx5b3880e:e6fxxxxc-bxx4-4xx9-axx6-756xxxxx7ec9::" -> (known after apply)
-              + records_added        = (known after apply)
-              + total_records_parsed = (known after apply)
-                # (2 unchanged attributes hidden)
-            },
-        ]
+            ~ {
+                ~ file                 = "../../modules/dns/dns_records_2023-12-10T09:45:59Z.txt" -> (known after apply)
+                ~ id                   = "3:3:../../modules/dns/dns_records_2023-12-10T09:45:59Z.txt:e47cxxxxx7caf0xxxxx452395xxxxxfe:crn:v1:bluemix:public:internet-svcs:global:a/abxxxxx06xxxxa9cxxxxx44f5xxxxx0e:exxx8xx5-7xx1-4xx1-bxxe-2xxxxa2xxxxf::" -> (known after apply)
+                + records_added        = (known after apply)
+                + total_records_parsed = (known after apply)
+                },
+            ]
+    }
 
 
 
