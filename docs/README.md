@@ -64,11 +64,13 @@ This means that when you run a `terraform plan` command after a successful `terr
 
 The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to turn WAF on and off. CIS includes the default rule sets for WAF: the [OWASP rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and the [CIS rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf). You can either enable or disable the WAF with these default rule sets.
 
-##  Distributed Denial of Service(DDOS)
+##  Activating DDOS protection
 
-To activate the DDoS protection the following conditions must be met-
+CIS can provide protection against distributed denial of service (DDoS) attacks by proxying traffic for some types of DNS records, such as `A`, `AAAA`, and `CNAME` records. For more information, see the [DNS record](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record) section of the CIS CLI reference.
+
+Activating DDoS protection requires that you set the following conditions:
 
   * The domain must be active.
-  * The global load balancer(GLB) or DNS records needs to be proxied as mentioned in the [documentation](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
-
-> The CIS provides DDoS protection by proxying traffic for some specific types of DNS records, such as `A`, `AAAA`, and `CNAME` records as mentioned [here](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record).
+  * The global load balancer( GLB) or DNS records must be proxied. 
+  
+      For more information proxy options, see [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
