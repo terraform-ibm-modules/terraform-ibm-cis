@@ -14,7 +14,7 @@ This module provisions an IBM Cloud Internet Services (CIS) instance and configu
 * Global load balancer (GLB) including load balancers, origin pools and health checks
 * Web Application Firewall (WAF)
 
-For more information see, [Getting started with IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-getting-started).
+For additional information about the module, read [here](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md).
 
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
