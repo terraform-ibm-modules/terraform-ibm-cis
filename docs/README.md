@@ -15,12 +15,11 @@ The module implements this infrastructure:
 
 For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts).
 
-## Domain Name System(DNS)
+## About the DNS module 
 
-The [DNS submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) provides the terraform resource for creating and managing DNS records in a CIS instance. For more information, read [this](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis).
+The [Domain name system (DNS) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) provides the Terraform resources to create and manage DNS records in a CIS instance. For more information, see [Setting up your Domain Name System for CIS](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis).
 
-If you add a **SRV record**, though the record name is provided in the variable, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
-
+If you add a SRV record, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. This is true even though the record name is provided in the variable. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
 
 The changed name means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. You can ignore that message. Your infrastructure will not be affected.
 
