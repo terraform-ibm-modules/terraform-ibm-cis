@@ -44,9 +44,9 @@ The returned `flags` parameter means that when you run a `terraform plan` comman
                 # (12 unchanged attributes hidden)
             }
 
-## Global Load Balancer(GLB)
+## About the GLB submodule
 
-The [glb submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/glb/) provides terraform resources to create and manage global load balancers in a CIS instance. It also allows to configure health checks, origin pools and proxy settings. For more information see [global load balancer concepts](https://cloud.ibm.com/docs/cis?topic=cis-global-load-balancer-glb-concepts).
+The [Global load balancer (GLB) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/glb/) provides Terraform resources to create and manage global load balancers in a CIS instance. It also allows to configure health checks, origin pools and proxy settings. For more information see [Global load balancer concepts](https://cloud.ibm.com/docs/cis?topic=cis-global-load-balancer-glb-concepts).
 
 When `glb_proxied` is set as `true`, then `ttl` is automatically set and cannot be updated.
 
