@@ -1,5 +1,7 @@
 # IBM Cloud Internet Service (CIS)
-IBM Cloud Internet Services, powered by Cloudflare, provides security, reliability and performance for customers running their business on IBM Cloud. Through CIS, you have the ability to manage the domain, configure DNS records, set up a global load balancer, activate the Web Application Firewall (WAF), and perform other tasks related to your domain. For more information see, [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
+IBM Cloud Internet Services (CIS), powered by Cloudflare, provides security, reliability and performance for customers running their business on IBM Cloud. For more information see, [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis)
+
+Through this CIS module, you can manage the domain, configure DNS records, set up a global load balancer, activate the Web Application Firewall (WAF), and perform other tasks related to your domain through Terraform.
 
 ## Domain
 
