@@ -1,10 +1,23 @@
 # Features of IBM Cloud Internet Service module
 
-IBM Cloud Internet Services (CIS), powered by Cloudflare, provides security, reliability and performance for customers running their business on IBM Cloud. 
+IBM Cloud Internet Services (CIS), powered by Cloudflare, provides security, reliability and performance for customers running their business on IBM Cloud.
 
 Through this CIS module, you can configure the domain, manage DNS records, set up a global load balancer, activate the Web Application Firewall (WAF), and complete other tasks. For more information, see [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
 
+##  Activating DDOS protection
+
+CIS can provide protection against distributed denial of service (DDoS) attacks by proxying traffic for some types of DNS records, such as `A`, `AAAA`, and `CNAME` records. For more information, see the [DNS record](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record) section of the CIS CLI reference.
+
+Activating DDoS protection requires that you set the following conditions:
+
+  * The domain must be active.
+  * The global load balancer( GLB) or DNS records must be proxied.
+
+For more information about proxy options, see [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
+
 ## About the CIS submodules
+
+The CIS module has a number of submodules allowing a user to configure a domain to the CIS instance, add and manage DNS records, set up a load balancer with origin pool and health checks, and enable/disable a web application firewall.
 
 ### Domain submodule
 
@@ -17,7 +30,7 @@ After this module run successfully, the status of the domain that is configured 
 
 The [Domain name system (DNS) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) provides the Terraform resources to create and manage DNS records in a CIS instance. For more information, see [Setting up your Domain Name System for CIS](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis).
 
-If you add a SRV record, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. This is true even though the record name is provided in the variable. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
+If you add an SRV record, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. This is true even though the record name is provided in the variable. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
 
 The changed name means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. You can ignore that message. Your infrastructure will not be affected.
 
@@ -101,14 +114,3 @@ This means that when you run a `terraform plan` command after a successful `terr
 ### WAF submodule
 
 The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to turn WAF on and off. CIS includes the default rule sets for WAF: the [OWASP rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and the [CIS rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf). You can either enable or disable the WAF with these default rule sets.
-
-##  Activating DDOS protection
-
-CIS can provide protection against distributed denial of service (DDoS) attacks by proxying traffic for some types of DNS records, such as `A`, `AAAA`, and `CNAME` records. For more information, see the [DNS record](https://cloud.ibm.com/docs/cli?topic=cli-cis-cli#dns-record) section of the CIS CLI reference.
-
-Activating DDoS protection requires that you set the following conditions:
-
-  * The domain must be active.
-  * The global load balancer( GLB) or DNS records must be proxied.
-
-For more information about proxy options, see [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
