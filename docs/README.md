@@ -1,21 +1,17 @@
-# Features of IBM Cloud Internet Service (CIS) module
+# Features of IBM Cloud Internet Service (CIS) services
 
 IBM Cloud Internet Services (CIS), powered by Cloudflare, provides security, reliability and performance for customers running their business on IBM Cloud. The CIS module incorporates several submodules such as domain, dns, glb and waf to configure enhanced security and reliability for a CIS instance. Through this module, you can configure the domain, manage DNS records, set up a global load balancer, activate the Web Application Firewall (WAF), and perform other tasks. For more information see, [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis)
 
+## About the CIS submodules
 
-## Domain submodule
+### Domain submodule
 
-The [domain submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) provides the Terraform resources that are required to add and configure a domain in a CIS instance.
+The [domain submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) provides the Terraform resources that are required to add and configure a domain in a CIS instance. For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts).
 
-The module adds and configure the domain for the CIS instance:
+After this module run successfully, the status of the domain that is configured in the CIS instance is set to `pending`. You then configure the name servers that are assigned to the domain at the DNS provider or registrar. You can find the assigned name servers in the `name_servers` variable of the module output. The status changes to `active` after the name servers are configured correctly at the DNS provider or registrar.
 
-* Sets the status of the domain that is configured in the CIS instance to `pending`.
-* Configures the name servers that are assigned to the domain at the DNS provider or registrar, and then finds the assigned name servers in the `name_servers` variable of the module output.
-* Sets the status of the domain changes to `active` after the name servers are configured correctly at the DNS provider or registrar.
 
-For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts).
-
-## DNS submodule
+### DNS submodule
 
 The [Domain name system (DNS) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) provides the Terraform resources to create and manage DNS records in a CIS instance. For more information, see [Setting up your Domain Name System for CIS](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis).
 
@@ -30,7 +26,7 @@ The changed name means that when you run a `terraform plan` command after a succ
             # (13 unchanged attributes hidden)
             }
 
-If you add a **CAA record**, a `flags` parameter is returned in the data object. The work is being tracked [here](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4792).
+If you add a CAA record, a `flags` parameter is returned in the data object. The work is being tracked [here](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/4792).
 
 The returned `flags` parameter means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. You can ignore that message. Your infrastructure will not be affected.
 
@@ -44,10 +40,10 @@ The returned `flags` parameter means that when you run a `terraform plan` comman
                 # (12 unchanged attributes hidden)
             }
 
-The DNS records can be imported from a file in IBM Cloud Internet Services. This module allows the import of DNS records in two ways:
+This module allows you to import DNS records from a file in the following two ways :
 
-* using the local file path (if accessible)
-* using the base64 encoded string for the file
+- by specifying the file path directly
+- by using a base64-encoded string representation of the file
 
 To convert the records text file to base64 encoded string:
 ```sh
@@ -70,8 +66,7 @@ If you successfully import DNS records using the base64 encoded string method, a
     }
         Plan: 2 to add, 0 to change, 2 to destroy.
 
-
-It also shows changes to output as below. You can ignore that message. Your infrastructure will not be affected.
+It shows the following changes to output as below. You can ignore that message. Your infrastructure will not be affected.
 
     Changes to Outputs:
     ~ cis_dns_records     = {
@@ -85,7 +80,7 @@ It also shows changes to output as below. You can ignore that message. Your infr
             ]
     }
 
-## GLB submodule
+### GLB submodule
 
 The [Global load balancer (GLB) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/glb/) provides Terraform resources to create and manage global load balancers in a CIS instance. It also allows to configure health checks, origin pools and proxy settings. For more information see [Global load balancer concepts](https://cloud.ibm.com/docs/cis?topic=cis-global-load-balancer-glb-concepts).
 
@@ -101,7 +96,7 @@ This means that when you run a `terraform plan` command after a successful `terr
         ~ ttl              = 0 -> 60
 ```
 
-## WAF submodule
+### WAF submodule
 
 The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to turn WAF on and off. CIS includes the default rule sets for WAF: the [OWASP rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and the [CIS rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf). You can either enable or disable the WAF with these default rule sets.
 
