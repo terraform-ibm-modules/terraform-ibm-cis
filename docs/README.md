@@ -1,12 +1,9 @@
-# IBM Cloud Internet Service (CIS)
-IBM Cloud Internet Services (CIS), powered by Cloudflare, provides security, reliability and performance for customers running their business on IBM Cloud. For more information see, [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis)
+# Features of IBM Cloud Internet Service (CIS) module
 
-## About the CIS submodules
-
-The CIS module incorporates several submodules such as domain, dns, glb and waf to configure enhanced security and reliability for a CIS instance. Through this CIS module, you can manage the domain, configure DNS records, set up a global load balancer, activate the Web Application Firewall (WAF), and perform other tasks related to your domain through Terraform.
+IBM Cloud Internet Services (CIS), powered by Cloudflare, provides security, reliability and performance for customers running their business on IBM Cloud. The CIS module incorporates several submodules such as domain, dns, glb and waf to configure enhanced security and reliability for a CIS instance. Through this module, you can configure the domain, manage DNS records, set up a global load balancer, activate the Web Application Firewall (WAF), and perform other tasks. For more information see, [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis)
 
 
-## About the Domain submodule
+## Domain submodule
 
 The [domain submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) provides the Terraform resources that are required to add and configure a domain in a CIS instance.
 
@@ -18,7 +15,7 @@ The module adds and configure the domain for the CIS instance:
 
 For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts).
 
-## About the DNS submodule
+## DNS submodule
 
 The [Domain name system (DNS) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) provides the Terraform resources to create and manage DNS records in a CIS instance. For more information, see [Setting up your Domain Name System for CIS](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis).
 
@@ -47,7 +44,48 @@ The returned `flags` parameter means that when you run a `terraform plan` comman
                 # (12 unchanged attributes hidden)
             }
 
-## About the GLB submodule
+The DNS records can be imported from a file in IBM Cloud Internet Services. This module allows the import of DNS records in two ways:
+
+* using the local file path (if accessible)
+* using the base64 encoded string for the file
+
+To convert the records text file to base64 encoded string:
+```sh
+cat dns_records.txt | base64
+```
+
+If you successfully import DNS records using the base64 encoded string method, and then run a `terraform plan` command, you will receive a message stating that the `ibm_cis_dns_records_import` resource and the `local_file` resource need to be forcefully replaced as shown below. This happens because the `local_file` resource block generates a unique filename everytime and therefore needs to be updated. However, if you do `terraform apply` then the DNS records will not get duplicated and infrastructure remains the same.
+
+    # module.cis_dns_records.ibm_cis_dns_records_import.import_dns_records[0] must be replaced
+    -/+ resource "ibm_cis_dns_records_import" "import_dns_records" {
+      ~ file                 = "../../modules/dns/dns_records_2023-12-10T09" # forces replacement -> (known after apply) #
+      ~ records_added        = 3 -> (known after apply)
+      ~ total_records_parsed = 3 -> (known after apply)
+    }
+    # module.cis_dns_records.local_file.dns_record_file[0] must be replaced
+    -/+ resource "local_file" "dns_record_file" {
+      ~ filename             = "../../modules/dns/dns_records_2023-12-10T09:29:24Z.txt"-> (known after apply) # forces replacement
+      ~ id                   = "de87dcxxxxfec671eexxxxxxxxx30accaxxxxa13" -> (known after apply)
+        # (3 unchanged attributes hidden)
+    }
+        Plan: 2 to add, 0 to change, 2 to destroy.
+
+
+It also shows changes to output as below. You can ignore that message. Your infrastructure will not be affected.
+
+    Changes to Outputs:
+    ~ cis_dns_records     = {
+        ~ cis_imported_dns_records = [
+            ~ {
+                ~ file                 = "../../modules/dns/dns_records_2023-12-10T09:45:59Z.txt" -> (known after apply)
+                ~ id                   = "3:3:../../modules/dns/dns_records_2023-12-10T09:45:59Z.txt:e47cxxxxx7caf0xxxxx452395xxxxxfe:crn:v1:bluemix:public:internet-svcs:global:a/abxxxxx06xxxxa9cxxxxx44f5xxxxx0e:exxx8xx5-7xx1-4xx1-bxxe-2xxxxa2xxxxf::" -> (known after apply)
+                + records_added        = (known after apply)
+                + total_records_parsed = (known after apply)
+                },
+            ]
+    }
+
+## GLB submodule
 
 The [Global load balancer (GLB) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/glb/) provides Terraform resources to create and manage global load balancers in a CIS instance. It also allows to configure health checks, origin pools and proxy settings. For more information see [Global load balancer concepts](https://cloud.ibm.com/docs/cis?topic=cis-global-load-balancer-glb-concepts).
 
@@ -63,7 +101,7 @@ This means that when you run a `terraform plan` command after a successful `terr
         ~ ttl              = 0 -> 60
 ```
 
-## About the WAF submodule
+## WAF submodule
 
 The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to turn WAF on and off. CIS includes the default rule sets for WAF: the [OWASP rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and the [CIS rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf). You can either enable or disable the WAF with these default rule sets.
 
@@ -76,4 +114,4 @@ Activating DDoS protection requires that you set the following conditions:
   * The domain must be active.
   * The global load balancer( GLB) or DNS records must be proxied.
 
-      For more information proxy options, see [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
+For more information about proxy options, see [About IBM Cloud Internet Services](https://cloud.ibm.com/docs/cis?topic=cis-about-ibm-cloud-internet-services-cis).
