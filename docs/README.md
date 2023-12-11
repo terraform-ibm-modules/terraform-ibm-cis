@@ -1,4 +1,4 @@
-# Features of IBM Cloud Internet Service (CIS) services
+# Features of IBM Cloud Internet Service module
 
 IBM Cloud Internet Services (CIS), powered by Cloudflare, provides security, reliability and performance for customers running their business on IBM Cloud. 
 
