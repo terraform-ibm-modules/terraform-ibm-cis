@@ -2,6 +2,19 @@
 
 This module enables/disables the web application firewall (WAF) of the domain. For more information, see the [main readme file](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md) for this module.
 
+### Usage
+```
+provider "ibm" {
+  ibmcloud_api_key = ""
+}
+
+module "cis_waf"{
+    cis_instance_id = "crn:v1:bluemix:public:internet-svcs:global:a/xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX:xxxxxxxx-XXXX-xxxx-XXXX-xxxxxXXXXxxxx::"
+    domain_id       = "xxxxXXXXxxxxXXXXxxxxxxxxXXXXxxxx"
+    waf = "on"
+}
+```
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
 
