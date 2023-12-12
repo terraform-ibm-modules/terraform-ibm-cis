@@ -1,6 +1,6 @@
 # CIS DNS module
 
-This module is used to create and manage IBM Cloud Internet Services (CIS) DNS records. For more information, see the [main readme file](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md) for this module.
+This module is used to create and manage IBM Cloud Internet Services (CIS) DNS records. It also provides the option to import dns records from a file. For more information, see the [main readme file](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md) for this module.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements
