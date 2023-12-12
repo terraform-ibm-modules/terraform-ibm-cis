@@ -23,14 +23,14 @@ resource "ibm_cis_global_load_balancer" "cis_glb" {
     for_each = var.region_pools
     content {
       region   = region_pools.value.region
-      pool_ids = lookup(pop_pools.value, "pool_names", null) != null ? [for pool in lookup(pop_pools.value, "pool_names", null) : ibm_cis_origin_pool.origin_pool[pool].id] : lookup(pop_pools.value, "pool_ids", null)
+      pool_ids = lookup(region_pools.value, "pool_names", null) != null ? [for pool in lookup(region_pools.value, "pool_names", null) : ibm_cis_origin_pool.origin_pool[pool].id] : lookup(region_pools.value, "pool_ids", null)
     }
   }
   dynamic "pop_pools" {
     for_each = var.pop_pools
     content {
       pop      = pop_pools.value.pop
-      pool_ids = lookup(pop_pools.value, "pool_names", null) != null ? [for pool in pop_pools.value["pool_names"] : ibm_cis_origin_pool.origin_pool[pool].id] : lookup(pop_pools.value, "pool_ids", null)
+      pool_ids = lookup(pop_pools.value, "pool_names", null) != null ? [for pool in lookup(pop_pools.value, "pool_names", null) : ibm_cis_origin_pool.origin_pool[pool].id] : lookup(pop_pools.value, "pool_ids", null)
     }
   }
 }
@@ -57,7 +57,7 @@ resource "ibm_cis_origin_pool" "origin_pool" {
   enabled            = lookup(each.value, "enabled", null)
   minimum_origins    = lookup(each.value, "minimum_origins", null)
   notification_email = lookup(each.value, "notification_email", null)
-  monitor = (lookup(each.value, "health_check_name", null) != null ? ibm_cis_healthcheck.health_check[lookup(each.value, "health_check_name", null)].id : null)
+  monitor            = (lookup(each.value, "health_check_name", null) != null ? ibm_cis_healthcheck.health_check[lookup(each.value, "health_check_name", null)].id : null)
 }
 
 ##############################################################################
