@@ -1,4 +1,4 @@
-# Features of IBM Cloud Internet Service module
+# Features of IBM Cloud Internet Services module
 
 IBM Cloud Internet Services (CIS), powered by Cloudflare, provides security, reliability and performance for customers running their business on IBM Cloud.
 
@@ -17,20 +17,19 @@ For more information about proxy options, see [About IBM Cloud Internet Services
 
 ## About the CIS submodules
 
-The CIS module has a number of submodules allowing a user to configure a domain to the CIS instance, add and manage DNS records, set up a load balancer with origin pool and health checks, and enable/disable a web application firewall.
+The CIS module has a number of submodules to configure a domain to the CIS instance, add and manage DNS records, set up a load balancer with origin pool and health checks, and enable or disable a web application firewall.
 
 ### Domain submodule
 
 The [domain submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/domain/) provides the Terraform resources that are required to add and configure a domain in a CIS instance. For more information, see [Domain lifecycle concepts](https://cloud.ibm.com/docs/cis?topic=cis-domain-lifecycle-concepts).
 
-After this module run successfully, the status of the domain that is configured in the CIS instance is set to `pending`. You then configure the name servers that are assigned to the domain at the DNS provider or registrar. You can find the assigned name servers in the `name_servers` variable of the module output. The status changes to `active` after the name servers are configured correctly at the DNS provider or registrar.
-
+After this module runs successfully, the status of the domain that is configured in the CIS instance is set to `pending`. You then configure the name servers that are assigned to the domain at the DNS provider or registrar. You can find the assigned name servers in the `name_servers` variable of the module output. The status changes to `active` after the name servers are configured correctly at the DNS provider or registrar.
 
 ### DNS submodule
 
 The [Domain name system (DNS) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns) provides the Terraform resources to create and manage DNS records in a CIS instance. For more information, see [Setting up your Domain Name System for CIS](https://cloud.ibm.com/docs/cis?topic=cis-set-up-your-dns-for-cis).
 
-If you add an SRV record, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. This is true even though the record name is provided in the variable. For more information, see  [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
+If you add an SRV record, it is stored as `_service._proto.record_name.domain_name TTL class type of record priority weight port target`. This is true even though the record name is provided in the variable. For more information, see [What is a DNS SRV record?](https://www.cloudflare.com/en-gb/learning/dns/dns-records/dns-srv-record/).
 
 The changed name means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the DNS record requires an update, as shown in the following example. You can ignore that message. Your infrastructure will not be affected.
 
@@ -55,17 +54,18 @@ The returned `flags` parameter means that when you run a `terraform plan` comman
                 # (12 unchanged attributes hidden)
             }
 
-This module allows you to import DNS records from a file in the following two ways :
+This module allows you to import DNS records from a file in the following two ways:
 
-- by specifying the file path directly
-- by using a base64-encoded string representation of the file
+- By specifying the file path directly
+- By using a base64-encoded string representation of the file
 
-To convert the records text file to base64 encoded string:
+To convert the records text file to base64 encoded string, run the following command:
+
 ```sh
 cat dns_records.txt | base64
 ```
 
-If you successfully import DNS records using the base64 encoded string method, and then run a `terraform plan` command, you will receive a message stating that the `ibm_cis_dns_records_import` resource and the `local_file` resource need to be forcefully replaced as shown below. This happens because the `local_file` resource block generates a unique filename everytime and therefore needs to be updated. However, if you do `terraform apply` then the DNS records will not get duplicated and infrastructure remains the same.
+If you successfully import the DNS records using the base64 encoded string method and then run a `terraform plan` command, you receive a message that the `ibm_cis_dns_records_import` resource and the `local_file` resource need to be forcefully replaced, as shown in the following example. This happens because the `local_file` resource block generates a unique filename every time, and needs to be updated. However, if you run `terraform apply`, then the DNS records are not duplicated, and the infrastructure remains the same.
 
     # module.cis_dns_records.ibm_cis_dns_records_import.import_dns_records[0] must be replaced
     -/+ resource "ibm_cis_dns_records_import" "import_dns_records" {
@@ -81,7 +81,7 @@ If you successfully import DNS records using the base64 encoded string method, a
     }
         Plan: 2 to add, 0 to change, 2 to destroy.
 
-It shows the following changes to output as below. You can ignore that message. Your infrastructure will not be affected.
+It shows the following changes to the output in the following example. You can ignore that message. Your infrastructure will not be affected.
 
     Changes to Outputs:
     ~ cis_dns_records     = {
@@ -97,7 +97,7 @@ It shows the following changes to output as below. You can ignore that message. 
 
 ### GLB submodule
 
-The [Global load balancer (GLB) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/glb/) provides Terraform resources to create and manage global load balancers in a CIS instance. It also allows to configure health checks, origin pools and proxy settings. For more information see [Global load balancer concepts](https://cloud.ibm.com/docs/cis?topic=cis-global-load-balancer-glb-concepts).
+The [Global load balancer (GLB) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/glb/) provides Terraform resources to create and manage global load balancers in a CIS instance. It also allows you to configure health checks, origin pools, and proxy settings. For more information, see [Global load balancer concepts](https://cloud.ibm.com/docs/cis?topic=cis-global-load-balancer-glb-concepts).
 
 When `glb_proxied` is set as `true`, then `ttl` is automatically set and cannot be updated.
 
