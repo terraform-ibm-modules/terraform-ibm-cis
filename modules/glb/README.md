@@ -1,18 +1,47 @@
-# CIS global load balancer (GLB) module
+# CIS GLB module
 
-This module provisions a global load balancer that includes load balancers, origin pools, and health checks.
+This module provisions a global load balancer that includes load balancers, origin pools, and health checks. For more information, see the [main readme file](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md) for this module.
 
-
-When `glb_proxied` is set as `true`, then `ttl` is automatically set and cannot be updated.
-
-This means that when you run a `terraform plan` command after a successful `terraform apply`, the output shows that the `ttl` value requires an update, as shown in the following example. However, your infrastructure will not be affected.
-
+### Usage
 ```
-# module.cis_glb[0].ibm_cis_global_load_balancer.cis_glb will be updated in-place
-~ resource "ibm_cis_global_load_balancer" "cis_glb" {
-    id               = "xxx:crn:v1:bluemix:public:internet-svcs:global:a/xxxe:xxx509::"
-    name             = "glb.***.com"
-    ~ ttl              = 0 -> 60
+provider "ibm" {
+  ibmcloud_api_key = ""
+}
+
+module "cis_glb" {
+  source             = "terraform-ibm-modules/cis/ibm//glb"
+  cis_instance_id = "crn:v1:bluemix:public:internet-svcs:global:a/xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX:xxxxxxxx-XXXX-xxxx-XXXX-xxxxxXXXXxxxx::"
+  domain_id       = "xxxxXXXXxxxxXXXXxxxxxxxxXXXXxxxx"
+  glb_name           = "cis_glb"
+  fallback_pool_name = "cis_fpn"
+  glb_enabled        = true
+  origin_pools       = [
+    {
+      name = "glb1"
+      origins = [{
+        name    = "o-1"
+        address = "1.1.1.0"
+        enabled = true
+        }]
+      enabled           = true
+      description       = "Test GLB"
+      check_regions     = ["WEU"]
+      health_check_name = "hc1"
+    }
+  ]
+  health_checks       = [
+    {
+      expected_body  = "alive"
+      expected_codes = "200"
+      method         = "GET"
+      timeout        = 7
+      path           = "/health"
+      interval       = 60
+      retries        = 3
+      name           = "hc1"
+    }
+  ]
+}
 ```
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
