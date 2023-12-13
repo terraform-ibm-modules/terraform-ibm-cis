@@ -39,7 +39,7 @@ func TestRunCompleteExample(t *testing.T) {
 
 func TestRunUpgradeCompleteExample(t *testing.T) {
 	t.Parallel()
-	t.Skip()
+
 	options := setupOptions(t, "cis-new-upg", domainName)
 
 	output, err := options.RunTestUpgrade()

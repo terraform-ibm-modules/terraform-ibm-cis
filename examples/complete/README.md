@@ -8,4 +8,4 @@ An end-to-end example that provisions the following infrastructure:
 - Adds a global load balancer including the origin pools and health checks to the CIS instance.
 
 
-For information about accessing an application through CIS, see [Configuring access to an application deployed on Red Hat OpenShift through CIS](./../../access-ocp-api-through-cis.md).
+For information about accessing an application through CIS, see [Configuring access to an application deployed on Red Hat OpenShift through CIS](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/access-ocp-api-through-cis.md).
