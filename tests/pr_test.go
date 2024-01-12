@@ -31,11 +31,11 @@ func TestRunCompleteExample(t *testing.T) {
 	t.Parallel()
 
 	options := setupOptions(t, "cis-new", domainName)
+	options.SkipTestTearDown = true
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
 	assert.NotNil(t, output, "Expected some output")
-	// options.TestTearDown()
 }
 
 func TestRunOverride(t *testing.T) {
