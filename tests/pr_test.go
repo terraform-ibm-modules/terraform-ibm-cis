@@ -50,7 +50,7 @@ func TestRunOverride(t *testing.T) {
 
 func TestRunUpgradeCompleteExample(t *testing.T) {
 	t.Parallel()
-	t.skip()
+	t.Skip()
 
 	options := setupOptions(t, "cis-new-upg", domainName)
 
