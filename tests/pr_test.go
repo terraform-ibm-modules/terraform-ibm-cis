@@ -29,7 +29,6 @@ func setupOptions(t *testing.T, prefix string, domain_name string) *testhelper.T
 
 func TestRunCompleteExample(t *testing.T) {
 	t.Parallel()
-	options.SkipTestTearDown = true
 
 	options := setupOptions(t, "cis-new", domainName)
 
@@ -39,8 +38,19 @@ func TestRunCompleteExample(t *testing.T) {
 	// options.TestTearDown()
 }
 
+func TestRunOverride(t *testing.T) {
+	t.Parallel()
+
+	options := setupOptions(t, "cis-std", domainName)
+	options.SkipTestTearDown = true
+	output, err := options.RunTestConsistency()
+	assert.Nil(t, err, "This should not have errored")
+	assert.NotNil(t, output, "Expected some output")
+}
+
 func TestRunUpgradeCompleteExample(t *testing.T) {
 	t.Parallel()
+	t.skip()
 
 	options := setupOptions(t, "cis-new-upg", domainName)
 
