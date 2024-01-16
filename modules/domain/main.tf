@@ -7,3 +7,9 @@ resource "ibm_cis_domain" "cis_domain" {
   cis_id = var.cis_instance_id
   type   = var.domain_type
 }
+
+resource "time_sleep" "wait_for_domain" {
+  depends_on = [ibm_cis_domain.cis_domain]
+
+  create_duration = "30s"
+}
