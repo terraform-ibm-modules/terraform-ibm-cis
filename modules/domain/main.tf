@@ -11,5 +11,5 @@ resource "ibm_cis_domain" "cis_domain" {
 resource "time_sleep" "wait_for_domain" {
   depends_on = [ibm_cis_domain.cis_domain]
 
-  create_duration = "30s"
+  create_duration = "60s"
 }
