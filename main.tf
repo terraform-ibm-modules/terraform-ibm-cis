@@ -16,6 +16,12 @@ resource "ibm_cis" "cis_instance" {
   }
 }
 
+resource "time_sleep" "wait_for_cis_instance" {
+  depends_on = [ibm_cis.cis_instance]
+
+  create_duration = "30s"
+}
+
 ##############################################################################
 # Add domain to CIS instance
 ##############################################################################
