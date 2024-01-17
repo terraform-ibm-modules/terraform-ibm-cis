@@ -7,11 +7,11 @@
 [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 
-This module provisions an IBM Cloud Internet Services (CIS) instance and configures domain to the CIS instance. The module includes the submodules to add the following features to a CIS instance.
+This module provisions an IBM Cloud Internet Services (CIS) instance and configures the domain to the CIS instance. The module includes submodules to add the following features to a CIS instance:
 
 * Domain
 * DNS records
-* Global load balancer (GLB) including load balancers, origin pools and health checks
+* Global load balancer (GLB), including load balancers, origin pools, and health checks
 * Web Application Firewall (WAF)
 
 For more information about the module, see, read [Features of IBM Cloud Internet Services module](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md).
