@@ -117,7 +117,7 @@ You need the following permissions to run this module.
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0, <1.6.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.49.0, < 2.0.0 |
-| <a name="requirement_time"></a> [time](#requirement\_time) | 0.10.0 |
+| <a name="requirement_null"></a> [null](#requirement\_null) | 3.2.2 |
 
 ### Modules
 
@@ -130,7 +130,7 @@ You need the following permissions to run this module.
 | Name | Type |
 |------|------|
 | [ibm_cis.cis_instance](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis) | resource |
-| [time_sleep.wait_for_cis_instance](https://registry.terraform.io/providers/hashicorp/time/0.10.0/docs/resources/sleep) | resource |
+| [null_resource.delay_30s](https://registry.terraform.io/providers/hashicorp/null/3.2.2/docs/resources/resource) | resource |
 
 ### Inputs
 

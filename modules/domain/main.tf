@@ -8,8 +8,12 @@ resource "ibm_cis_domain" "cis_domain" {
   type   = var.domain_type
 }
 
-resource "time_sleep" "wait_for_domain" {
-  depends_on = [ibm_cis_domain.cis_domain]
+resource "null_resource" "delay_30s" {
+  provisioner "local-exec" {
+    command = "echo 'Resource is provisioned, waiting for 2 minutes'"
+  }
 
-  create_duration = "60s"
+  triggers = {
+    instance_id = ibm_cis_domain.cis_domain
+  }
 }
