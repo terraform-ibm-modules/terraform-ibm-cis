@@ -107,6 +107,7 @@ resource "null_resource" "next" {
 
 module "cis_domain_settings" {
   source          = "../../modules/waf"
+  depends_on      = [null_resource.next]
   cis_instance_id = module.cis_instance.cis_instance_id
   domain_id       = module.cis_instance.cis_domain.domain_id
   enable_waf      = true
