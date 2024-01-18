@@ -8,16 +8,16 @@ resource "ibm_cis_domain" "cis_domain" {
   type   = var.domain_type
 }
 
-resource "time_sleep" "wait_for_cis_instance" {
-  depends_on = [ibm_cis_domain.cis_domain]
+# resource "time_sleep" "wait_for_cis_instance" {
+#   depends_on = [ibm_cis_domain.cis_domain]
 
-  create_duration = "30s"
-}
+#   create_duration = "30s"
+# }
 
-# This resource will create (at least) 30 seconds after null_resource.previous
-resource "null_resource" "next" {
-  depends_on = [time_sleep.wait_for_cis_instance]
-}
+# # This resource will create (at least) 30 seconds after null_resource.previous
+# resource "null_resource" "next" {
+#   depends_on = [time_sleep.wait_for_cis_instance]
+# }
 
 # resource "null_resource" "delay_30s" {
 #   provisioner "local-exec" {
