@@ -104,7 +104,7 @@ module "cis_instance" {
 # resource "null_resource" "next" {
 #   depends_on = [time_sleep.wait_for_cis_instance]
 # }
-
+# cis domain settings
 module "cis_domain_settings" {
   source = "../../modules/waf"
   # depends_on      = [null_resource.next]
