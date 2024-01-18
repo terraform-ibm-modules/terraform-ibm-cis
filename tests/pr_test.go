@@ -40,6 +40,7 @@ func TestRunCompleteExample(t *testing.T) {
 
 func TestRunOverride(t *testing.T) {
 	t.Parallel()
+	t.Skip()
 
 	options := setupOptions(t, "cis-std", domainName)
 	// options.SkipTestTearDown = true

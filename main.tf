@@ -22,15 +22,15 @@ resource "ibm_cis" "cis_instance" {
 #   create_duration = "30s"
 # }
 
-resource "null_resource" "delay_30s" {
-  provisioner "local-exec" {
-    command = "echo 'Resource is provisioned, waiting for 2 minutes'"
-  }
+# resource "null_resource" "delay_30s" {
+#   provisioner "local-exec" {
+#     command = "echo 'Resource is provisioned, waiting for 2 minutes'"
+#   }
 
-  triggers = {
-    instance_id = ibm_cis.cis_instance.guid
-  }
-}
+#   triggers = {
+#     instance_id = ibm_cis.cis_instance.guid
+#   }
+# }
 ##############################################################################
 # Add domain to CIS instance
 ##############################################################################

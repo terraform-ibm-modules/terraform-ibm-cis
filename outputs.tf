@@ -24,6 +24,6 @@ output "cis_instance_status" {
 
 output "cis_domain" {
   description = "CIS Domain details"
-  value       = module.cis_domain.cis_domain_details
+  value       = module.cis_domain
 }
 ##############################################################################
