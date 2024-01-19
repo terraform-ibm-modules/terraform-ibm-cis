@@ -27,20 +27,20 @@ module "cis_instance" {
 # Add dns records to CIS instance
 ##############################################################################
 
-# module "cis_dns_records" {
-#   source          = "../../modules/dns"
-#   cis_instance_id = module.cis_instance.cis_instance_id
-#   domain_id       = module.cis_instance.cis_domain.domain_id
-#   dns_record_set = [
-#     {
-#       type    = "A"
-#       name    = "test-example"
-#       content = "1.2.3.4"
-#       ttl     = 900
-#     }
-#   ]
-#   dns_records_file = "dns_records.txt"
-# }
+module "cis_dns_records" {
+  source          = "../../modules/dns"
+  cis_instance_id = module.cis_instance.cis_instance_id
+  domain_id       = module.cis_instance.cis_domain.domain_id
+  dns_record_set = [
+    {
+      type    = "A"
+      name    = "test-example"
+      content = "1.2.3.4"
+      ttl     = 900
+    }
+  ]
+  dns_records_file = "dns_records.txt"
+}
 
 ##############################################################################
 # Add global load balancer to CIS instance
