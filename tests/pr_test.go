@@ -40,9 +40,8 @@ func TestRunCompleteExample(t *testing.T) {
 
 func TestRunOverride(t *testing.T) {
 	t.Parallel()
-	t.Skip()
 
-	options := setupOptions(t, "cis-std", domainName)
+	options := setupOptions(t, "cis-ovr", domainName)
 	// options.SkipTestTearDown = true
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
