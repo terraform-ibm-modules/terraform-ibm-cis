@@ -108,8 +108,8 @@ module "cis_glb" {
 
 # cis domain settings
 module "cis_domain_settings" {
-  source = "../../modules/waf"
-  # depends_on      = [module.cis_instance]
+  source          = "../../modules/waf"
+  depends_on      = [module.cis_instance]
   cis_instance_id = module.cis_instance.cis_instance_id
   domain_id       = module.cis_instance.cis_domain.domain_id
   enable_waf      = true
