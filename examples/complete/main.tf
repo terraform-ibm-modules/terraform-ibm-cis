@@ -89,7 +89,6 @@ module "cis_glb" {
     }
   ]
 }
-# second pipeline trigger
 
 ##############################################################################
 # Enables web application firewall(WAF) to CIS instance
@@ -114,3 +113,4 @@ module "cis_domain_settings" {
   domain_id       = module.cis_instance.cis_domain.domain_id
   enable_waf      = true
 }
+# Trigger Pipeline Again
