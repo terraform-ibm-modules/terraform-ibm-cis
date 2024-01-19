@@ -89,6 +89,7 @@ module "cis_glb" {
     }
   ]
 }
+# second pipeline trigger
 
 ##############################################################################
 # Enables web application firewall(WAF) to CIS instance
