@@ -26,8 +26,8 @@ variable "domain_name" {
   default     = "example.cloud.ibm.com"
 }
 
-# variable "glb_name" {
-#   description = "Name of the CIS global load balancer."
-#   type        = string
-#   default     = "glb"
-# }
+variable "glb_name" {
+  description = "Name of the CIS global load balancer."
+  type        = string
+  default     = "glb"
+}
