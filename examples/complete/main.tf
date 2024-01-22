@@ -105,7 +105,6 @@ resource "time_sleep" "wait_for_cis_instance" {
 #   depends_on = [time_sleep.wait_for_cis_instance]
 # }
 
-# cis domain settings
 module "cis_domain_settings" {
   source          = "../../modules/waf"
   depends_on      = [time_sleep.wait_for_cis_instance]
@@ -113,4 +112,3 @@ module "cis_domain_settings" {
   domain_id       = module.cis_instance.cis_domain.domain_id
   enable_waf      = true
 }
-# Trigger Pipeline
