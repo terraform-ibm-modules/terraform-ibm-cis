@@ -91,7 +91,7 @@ module "cis_glb" {
 }
 
 /*
-A 30-second sleep time has been added to ensure that the Cloud Interface Services (CIS) instance and domain are fully configured
+A 30-second sleep time has been added as a workround to ensure that the Cloud Interface Services (CIS) instance and domain are fully configured
 before making changes to the domain settings to enable Web Application Firewall (WAF) for the instance. Failing to include this
 sleep time can result in the following error:
 
