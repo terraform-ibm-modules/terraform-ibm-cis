@@ -102,6 +102,7 @@ sleep time can result in the following error:
   │    5: resource "ibm_cis_domain_settings" "domain_settings" {
   │
   ╵}
+The issue is being tracked here: https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5118
 */
 resource "time_sleep" "wait_for_cis_instance" {
   depends_on = [module.cis_instance]
