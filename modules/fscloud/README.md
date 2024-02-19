@@ -13,6 +13,7 @@ After this module runs successfully, the status of the domain that is configured
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0, <1.6.0 |
+| <a name="requirement_time"></a> [time](#requirement\_time) | 0.10.0 |
 
 ### Modules
 
@@ -25,7 +26,9 @@ After this module runs successfully, the status of the domain that is configured
 
 ### Resources
 
-No resources.
+| Name | Type |
+|------|------|
+| [time_sleep.wait_for_cis_instance](https://registry.terraform.io/providers/hashicorp/time/0.10.0/docs/resources/sleep) | resource |
 
 ### Inputs
 
