@@ -4,8 +4,9 @@ This code is a version of the [parent root module](../../) that includes a defau
 
 ## Manual Actions
 
-After this module runs successfully, the status of the domain that is configured in the CIS instance is set to `pending`. You need to configure the name servers that are assigned to the domain at the DNS provider or registrar and then the status changes to `active`. As a result, this manual step must be taken after deploying and configuring the instance to ensure compliance with the IBM Cloud Framework for Financial Services.
+After this module runs successfully, the status of the domain that is configured in the CIS instance is set to `pending`. You need to configure the name servers that are assigned to the domain at the DNS provider and then the status of the domain will be changed to `active`. This manual step must be taken after deploying and configuring the instance to ensure compliance with the IBM Cloud Framework for Financial Services.
 
+For more information, read [here](https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/docs/README.md).
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ### Requirements

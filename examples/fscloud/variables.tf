@@ -23,11 +23,5 @@ variable "resource_group" {
 variable "domain_name" {
   type        = string
   description = "Domain name to be added for the CIS Instance."
-  default     = "test.goldeneye.dev.cloud.ibm.com"
-}
-
-variable "glb_name" {
-  description = "Name of the CIS global load balancer."
-  type        = string
-  default     = "glb"
+  default     = "example.cloud.ibm.com"
 }
