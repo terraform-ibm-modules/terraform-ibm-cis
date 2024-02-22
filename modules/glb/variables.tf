@@ -30,6 +30,7 @@ variable "default_pool_ids" {
 variable "fallback_pool_name" {
   description = "FallBack Pool Name. Required if fallback_pool_id is not provided."
   type        = string
+  default     = null
 }
 
 variable "glb_description" {
@@ -66,7 +67,7 @@ variable "steering_policy" {
 }
 
 variable "ttl" {
-  description = "Time to live (TTL) for the CIS global load balancer (GLB), in seconds. If the GLB is proxied, set a minimum value of 120. If not proxied, the value is set automatically."
+  description = "Time to live (TTL) for the CIS global load balancer (GLB), in seconds. If the GLB is proxied, the value is set automatically."
   type        = number
   default     = null
 }

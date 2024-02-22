@@ -22,10 +22,12 @@ For more information about the module, see, read [Features of IBM Cloud Internet
 * [Submodules](./modules)
     * [dns](./modules/dns)
     * [domain](./modules/domain)
+    * [fscloud](./modules/fscloud)
     * [glb](./modules/glb)
     * [waf](./modules/waf)
 * [Examples](./examples)
     * [End-to-end example](./examples/complete)
+    * [Financial Services Cloud profile example](./examples/fscloud)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 

@@ -72,7 +72,7 @@ No modules.
 | <a name="input_default_pool_ids"></a> [default\_pool\_ids](#input\_default\_pool\_ids) | List of default pool IDs. | `list(string)` | `null` | no |
 | <a name="input_domain_id"></a> [domain\_id](#input\_domain\_id) | Existing domain ID of the CIS Instance. | `string` | n/a | yes |
 | <a name="input_fallback_pool_id"></a> [fallback\_pool\_id](#input\_fallback\_pool\_id) | ID of the fallback pool. Required if fallback\_pool\_name is not provided. | `string` | `null` | no |
-| <a name="input_fallback_pool_name"></a> [fallback\_pool\_name](#input\_fallback\_pool\_name) | FallBack Pool Name. Required if fallback\_pool\_id is not provided. | `string` | n/a | yes |
+| <a name="input_fallback_pool_name"></a> [fallback\_pool\_name](#input\_fallback\_pool\_name) | FallBack Pool Name. Required if fallback\_pool\_id is not provided. | `string` | `null` | no |
 | <a name="input_glb_description"></a> [glb\_description](#input\_glb\_description) | Description of the CIS global load balancer. | `string` | `null` | no |
 | <a name="input_glb_enabled"></a> [glb\_enabled](#input\_glb\_enabled) | Whether the CIS global load balancer is enabled. If set to true, the load balancer is enabled and can receive network traffic. | `bool` | n/a | yes |
 | <a name="input_glb_name"></a> [glb\_name](#input\_glb\_name) | The DNS name to associate with CIS global load balancer. It can be a hostname. | `string` | n/a | yes |
@@ -83,7 +83,7 @@ No modules.
 | <a name="input_region_pools"></a> [region\_pools](#input\_region\_pools) | Region pools of the CIS global load balancer. | <pre>list(object({<br>    region   = string<br>    pool_ids = list(string)<br>  }))</pre> | `[]` | no |
 | <a name="input_session_affinity"></a> [session\_affinity](#input\_session\_affinity) | Session Affinity of the CIS global load balancer. To make use of session affinity, glb\_proxied has to be true. | `string` | `null` | no |
 | <a name="input_steering_policy"></a> [steering\_policy](#input\_steering\_policy) | Steering Policy of the CIS global load balancer. | `string` | `"off"` | no |
-| <a name="input_ttl"></a> [ttl](#input\_ttl) | Time to live (TTL) for the CIS global load balancer (GLB), in seconds. If the GLB is proxied, set a minimum value of 120. If not proxied, the value is set automatically. | `number` | `null` | no |
+| <a name="input_ttl"></a> [ttl](#input\_ttl) | Time to live (TTL) for the CIS global load balancer (GLB), in seconds. If the GLB is proxied, the value is set automatically. | `number` | `null` | no |
 
 ### Outputs
 
