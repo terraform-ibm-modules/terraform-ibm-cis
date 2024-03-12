@@ -1,45 +1,34 @@
 ##############################################################################
-# Resource group
-##############################################################################
-
-module "resource_group" {
-  source  = "terraform-ibm-modules/resource-group/ibm"
-  version = "1.1.5"
-  # if an existing resource group is not set (null) create a new one using prefix
-  resource_group_name          = var.resource_group == null ? "${var.prefix}-resource-group" : null
-  existing_resource_group_name = var.resource_group
-}
-
-##############################################################################
 # Create CIS instance and add domain
 ##############################################################################
 
 module "cis_instance" {
   source            = "../../"
-  service_name      = "${var.prefix}-cis"
-  resource_group_id = module.resource_group.resource_group_id
-  tags              = []
-  plan              = "standard-next"
+  service_name      = var.service_name
+  resource_group_id = var.resource_group_id
+  tags              = var.tags
+  plan              = var.plan
   domain_name       = var.domain_name
 }
 
 ##############################################################################
 # Add dns records to CIS instance
 ##############################################################################
+locals {
+  # tflint-ignore: terraform_unused_declarations
+  validate_dns_input = (var.add_dns_records && length(var.dns_record_set) == 0) ? tobool("No DNS records found.") : true
+  # tflint-ignore: terraform_unused_declarations
+  validate_dns_records = [for record in var.dns_record_set : tobool("DNS records must be proxied for enabling DDoS protection.") if record.proxied != true]
+  # tflint-ignore: terraform_unused_declarations
+  validate_glb_input = var.add_glb ? ((var.fallback_pool_name == null && var.fallback_pool_id == null) ? tobool("Both fallback_pool_name and fallback_pool_id can not be null.") : true) : true
+}
 
 module "cis_dns_records" {
+  count           = var.add_dns_records ? 1 : 0
   source          = "../../modules/dns"
   cis_instance_id = module.cis_instance.cis_instance_id
   domain_id       = module.cis_instance.cis_domain.domain_id
-  dns_record_set = [
-    {
-      type    = "A"
-      name    = "test-example"
-      content = "1.2.3.4"
-      ttl     = 900
-    }
-  ]
-  dns_records_file = "dns_records.txt"
+  dns_record_set  = var.dns_record_set
 }
 
 ##############################################################################
@@ -47,48 +36,29 @@ module "cis_dns_records" {
 ##############################################################################
 
 module "cis_glb" {
+  count              = var.add_glb ? 1 : 0
   source             = "../../modules/glb"
   cis_instance_id    = module.cis_instance.cis_instance_id
   domain_id          = module.cis_instance.cis_domain.domain_id
-  glb_name           = join(".", [var.glb_name, var.domain_name])
-  fallback_pool_name = "glb1"
-  glb_description    = "Load Balancer"
-  glb_enabled        = true
-  ttl                = 120
-
-  origin_pools = [
-    {
-      name = "glb1"
-      origins = [{
-        name    = "o-1"
-        address = "1.1.1.0"
-        enabled = true
-        },
-        {
-          name    = "o-2"
-          address = "1.1.1.4"
-          enabled = true
-      }]
-      enabled           = true
-      description       = "Test GLB"
-      check_regions     = ["WEU"]
-      health_check_name = "hc1"
-    }
-  ]
-
-  health_checks = [
-    {
-      expected_body  = "alive"
-      expected_codes = "200"
-      method         = "GET"
-      timeout        = 7
-      path           = "/health"
-      interval       = 60
-      retries        = 3
-      name           = "hc1"
-    }
-  ]
+  glb_name           = var.glb_name
+  fallback_pool_name = var.fallback_pool_name
+  fallback_pool_id   = var.fallback_pool_id
+  default_pool_ids   = var.default_pool_ids
+  glb_description    = var.glb_description
+  glb_enabled        = var.glb_enabled
+  ttl                = null
+  glb_proxied        = true
+  session_affinity   = var.session_affinity
+  steering_policy    = var.steering_policy
+  region_pools       = var.region_pools
+  pop_pools          = var.pop_pools
+  origin_pools       = var.origin_pools
+  health_checks      = var.health_checks
 }
+
+##############################################################################
+# Enables web application firewall(WAF) to CIS instance
+##############################################################################
 
 /*
 A 30-second sleep time has been added as a workround to ensure that the Cloud Interface Services (CIS) instance and domain are fully configured
@@ -104,15 +74,12 @@ sleep time can result in the following error:
   ╵}
 The issue is being tracked here: https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5118
 */
+
 resource "time_sleep" "wait_for_cis_instance" {
   depends_on = [module.cis_instance]
 
   create_duration = "30s"
 }
-
-##############################################################################
-# Enables web application firewall(WAF) to CIS instance
-##############################################################################
 
 module "cis_domain_settings" {
   source          = "../../modules/waf"
@@ -121,3 +88,4 @@ module "cis_domain_settings" {
   domain_id       = module.cis_instance.cis_domain.domain_id
   enable_waf      = true
 }
+##############################################################################

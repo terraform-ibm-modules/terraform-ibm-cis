@@ -22,10 +22,12 @@ For more information about the module, see, read [Features of IBM Cloud Internet
 * [Submodules](./modules)
     * [dns](./modules/dns)
     * [domain](./modules/domain)
+    * [fscloud](./modules/fscloud)
     * [glb](./modules/glb)
     * [waf](./modules/waf)
 * [Examples](./examples)
     * [End-to-end example](./examples/complete)
+    * [Financial Services Cloud profile example](./examples/fscloud)
 * [Contributing](#contributing)
 <!-- END OVERVIEW HOOK -->
 
@@ -115,8 +117,8 @@ You need the following permissions to run this module.
 
 | Name | Version |
 |------|---------|
-| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0, <1.6.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.60.0, < 2.0.0 |
+| <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0, <1.7.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.49.0, < 2.0.0 |
 
 ### Modules
 
