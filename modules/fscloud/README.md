@@ -14,7 +14,7 @@ For more information, read [here](https://github.com/terraform-ibm-modules/terra
 | Name | Version |
 |------|---------|
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.3.0, <1.7.0 |
-| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.49.0, < 2.0.0 |
+| <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.63.0, < 2.0.0 |
 | <a name="requirement_time"></a> [time](#requirement\_time) | 0.10.0 |
 
 ### Modules
