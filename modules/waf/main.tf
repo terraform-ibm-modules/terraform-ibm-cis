@@ -2,36 +2,48 @@
 # To enable/disable Web Application Firewall(WAF) for a domain
 ##############################################################################
 
+locals {
+
+  rulesets_list                                  = data.ibm_cis_rulesets.tests.rulesets_list
+  rulesets_map                                   = { for rule in local.rulesets_list : rule.name => rule.ruleset_id }
+  ruleset_id_for_cis_managed_ruleset             = local.rulesets_map["CIS Managed Ruleset"]
+  ruleset_id_for_cis_owasp_core_ruleset          = local.rulesets_map["CIS OWASP Core Ruleset"]
+  ruleset_id_for_cis_exposed_creds_check_ruleset = local.rulesets_map["CIS Exposed Credentials Check Ruleset"]
+}
+data "ibm_cis_rulesets" "tests" {
+  cis_id    = var.cis_instance_id
+  domain_id = var.domain_id
+}
 
 resource "ibm_cis_ruleset_entrypoint_version" "config" {
-    cis_id    = var.cis_instance_id
-    domain_id = var.domain_id
-    phase = "http_request_firewall_managed"
-    rulesets {
-      description = "Entry Point ruleset"
-      rules {
-        action =  "execute"
-        action_parameters  {
-          id = "efb7b8c949ac4650a09736fc376e9aee"
-          }
-        enabled = true 
-        expression = "true"
+  cis_id    = var.cis_instance_id
+  domain_id = var.domain_id
+  phase     = "http_request_firewall_managed"
+  rulesets {
+    description = "Entry Point ruleset"
+    rules {
+      action = "execute"
+      action_parameters {
+        id = local.ruleset_id_for_cis_managed_ruleset
       }
-      rules {
-        action =  "execute"
-        action_parameters  {
-          id = "c2e184081120413c86c3ab7e14069605"
-          }
-        enabled = true 
-        expression = "true"
+      enabled    = var.enable_cis_managed_ruleset
+      expression = "true"
+    }
+    rules {
+      action = "execute"
+      action_parameters {
+        id = local.ruleset_id_for_cis_exposed_creds_check_ruleset
       }
-      rules {
-        action =  "execute"
-        action_parameters  {
-          id = "4814384a9e5d4991b9815dcfc25d2f1f"
-          }
-        enabled = true 
-        expression = "true"
+      enabled    = var.enable_cis_exposed_creds_check_ruleset
+      expression = "true"
+    }
+    rules {
+      action = "execute"
+      action_parameters {
+        id = local.ruleset_id_for_cis_owasp_core_ruleset
       }
+      enabled    = var.enable_cis_owasp_core_ruleset
+      expression = "true"
     }
   }
+}

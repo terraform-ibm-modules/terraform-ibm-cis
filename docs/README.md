@@ -114,3 +114,132 @@ This means that when you run a `terraform plan` command after a successful `terr
 ### WAF submodule
 
 The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to turn WAF on and off. CIS includes the default rule sets for WAF: the [OWASP rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and the [CIS rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf). You can either enable or disable the WAF with these default rule sets.
+
+WAF will be enabled by creating the managed rulesets. Currently between a terraform apply and re-apply there is an in place update shown on the below resource although there is no change in the resource configuration as per state file even after re-apply.
+[Provider Issue](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5944)
+```
+
+ # module.cis_domain_settings.ibm_cis_ruleset_entrypoint_version.config will be updated in-place
+  ~ resource "ibm_cis_ruleset_entrypoint_version" "config" {
+        id        = "http_request_firewall_managed:1a71f682d7a84667575f48fabc07384b:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644a9cabc6e44f55b3880e:5030125c-b120-4bcd-be64-09480a05dc10::"
+        # (3 unchanged attributes hidden)
+
+      - rulesets {
+          - description  = "Entry Point ruleset" -> null
+          - kind         = "zone" -> null
+          - last_updated = "2025-01-27T08:35:19.069158Z" -> null
+          - name         = "default" -> null
+          - phase        = "http_request_firewall_managed" -> null
+          - ruleset_id   = "9daa90836793408ca3aef71ecbb573f1" -> null # pragma: allowlist secret
+          - version      = "1" -> null
+
+          - rules {
+              - action          = "execute" -> null
+              - categories      = [] -> null
+              - enabled         = true -> null
+              - expression      = "true" -> null
+              - id              = "7756b73305a84ce99ea2da131250d725" -> null # pragma: allowlist secret
+              - last_updated_at = "2025-01-27T08:35:19.069158Z" -> null
+              - logging         = {} -> null
+              - ref             = "7756b73305a84ce99ea2da131250d725" -> null # pragma: allowlist secret
+              - version         = "1" -> null
+                # (1 unchanged attribute hidden)
+
+              - action_parameters {
+                  - id       = "efb7b8c949ac4650a09736fc376e9aee" -> null # pragma: allowlist secret
+                  - rulesets = [] -> null
+                  - version  = "latest" -> null
+                    # (1 unchanged attribute hidden)
+                }
+            }
+          - rules {
+              - action          = "execute" -> null
+              - categories      = [] -> null
+              - enabled         = true -> null
+              - expression      = "true" -> null
+              - id              = "bdeb2245abb2447ead957bc3235bab0a" -> null # pragma: allowlist secret
+              - last_updated_at = "2025-01-27T08:35:19.069158Z" -> null
+              - logging         = {} -> null
+              - ref             = "bdeb2245abb2447ead957bc3235bab0a" -> null # pragma: allowlist secret
+              - version         = "1" -> null
+                # (1 unchanged attribute hidden)
+
+              - action_parameters {
+                  - id       = "c2e184081120413c86c3ab7e14069605" -> null # pragma: allowlist secret
+                  - rulesets = [] -> null
+                  - version  = "latest" -> null
+                    # (1 unchanged attribute hidden)
+                }
+            }
+          - rules {
+              - action          = "execute" -> null
+              - categories      = [] -> null
+              - enabled         = true -> null
+              - expression      = "true" -> null
+              - id              = "ba652d987fa6441db6c6dc6c20ed4250" -> null # pragma: allowlist secret
+              - last_updated_at = "2025-01-27T08:35:19.069158Z" -> null
+              - logging         = {} -> null
+              - ref             = "ba652d987fa6441db6c6dc6c20ed4250" -> null # pragma: allowlist secret
+              - version         = "1" -> null
+                # (1 unchanged attribute hidden)
+
+              - action_parameters {
+                  - id       = "4814384a9e5d4991b9815dcfc25d2f1f" -> null # pragma: allowlist secret
+                  - rulesets = [] -> null
+                  - version  = "latest" -> null
+                    # (1 unchanged attribute hidden)
+                }
+            }
+        }
+      + rulesets {
+          + description  = "Entry Point ruleset"
+            name         = null
+            # (5 unchanged attributes hidden)
+
+          + rules {
+              + action          = "execute"
+              + categories      = []
+              + enabled         = true
+              + expression      = "true"
+                id              = null
+                # (4 unchanged attributes hidden)
+
+              + action_parameters {
+                  + id       = "efb7b8c949ac4650a09736fc376e9aee" # pragma: allowlist secret
+                  + rulesets = []
+                    # (2 unchanged attributes hidden)
+                }
+            }
+          + rules {
+              + action          = "execute"
+              + categories      = []
+              + enabled         = true
+              + expression      = "true"
+                id              = null
+                # (4 unchanged attributes hidden)
+
+              + action_parameters {
+                  + id       = "c2e184081120413c86c3ab7e14069605" # pragma: allowlist secret
+                  + rulesets = []
+                    # (2 unchanged attributes hidden)
+                }
+            }
+          + rules {
+              + action          = "execute"
+              + categories      = []
+              + enabled         = true
+              + expression      = "true"
+                id              = null
+                # (4 unchanged attributes hidden)
+
+              + action_parameters {
+                  + id       = "4814384a9e5d4991b9815dcfc25d2f1f" # pragma: allowlist secret
+                  + rulesets = []
+                    # (2 unchanged attributes hidden)
+                }
+            }
+        }
+}
+# Copy-paste your Terraform configurations here - for large Terraform configs,
+# please share a link to the ZIP file.
+```
