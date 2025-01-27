@@ -4,4 +4,3 @@ output "rulesets" {
   description = "CIS Managed Rulesets"
 
 }
-
