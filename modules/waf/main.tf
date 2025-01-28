@@ -4,13 +4,14 @@
 
 locals {
 
-  rulesets_list                                  = data.ibm_cis_rulesets.tests.rulesets_list
+  rulesets_list                                  = data.ibm_cis_rulesets.rulesets.rulesets_list
   rulesets_map                                   = { for rule in local.rulesets_list : rule.name => rule.ruleset_id }
   ruleset_id_for_cis_managed_ruleset             = local.rulesets_map["CIS Managed Ruleset"]
   ruleset_id_for_cis_owasp_core_ruleset          = local.rulesets_map["CIS OWASP Core Ruleset"]
   ruleset_id_for_cis_exposed_creds_check_ruleset = local.rulesets_map["CIS Exposed Credentials Check Ruleset"]
 }
-data "ibm_cis_rulesets" "tests" {
+
+data "ibm_cis_rulesets" "rulesets" {
   cis_id    = var.cis_instance_id
   domain_id = var.domain_id
 }
