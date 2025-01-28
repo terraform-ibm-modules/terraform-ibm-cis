@@ -36,7 +36,7 @@ No modules.
 | Name | Type |
 |------|------|
 | [ibm_cis_ruleset_entrypoint_version.config](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis_ruleset_entrypoint_version) | resource |
-| [ibm_cis_rulesets.tests](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/cis_rulesets) | data source |
+| [ibm_cis_rulesets.rulesets](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/data-sources/cis_rulesets) | data source |
 
 ### Inputs
 
