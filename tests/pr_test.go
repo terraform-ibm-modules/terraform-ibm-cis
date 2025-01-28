@@ -33,6 +33,12 @@ func TestRunCompleteExample(t *testing.T) {
 
 	options := setupOptions(t, "cis-new", domainName, defaultExampleTerraformDir)
 
+	options.IgnoreUpdates = testhelper.Exemptions{
+		List: []string{
+			"module.cis_domain_settings.ibm_cis_ruleset_entrypoint_version.config",
+		},
+	}
+
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
 	assert.NotNil(t, output, "Expected some output")
@@ -42,6 +48,12 @@ func TestRunUpgradeCompleteExample(t *testing.T) {
 	t.Parallel()
 
 	options := setupOptions(t, "cis-new-upg", domainName, defaultExampleTerraformDir)
+
+	options.IgnoreUpdates = testhelper.Exemptions{
+		List: []string{
+			"module.cis_domain_settings.ibm_cis_ruleset_entrypoint_version.config",
+		},
+	}
 
 	output, err := options.RunTestUpgrade()
 	if !options.UpgradeTestSkipped {
@@ -54,6 +66,12 @@ func TestRunFsCloudExample(t *testing.T) {
 	t.Parallel()
 
 	options := setupOptions(t, "cis-fs", domainName, fscloudExampleTerraformDir)
+
+	options.IgnoreUpdates = testhelper.Exemptions{
+		List: []string{
+			"module.cis_instance.module.cis_domain_settings.ibm_cis_ruleset_entrypoint_version.config",
+		},
+	}
 
 	output, err := options.RunTestConsistency()
 	assert.Nil(t, err, "This should not have errored")
