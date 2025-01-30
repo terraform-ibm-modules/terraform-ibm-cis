@@ -6,9 +6,28 @@ locals {
 
   rulesets_list                                  = data.ibm_cis_rulesets.rulesets.rulesets_list
   rulesets_map                                   = { for rule in local.rulesets_list : rule.name => rule.ruleset_id }
-  ruleset_id_for_cis_managed_ruleset             = local.rulesets_map["CIS Managed Ruleset"]
-  ruleset_id_for_cis_owasp_core_ruleset          = local.rulesets_map["CIS OWASP Core Ruleset"]
-  ruleset_id_for_cis_exposed_creds_check_ruleset = local.rulesets_map["CIS Exposed Credentials Check Ruleset"]
+  ruleset_id_for_cis_managed_ruleset             = var.enable_cis_managed_ruleset ? local.rulesets_map["CIS Managed Ruleset"] : null
+  ruleset_id_for_cis_owasp_core_ruleset          = var.enable_cis_owasp_core_ruleset ? local.rulesets_map["CIS OWASP Core Ruleset"] : null
+  ruleset_id_for_cis_exposed_creds_check_ruleset = var.enable_cis_exposed_creds_check_ruleset ? local.rulesets_map["CIS Exposed Credentials Check Ruleset"] : null
+  rules = [
+    for rule_name, rule_data in {
+      "CIS Managed Ruleset" = {
+        id       = var.enable_cis_managed_ruleset ? local.ruleset_id_for_cis_managed_ruleset : null
+        enabled  = var.enable_cis_managed_ruleset
+        expression = "true"
+      },
+      "CIS Exposed Credentials Check Ruleset" = {
+        id       = var.enable_cis_exposed_creds_check_ruleset ? local.ruleset_id_for_cis_exposed_creds_check_ruleset : null
+        enabled  = var.enable_cis_exposed_creds_check_ruleset
+        expression = "true"
+      },
+      "CIS OWASP Core Ruleset" = {
+        id       = var.enable_cis_owasp_core_ruleset ? local.ruleset_id_for_cis_owasp_core_ruleset : null
+        enabled  = var.enable_cis_owasp_core_ruleset
+        expression = "true"
+      }
+    } : rule_data.enabled ? rule_data : null
+  ]
 }
 
 data "ibm_cis_rulesets" "rulesets" {
@@ -20,31 +39,21 @@ resource "ibm_cis_ruleset_entrypoint_version" "config" {
   cis_id    = var.cis_instance_id
   domain_id = var.domain_id
   phase     = "http_request_firewall_managed"
+  
   rulesets {
     description = "Entry Point ruleset"
-    rules {
-      action = "execute"
-      action_parameters {
-        id = local.ruleset_id_for_cis_managed_ruleset
+    
+    dynamic "rules" {
+      for_each = [for rule in local.rules : rule if rule != null]
+
+      content {
+        action = "execute"
+        action_parameters {
+          id = rules.value.id
+        }
+        enabled    = rules.value.enabled
+        expression = rules.value.expression
       }
-      enabled    = var.enable_cis_managed_ruleset
-      expression = "true"
-    }
-    rules {
-      action = "execute"
-      action_parameters {
-        id = local.ruleset_id_for_cis_exposed_creds_check_ruleset
-      }
-      enabled    = var.enable_cis_exposed_creds_check_ruleset
-      expression = "true"
-    }
-    rules {
-      action = "execute"
-      action_parameters {
-        id = local.ruleset_id_for_cis_owasp_core_ruleset
-      }
-      enabled    = var.enable_cis_owasp_core_ruleset
-      expression = "true"
     }
   }
 }

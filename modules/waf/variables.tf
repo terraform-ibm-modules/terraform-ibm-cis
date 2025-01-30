@@ -11,21 +11,18 @@ variable "domain_id" {
 
 
 variable "enable_cis_managed_ruleset" {
-
   type        = bool
   description = "To control whether to enable CIS Managed Ruleset"
   default     = false
 }
 
 variable "enable_cis_exposed_creds_check_ruleset" {
-
   type        = bool
   description = "To control whether to enable CIS Exposed Credentials Check Ruleset"
   default     = false
 }
 
 variable "enable_cis_owasp_core_ruleset" {
-
   type        = bool
   description = "To control whether to enable CIS Owasp Core Ruleset"
   default     = false

@@ -200,3 +200,21 @@ variable "health_checks" {
   default = []
 }
 ##############################################################################
+
+variable "enable_cis_managed_ruleset" {
+  type        = bool
+  description = "To control whether to enable CIS Managed Ruleset"
+  default     = true
+}
+
+variable "enable_cis_exposed_creds_check_ruleset" {
+  type        = bool
+  description = "To control whether to enable CIS Exposed Credentials Check Ruleset"
+  default     = true
+}
+
+variable "enable_cis_owasp_core_ruleset" {
+  type        = bool
+  description = "To control whether to enable CIS Owasp Core Ruleset"
+  default     = true
+}
