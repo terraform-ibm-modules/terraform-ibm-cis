@@ -86,8 +86,6 @@ module "cis_domain_settings" {
   depends_on                             = [time_sleep.wait_for_cis_instance]
   cis_instance_id                        = module.cis_instance.cis_instance_id
   domain_id                              = module.cis_instance.cis_domain.domain_id
-  enable_cis_managed_ruleset             = var.enable_cis_managed_ruleset
-  enable_cis_exposed_creds_check_ruleset = var.enable_cis_exposed_creds_check_ruleset
-  enable_cis_owasp_core_ruleset          = var.enable_cis_owasp_core_ruleset
+  enabled_rulesets = var.enabled_rulesets
 }
 ##############################################################################

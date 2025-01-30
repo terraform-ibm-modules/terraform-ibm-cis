@@ -26,30 +26,15 @@ variable "domain_name" {
   default     = "example.cloud.ibm.com"
 }
 
-variable "enable_cis_managed_ruleset" {
-  type        = bool
-  description = "To control whether to enable CIS Managed Ruleset"
-  default     = true
-}
-
-variable "enable_cis_exposed_creds_check_ruleset" {
-  type        = bool
-  description = "To control whether to enable CIS Exposed Credentials Check Ruleset"
-  default     = true
-}
-
-variable "enable_cis_owasp_core_ruleset" {
-  type        = bool
-  description = "To control whether to enable CIS Owasp Core Ruleset"
-  default     = true
-}
-
 variable "enabled_rulesets" {
-  description = "Map to control which rulesets are enabled"
-  type        = map(bool)
-  default = {
-    "CIS Managed Ruleset"                 = true,
-    "CIS Exposed Credentials Check Ruleset" = false,
-    "CIS OWASP Core Ruleset"              = true
-  }
+  description = "List of rulesets and whether they are enabled or not"
+  type = list(object({
+    rule_name = string
+    enabled   = bool
+  }))
+  default = [
+    { rule_name = "CIS Managed Ruleset",                   enabled = true },
+    { rule_name = "CIS Exposed Credentials Check Ruleset", enabled = true },
+    { rule_name = "CIS OWASP Core Ruleset",                enabled = true }
+  ]
 }

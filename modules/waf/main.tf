@@ -3,30 +3,17 @@
 ##############################################################################
 
 locals {
-
   rulesets_list                                  = data.ibm_cis_rulesets.rulesets.rulesets_list
   rulesets_map                                   = { for rule in local.rulesets_list : rule.name => rule.ruleset_id }
-  ruleset_id_for_cis_managed_ruleset             = var.enable_cis_managed_ruleset ? local.rulesets_map["CIS Managed Ruleset"] : null
-  ruleset_id_for_cis_owasp_core_ruleset          = var.enable_cis_owasp_core_ruleset ? local.rulesets_map["CIS OWASP Core Ruleset"] : null
-  ruleset_id_for_cis_exposed_creds_check_ruleset = var.enable_cis_exposed_creds_check_ruleset ? local.rulesets_map["CIS Exposed Credentials Check Ruleset"] : null
+
+  # Filter and construct the rules array
   rules = [
-    for rule_name, rule_data in {
-      "CIS Managed Ruleset" = {
-        id       = var.enable_cis_managed_ruleset ? local.ruleset_id_for_cis_managed_ruleset : null
-        enabled  = var.enable_cis_managed_ruleset
-        expression = "true"
-      },
-      "CIS Exposed Credentials Check Ruleset" = {
-        id       = var.enable_cis_exposed_creds_check_ruleset ? local.ruleset_id_for_cis_exposed_creds_check_ruleset : null
-        enabled  = var.enable_cis_exposed_creds_check_ruleset
-        expression = "true"
-      },
-      "CIS OWASP Core Ruleset" = {
-        id       = var.enable_cis_owasp_core_ruleset ? local.ruleset_id_for_cis_owasp_core_ruleset : null
-        enabled  = var.enable_cis_owasp_core_ruleset
-        expression = "true"
-      }
-    } : rule_data.enabled ? rule_data : null
+    for rule in var.enabled_rulesets :
+    rule.enabled && contains(keys(local.rulesets_map), rule.rule_name) ? {
+      id         = local.rulesets_map[rule.rule_name]
+      enabled    = rule.enabled
+      expression = "true"
+    } : null
   ]
 }
 
@@ -42,10 +29,9 @@ resource "ibm_cis_ruleset_entrypoint_version" "config" {
   
   rulesets {
     description = "Entry Point ruleset"
-    
+
     dynamic "rules" {
       for_each = [for rule in local.rules : rule if rule != null]
-
       content {
         action = "execute"
         action_parameters {
