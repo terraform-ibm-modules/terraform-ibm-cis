@@ -17,7 +17,7 @@ module "cis_instance" {
   source            = "../../modules/fscloud"
   service_name      = "${var.prefix}-example"
   resource_group_id = module.resource_group.resource_group_id
-  enabled_rulesets = var.enabled_rulesets
+  enabled_rulesets  = var.enabled_rulesets
   tags              = []
   plan              = "standard-next"
   domain_name       = var.domain_name

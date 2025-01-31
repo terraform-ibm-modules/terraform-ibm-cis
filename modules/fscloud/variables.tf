@@ -207,8 +207,8 @@ variable "enabled_rulesets" {
     enabled   = bool
   }))
   default = [
-    { rule_name = "CIS Managed Ruleset",                   enabled = true },
+    { rule_name = "CIS Managed Ruleset", enabled = true },
     { rule_name = "CIS Exposed Credentials Check Ruleset", enabled = true },
-    { rule_name = "CIS OWASP Core Ruleset",                enabled = true }
+    { rule_name = "CIS OWASP Core Ruleset", enabled = true }
   ]
 }

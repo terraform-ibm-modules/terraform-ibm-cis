@@ -113,9 +113,9 @@ This means that when you run a `terraform plan` command after a successful `terr
 
 ### WAF submodule
 
-The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to turn WAF on and off. CIS includes the default rule sets for WAF: the [OWASP rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and the [CIS rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf). You can either enable or disable the WAF with these default rule sets.
+The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to enable WAF using managed rulesets. For more information, see [Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)
 
-WAF will be enabled by creating the managed rulesets. Currently between a terraform apply and re-apply there is an in place update shown on the below resource although there is no change in the resource configuration as per state file even after re-apply.
+Currently between a terraform apply and re-apply there is an in place update shown on the below resource although there is no change in the resource configuration as per state file even after re-apply.
 [Provider Issue](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5944)
 ```
 
@@ -152,44 +152,6 @@ WAF will be enabled by creating the managed rulesets. Currently between a terraf
                     # (1 unchanged attribute hidden)
                 }
             }
-          - rules {
-              - action          = "execute" -> null
-              - categories      = [] -> null
-              - enabled         = true -> null
-              - expression      = "true" -> null
-              - id              = "bdeb2245abb2447ead957bc3235bab0a" -> null # pragma: allowlist secret
-              - last_updated_at = "2025-01-27T08:35:19.069158Z" -> null
-              - logging         = {} -> null
-              - ref             = "bdeb2245abb2447ead957bc3235bab0a" -> null # pragma: allowlist secret
-              - version         = "1" -> null
-                # (1 unchanged attribute hidden)
-
-              - action_parameters {
-                  - id       = "c2e184081120413c86c3ab7e14069605" -> null # pragma: allowlist secret
-                  - rulesets = [] -> null
-                  - version  = "latest" -> null
-                    # (1 unchanged attribute hidden)
-                }
-            }
-          - rules {
-              - action          = "execute" -> null
-              - categories      = [] -> null
-              - enabled         = true -> null
-              - expression      = "true" -> null
-              - id              = "ba652d987fa6441db6c6dc6c20ed4250" -> null # pragma: allowlist secret
-              - last_updated_at = "2025-01-27T08:35:19.069158Z" -> null
-              - logging         = {} -> null
-              - ref             = "ba652d987fa6441db6c6dc6c20ed4250" -> null # pragma: allowlist secret
-              - version         = "1" -> null
-                # (1 unchanged attribute hidden)
-
-              - action_parameters {
-                  - id       = "4814384a9e5d4991b9815dcfc25d2f1f" -> null # pragma: allowlist secret
-                  - rulesets = [] -> null
-                  - version  = "latest" -> null
-                    # (1 unchanged attribute hidden)
-                }
-            }
         }
       + rulesets {
           + description  = "Entry Point ruleset"
@@ -206,34 +168,6 @@ WAF will be enabled by creating the managed rulesets. Currently between a terraf
 
               + action_parameters {
                   + id       = "efb7b8c949ac4650a09736fc376e9aee" # pragma: allowlist secret
-                  + rulesets = []
-                    # (2 unchanged attributes hidden)
-                }
-            }
-          + rules {
-              + action          = "execute"
-              + categories      = []
-              + enabled         = true
-              + expression      = "true"
-                id              = null
-                # (4 unchanged attributes hidden)
-
-              + action_parameters {
-                  + id       = "c2e184081120413c86c3ab7e14069605" # pragma: allowlist secret
-                  + rulesets = []
-                    # (2 unchanged attributes hidden)
-                }
-            }
-          + rules {
-              + action          = "execute"
-              + categories      = []
-              + enabled         = true
-              + expression      = "true"
-                id              = null
-                # (4 unchanged attributes hidden)
-
-              + action_parameters {
-                  + id       = "4814384a9e5d4991b9815dcfc25d2f1f" # pragma: allowlist secret
                   + rulesets = []
                     # (2 unchanged attributes hidden)
                 }
