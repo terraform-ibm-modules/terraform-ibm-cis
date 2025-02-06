@@ -202,13 +202,8 @@ variable "health_checks" {
 
 variable "enabled_rulesets" {
   description = "List of rulesets and whether they are enabled or not"
-  type = list(object({
-    rule_name = string
-    enabled   = bool
-  }))
-  default = [
-    { rule_name = "CIS Managed Ruleset", enabled = true },
-    { rule_name = "CIS Exposed Credentials Check Ruleset", enabled = true },
-    { rule_name = "CIS OWASP Core Ruleset", enabled = true }
-  ]
+  type        = list(string)
+  default     = ["CIS Managed Ruleset", "CIS Exposed Credentials Check Ruleset", "CIS OWASP Core Ruleset"]
+
+
 }

@@ -8,10 +8,9 @@ locals {
 
   # Filter and construct the rules array
   rules = [
-    for rule in var.enabled_rulesets :
-    rule.enabled && contains(keys(local.rulesets_map), rule.rule_name) ? {
-      id         = local.rulesets_map[rule.rule_name]
-      enabled    = rule.enabled
+    for rule in var.enabled_rulesets : contains(keys(local.rulesets_map), rule) ? {
+      id         = local.rulesets_map[rule]
+      enabled    = true
       expression = "true"
     } : null
   ]

@@ -44,7 +44,7 @@ No modules.
 |------|-------------|------|---------|:--------:|
 | <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of the existing CIS instance. | `string` | n/a | yes |
 | <a name="input_domain_id"></a> [domain\_id](#input\_domain\_id) | ID of the existing domain to add a DNS record to the CIS instance. | `string` | n/a | yes |
-| <a name="input_enabled_rulesets"></a> [enabled\_rulesets](#input\_enabled\_rulesets) | List of rulesets and whether they are enabled or not | <pre>list(object({<br>    rule_name = string<br>    enabled   = bool<br>  }))</pre> | <pre>[<br>  {<br>    "enabled": true,<br>    "rule_name": "CIS Managed Ruleset"<br>  },<br>  {<br>    "enabled": true,<br>    "rule_name": "CIS Exposed Credentials Check Ruleset"<br>  },<br>  {<br>    "enabled": true,<br>    "rule_name": "CIS OWASP Core Ruleset"<br>  }<br>]</pre> | no |
+| <a name="input_enabled_rulesets"></a> [enabled\_rulesets](#input\_enabled\_rulesets) | List of rulesets and whether they are enabled or not | `list(string)` | <pre>[<br/>  "CIS Managed Ruleset",<br/>  "CIS Exposed Credentials Check Ruleset",<br/>  "CIS OWASP Core Ruleset"<br/>]</pre> | no |
 
 ### Outputs
 
