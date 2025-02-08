@@ -16,6 +16,19 @@ locals {
   ]
 }
 
+resource "ibm_cis_domain_settings" "domain_settings" {
+
+  count     = !var.disable_legacy_waf ? 1 : 0
+  cis_id    = var.cis_instance_id
+  domain_id = var.domain_id
+  waf       = var.enable_waf ? "on" : "off"
+}
+
+moved {
+  from = ibm_cis_domain_settings.domain_settings
+  to   = ibm_cis_domain_settings.domain_settings[0]
+}
+
 data "ibm_cis_rulesets" "rulesets" {
   cis_id    = var.cis_instance_id
   domain_id = var.domain_id
