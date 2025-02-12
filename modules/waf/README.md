@@ -13,9 +13,7 @@ provider "ibm" {
 module "cis_waf"{
     cis_instance_id = "crn:v1:bluemix:public:internet-svcs:global:a/xxXXxxXXxXxXXXXxxXxxxXXXXxXXXXX:xxxxxxxx-XXXX-xxxx-XXXX-xxxxxXXXXxxxx::"
     domain_id       = "xxxxXXXXxxxxXXXXxxxxxxxxXXXXxxxx"
-    enable_cis_managed_ruleset = true
-    enable_cis_exposed_creds_check_ruleset = true
-    enable_cis_owasp_core_ruleset = true
+    enabled_rulesets = ["CIS Managed Ruleset", "CIS Exposed Credentials Check Ruleset", "CIS OWASP Core Ruleset"]
 }
 ```
 
@@ -44,10 +42,10 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of the existing CIS instance. | `string` | n/a | yes |
-| <a name="input_disable_legacy_waf"></a> [disable\_legacy\_waf](#input\_disable\_legacy\_waf) | Disable old way of enabling waf by moving to managed rulesets | `bool` | `true` | no |
+| <a name="input_disable_legacy_waf"></a> [disable\_legacy\_waf](#input\_disable\_legacy\_waf) | Set to true to disable the old way of enabling WAF. To enable WAF by using managed rulesets, please use variable 'enabled\_rulesets' | `bool` | `true` | no |
 | <a name="input_domain_id"></a> [domain\_id](#input\_domain\_id) | ID of the existing domain to add a DNS record to the CIS instance. | `string` | n/a | yes |
 | <a name="input_enable_waf"></a> [enable\_waf](#input\_enable\_waf) | To control whether the web application firewall (WAF) is enabled or disabled for a CIS instance. | `bool` | n/a | yes |
-| <a name="input_enabled_rulesets"></a> [enabled\_rulesets](#input\_enabled\_rulesets) | List of rulesets and whether they are enabled or not. For more information, refer to the [IBM Cloud Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview). | `list(string)` | <pre>[<br/>  "CIS Managed Ruleset",<br/>  "CIS Exposed Credentials Check Ruleset",<br/>  "CIS OWASP Core Ruleset"<br/>]</pre> | no |
+| <a name="input_enabled_rulesets"></a> [enabled\_rulesets](#input\_enabled\_rulesets) | List of rulesets to be enabled. For more information, refer to the [IBM Cloud Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview). | `list(string)` | <pre>[<br>  "CIS Managed Ruleset",<br>  "CIS Exposed Credentials Check Ruleset",<br>  "CIS OWASP Core Ruleset"<br>]</pre> | no |
 
 ### Outputs
 

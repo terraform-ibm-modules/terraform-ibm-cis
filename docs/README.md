@@ -115,8 +115,7 @@ This means that when you run a `terraform plan` command after a successful `terr
 
 The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to enable WAF using managed rulesets. For more information, see [Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)
 
-Currently between a terraform apply and re-apply there is an in place update shown on the below resource although there is no change in the resource configuration as per state file even after re-apply.
-[Provider Issue](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5944)
+If you do a terraform plan once resources has been created it will show an inplace update to CIS Ruleset resources saying there were some changes done on the resource outside of terraform although it was not done. You can ignore this message. [Provider Issue](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5944)
 ```
 
  # module.cis_domain_settings.ibm_cis_ruleset_entrypoint_version.config will be updated in-place
