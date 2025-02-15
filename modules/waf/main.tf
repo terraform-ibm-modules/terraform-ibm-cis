@@ -36,14 +36,14 @@ data "ibm_cis_rulesets" "rulesets" {
 
 resource "ibm_cis_ruleset_entrypoint_version" "config" {
 
-  count     = var.enable_waf ? 1 : 0
+  count = var.enable_waf ? 1 : 0
 
   cis_id    = var.cis_instance_id
   domain_id = var.domain_id
   phase     = "http_request_firewall_managed"
 
   rulesets {
-    description = "Entry Point ruleset"
+    description = var.description
 
     dynamic "rules" {
       for_each = [for rule in local.rules : rule if rule != null]

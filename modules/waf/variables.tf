@@ -30,3 +30,9 @@ variable "enabled_rulesets" {
     error_message = "The following rule names are invalid: ${join(", ", [for rule in var.enabled_rulesets : rule if !contains(keys(local.rulesets_map), rule)])}"
   }
 }
+
+variable "description" {
+  description = "Enable Web application firewall for domain"
+  type        = string
+  default     = "Enable WAF using managed rulesets"
+}

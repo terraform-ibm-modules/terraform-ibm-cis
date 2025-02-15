@@ -87,5 +87,6 @@ module "waf" {
   cis_instance_id  = module.cis_instance.cis_instance_id
   domain_id        = module.cis_instance.cis_domain.domain_id
   enabled_rulesets = var.enabled_rulesets
+  use_legacy_waf   = var.use_legacy_waf
 }
 ##############################################################################

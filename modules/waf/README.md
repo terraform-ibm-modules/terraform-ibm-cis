@@ -42,14 +42,13 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of the existing CIS instance. | `string` | n/a | yes |
-| <a name="input_disable_legacy_waf"></a> [disable\_legacy\_waf](#input\_disable\_legacy\_waf) | Set to true to disable the old way of enabling WAF. To enable WAF by using managed rulesets, please use variable 'enabled\_rulesets' | `bool` | `true` | no |
+| <a name="input_description"></a> [description](#input\_description) | Enable Web application firewall for domain | `string` | `"Enable WAF using managed rulesets"` | no |
 | <a name="input_domain_id"></a> [domain\_id](#input\_domain\_id) | ID of the existing domain to add a DNS record to the CIS instance. | `string` | n/a | yes |
-| <a name="input_enable_waf"></a> [enable\_waf](#input\_enable\_waf) | To control whether the web application firewall (WAF) is enabled or disabled for a CIS instance. | `bool` | n/a | yes |
+| <a name="input_enable_waf"></a> [enable\_waf](#input\_enable\_waf) | To control whether the web application firewall (WAF) is enabled or disabled for a CIS instance. | `bool` | `true` | no |
 | <a name="input_enabled_rulesets"></a> [enabled\_rulesets](#input\_enabled\_rulesets) | List of rulesets to be enabled. For more information, refer to the [IBM Cloud Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview). | `list(string)` | <pre>[<br>  "CIS Managed Ruleset",<br>  "CIS Exposed Credentials Check Ruleset",<br>  "CIS OWASP Core Ruleset"<br>]</pre> | no |
+| <a name="input_use_legacy_waf"></a> [use\_legacy\_waf](#input\_use\_legacy\_waf) | Set to true to enable/disable the old way of enabling WAF. To enable WAF by using managed rulesets, please use variable 'enabled\_rulesets'. For more information, refer [this](https://cloud.ibm.com/docs/cis?topic=cis-migrating-to-managed-rules) | `bool` | `false` | no |
 
 ### Outputs
 
-| Name | Description |
-|------|-------------|
-| <a name="output_rulesets"></a> [rulesets](#output\_rulesets) | CIS Managed Rulesets |
+No outputs.
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
