@@ -18,7 +18,7 @@ locals {
 
 resource "ibm_cis_domain_settings" "domain_settings" {
 
-  count     = !var.disable_legacy_waf ? 1 : 0
+  count     = var.use_legacy_waf ? 1 : 0
   cis_id    = var.cis_instance_id
   domain_id = var.domain_id
   waf       = var.enable_waf ? "on" : "off"
@@ -35,6 +35,9 @@ data "ibm_cis_rulesets" "rulesets" {
 }
 
 resource "ibm_cis_ruleset_entrypoint_version" "config" {
+
+  count     = var.enable_waf ? 1 : 0
+
   cis_id    = var.cis_instance_id
   domain_id = var.domain_id
   phase     = "http_request_firewall_managed"

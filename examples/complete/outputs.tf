@@ -17,7 +17,7 @@ output "cis_glb" {
   value       = module.cis_glb
 }
 
-output "cis_domain_settings" {
+output "waf" {
   description = "CIS domain settings"
-  value       = module.cis_domain_settings
+  value       = module.waf
 }

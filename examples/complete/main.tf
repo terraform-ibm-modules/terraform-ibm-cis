@@ -114,9 +114,8 @@ resource "time_sleep" "wait_for_cis_instance" {
 # Enables web application firewall(WAF) to CIS instance
 ##############################################################################
 
-module "cis_domain_settings" {
+module "waf" {
   source           = "../../modules/waf"
-  enable_waf       = false
   depends_on       = [time_sleep.wait_for_cis_instance]
   cis_instance_id  = module.cis_instance.cis_instance_id
   domain_id        = module.cis_instance.cis_domain.domain_id
