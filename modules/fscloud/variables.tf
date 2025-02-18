@@ -200,14 +200,25 @@ variable "health_checks" {
   default = []
 }
 
-variable "enabled_rulesets" {
-  description = "List of rulesets to be enabled. For more information, refer to the [IBM Cloud Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)."
+variable "enable_waf" {
+  type        = bool
+  description = "To control whether the web application firewall (WAF) is enabled or disabled for a CIS instance."
+  default     = true
+}
+
+variable "enable_waf_rulesets" {
+  description = "List of rulesets to be enabled for web application firewal(WAF). For more information, refer to the [IBM Cloud Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)."
   type        = list(string)
   default     = ["CIS Managed Ruleset", "CIS Exposed Credentials Check Ruleset", "CIS OWASP Core Ruleset"]
 }
 
 variable "use_legacy_waf" {
   type        = bool
-  description = "Set to true to enable/disable the old way of enabling WAF. To enable WAF by using managed rulesets, please use variable 'enabled_rulesets'. For more information, refer [this](https://cloud.ibm.com/docs/cis?topic=cis-migrating-to-managed-rules)"
+  description = "Set to true to enable/disable the old way of enabling WAF. To enable WAF by using managed rulesets, please use variable 'enable_waf_rulesets'. For more information, refer [this](https://cloud.ibm.com/docs/cis?topic=cis-migrating-to-managed-rules)"
   default     = false
+
+  validation {
+    condition     = (var.use_legacy_waf && !var.enable_waf) || (var.use_legacy_waf && var.enable_waf) || (!var.use_legacy_waf && var.enable_waf)
+    error_message = "WAF can not be disabled as per IBM Cloud Framework for Financial Services for a CIS instance."
+  }
 }

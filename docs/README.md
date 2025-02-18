@@ -115,18 +115,16 @@ This means that when you run a `terraform plan` command after a successful `terr
 
 The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to enable WAF using managed rulesets. For more information, see [Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)
 
-If you do a terraform plan once resources has been created it will show an inplace update to CIS Ruleset resources saying there were some changes done on the resource outside of terraform although it was not done. You can ignore this message. [Provider Issue](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5944)
+When you run a `terraform plan` command after a successful `terraform apply`, it shows that an in-place update is required for CIS Ruleset resources, as shown in the following example. However, your infrastructure will not be affected and you can ignore that message. The work is being tracked [here](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5944).
+
 ```
-
-Migration is not supported from legacy way of enabling WAF using cis_domain_settings_resource to managed rulesets via terraform. It is only supported using UI/API as of now.[Check more](https://ibm-cloudplatform.slack.com/archives/C8XKQ9FPB/p1738819805199239)
-
  # module.cis_domain_settings.ibm_cis_ruleset_entrypoint_version.config will be updated in-place
   ~ resource "ibm_cis_ruleset_entrypoint_version" "config" {
-        id        = "http_request_firewall_managed:1a71f682d7a84667575f48fabc07384b:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644a9cabc6e44f55b3880e:5030125c-b120-4bcd-be64-09480a05dc10::"
+        id        = "http_request_firewall_managed:1a71f682d7a84667575fxxxxc07384b:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644a9c0e:50xxx5c-b120-4bcd-be64-09480a05dc10::"
         # (3 unchanged attributes hidden)
 
       - rulesets {
-          - description  = "Entry Point ruleset" -> null
+          - description  = "Managed rulesets" -> null
           - kind         = "zone" -> null
           - last_updated = "2025-01-27T08:35:19.069158Z" -> null
           - name         = "default" -> null
@@ -139,15 +137,15 @@ Migration is not supported from legacy way of enabling WAF using cis_domain_sett
               - categories      = [] -> null
               - enabled         = true -> null
               - expression      = "true" -> null
-              - id              = "7756b73305a84ce99ea2da131250d725" -> null # pragma: allowlist secret
+              - id              = "7756b73305axxxea2da131250d725" -> null # pragma: allowlist secret
               - last_updated_at = "2025-01-27T08:35:19.069158Z" -> null
               - logging         = {} -> null
-              - ref             = "7756b73305a84ce99ea2da131250d725" -> null # pragma: allowlist secret
+              - ref             = "7756b73305a8xxxa2da131250d725" -> null # pragma: allowlist secret
               - version         = "1" -> null
                 # (1 unchanged attribute hidden)
 
               - action_parameters {
-                  - id       = "efb7b8c949ac4650a09736fc376e9aee" -> null # pragma: allowlist secret
+                  - id       = "efb7b8c949acxxxx9736fc376e9aee" -> null # pragma: allowlist secret
                   - rulesets = [] -> null
                   - version  = "latest" -> null
                     # (1 unchanged attribute hidden)
@@ -155,7 +153,7 @@ Migration is not supported from legacy way of enabling WAF using cis_domain_sett
             }
         }
       + rulesets {
-          + description  = "Entry Point ruleset"
+          + description  = "Managed rulesets"
             name         = null
             # (5 unchanged attributes hidden)
 
@@ -168,13 +166,17 @@ Migration is not supported from legacy way of enabling WAF using cis_domain_sett
                 # (4 unchanged attributes hidden)
 
               + action_parameters {
-                  + id       = "efb7b8c949ac4650a09736fc376e9aee" # pragma: allowlist secret
+                  + id       = "efb7b8c949ac4xxx9736fc376e9aee" # pragma: allowlist secret
                   + rulesets = []
                     # (2 unchanged attributes hidden)
                 }
             }
         }
 }
-# Copy-paste your Terraform configurations here - for large Terraform configs,
-# please share a link to the ZIP file.
 ```
+
+**Migrating to managed rules**
+
+ There is no automated Terraform support to migrate from legacy WAF to managed rules. It requires manual intervention. Using this module, you can either disable the existing legacy WAF or enable WAF using managed rulesets in a new CIS instance.
+
+ To find more information on migration, refer [this](https://cloud.ibm.com/docs/cis?topic=cis-migrating-to-managed-rules).

@@ -8,7 +8,7 @@ locals {
 
   # Filter and construct the rules array
   rules = [
-    for rule in var.enabled_rulesets : contains(keys(local.rulesets_map), rule) ? {
+    for rule in var.enable_waf_rulesets : contains(keys(local.rulesets_map), rule) ? {
       id         = local.rulesets_map[rule]
       enabled    = true
       expression = "true"
@@ -16,26 +16,13 @@ locals {
   ]
 }
 
-resource "ibm_cis_domain_settings" "domain_settings" {
-
-  count     = var.use_legacy_waf ? 1 : 0
-  cis_id    = var.cis_instance_id
-  domain_id = var.domain_id
-  waf       = var.enable_waf ? "on" : "off"
-}
-
-moved {
-  from = ibm_cis_domain_settings.domain_settings
-  to   = ibm_cis_domain_settings.domain_settings[0]
-}
-
+# Retrieve information about WAF rulesets
 data "ibm_cis_rulesets" "rulesets" {
   cis_id    = var.cis_instance_id
   domain_id = var.domain_id
 }
 
-resource "ibm_cis_ruleset_entrypoint_version" "config" {
-
+resource "ibm_cis_ruleset_entrypoint_version" "waf_config" {
   count = var.enable_waf ? 1 : 0
 
   cis_id    = var.cis_instance_id
@@ -43,7 +30,7 @@ resource "ibm_cis_ruleset_entrypoint_version" "config" {
   phase     = "http_request_firewall_managed"
 
   rulesets {
-    description = var.description
+    description = var.rulesets_description
 
     dynamic "rules" {
       for_each = [for rule in local.rules : rule if rule != null]
@@ -57,4 +44,20 @@ resource "ibm_cis_ruleset_entrypoint_version" "config" {
       }
     }
   }
+}
+
+##################################################################
+# Disable the legacy WAF
+##################################################################
+
+resource "ibm_cis_domain_settings" "domain_settings" {
+  count     = var.use_legacy_waf ? 1 : 0
+  cis_id    = var.cis_instance_id
+  domain_id = var.domain_id
+  waf       = var.enable_waf ? "on" : "off"
+}
+
+moved {
+  from = ibm_cis_domain_settings.domain_settings
+  to   = ibm_cis_domain_settings.domain_settings[0]
 }

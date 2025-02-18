@@ -16,23 +16,23 @@ variable "enable_waf" {
 
 variable "use_legacy_waf" {
   type        = bool
-  description = "Set to true to enable/disable the old way of enabling WAF. To enable WAF by using managed rulesets, please use variable 'enabled_rulesets'. For more information, refer [this](https://cloud.ibm.com/docs/cis?topic=cis-migrating-to-managed-rules)"
+  description = "Set to true to enable/disable the legacy WAF. To enable WAF by using managed rulesets, please use variable 'enable_waf_rulesets'. For more information, refer [this](https://cloud.ibm.com/docs/cis?topic=cis-migrating-to-managed-rules)"
   default     = false
 }
 
-variable "enabled_rulesets" {
-  description = "List of rulesets to be enabled. For more information, refer to the [IBM Cloud Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)."
+variable "enable_waf_rulesets" {
+  description = "List of rulesets to be enabled for web application firewal(WAF). For more information, refer to the [IBM Cloud Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)."
   type        = list(string)
   default     = ["CIS Managed Ruleset", "CIS Exposed Credentials Check Ruleset", "CIS OWASP Core Ruleset"]
 
   validation {
-    condition     = alltrue([for rule in var.enabled_rulesets : contains(keys(local.rulesets_map), rule)])
-    error_message = "The following rule names are invalid: ${join(", ", [for rule in var.enabled_rulesets : rule if !contains(keys(local.rulesets_map), rule)])}"
+    condition     = alltrue([for rule in var.enable_waf_rulesets : contains(keys(local.rulesets_map), rule)])
+    error_message = "The following ruleset names are invalid: ${join(", ", [for rule in var.enable_waf_rulesets : rule if !contains(keys(local.rulesets_map), rule)])}"
   }
 }
 
-variable "description" {
-  description = "Enable Web application firewall for domain"
+variable "rulesets_description" {
+  description = "Description of the rulesets to be enabled."
   type        = string
-  default     = "Enable WAF using managed rulesets"
+  default     = "Managed rulesets"
 }
