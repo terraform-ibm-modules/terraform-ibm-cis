@@ -118,6 +118,8 @@ The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-
 If you do a terraform plan once resources has been created it will show an inplace update to CIS Ruleset resources saying there were some changes done on the resource outside of terraform although it was not done. You can ignore this message. [Provider Issue](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5944)
 ```
 
+Migration is not supported from legacy way of enabling WAF using cis_domain_settings_resource to managed rulesets via terraform. It is only supported using UI/API as of now.[Check more](https://ibm-cloudplatform.slack.com/archives/C8XKQ9FPB/p1738819805199239)
+
  # module.cis_domain_settings.ibm_cis_ruleset_entrypoint_version.config will be updated in-place
   ~ resource "ibm_cis_ruleset_entrypoint_version" "config" {
         id        = "http_request_firewall_managed:1a71f682d7a84667575f48fabc07384b:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644a9cabc6e44f55b3880e:5030125c-b120-4bcd-be64-09480a05dc10::"
