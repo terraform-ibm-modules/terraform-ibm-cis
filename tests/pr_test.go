@@ -35,7 +35,7 @@ func TestRunCompleteExample(t *testing.T) {
 
 	options.IgnoreUpdates = testhelper.Exemptions{
 		List: []string{
-			"module.cis_domain_settings.ibm_cis_ruleset_entrypoint_version.waf_config",
+			"module.waf.ibm_cis_ruleset_entrypoint_version.waf_config",
 		},
 	}
 
@@ -51,7 +51,7 @@ func TestRunUpgradeCompleteExample(t *testing.T) {
 
 	options.IgnoreUpdates = testhelper.Exemptions{
 		List: []string{
-			"module.cis_domain_settings.ibm_cis_ruleset_entrypoint_version.waf_config",
+			"module.waf.ibm_cis_ruleset_entrypoint_version.waf_config",
 		},
 	}
 
@@ -69,7 +69,7 @@ func TestRunFsCloudExample(t *testing.T) {
 
 	options.IgnoreUpdates = testhelper.Exemptions{
 		List: []string{
-			"module.cis_instance.module.cis_domain_settings.ibm_cis_ruleset_entrypoint_version.waf_config",
+			"module.cis_instance.module.waf.ibm_cis_ruleset_entrypoint_version.waf_config",
 		},
 	}
 
