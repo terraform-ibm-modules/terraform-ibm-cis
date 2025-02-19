@@ -18,6 +18,11 @@ variable "use_legacy_waf" {
   type        = bool
   description = "Set to true to enable/disable the legacy WAF. To enable WAF by using managed rulesets, please use variable 'enable_waf_rulesets'. For more information, refer [this](https://cloud.ibm.com/docs/cis?topic=cis-migrating-to-managed-rules)"
   default     = false
+
+  validation {
+    condition     = !(var.use_legacy_waf && var.enable_waf)
+    error_message = "Migrate to managed rulesets to enable WAF."
+  }
 }
 
 variable "enable_waf_rulesets" {

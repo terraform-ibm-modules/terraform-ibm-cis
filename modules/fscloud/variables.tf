@@ -218,7 +218,7 @@ variable "use_legacy_waf" {
   default     = false
 
   validation {
-    condition     = (var.use_legacy_waf && !var.enable_waf) || (var.use_legacy_waf && var.enable_waf) || (!var.use_legacy_waf && var.enable_waf)
+    condition     = (!var.use_legacy_waf && var.enable_waf) || var.use_legacy_waf
     error_message = "WAF can not be disabled as per IBM Cloud Framework for Financial Services for a CIS instance."
   }
 }

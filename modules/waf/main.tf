@@ -51,7 +51,7 @@ resource "ibm_cis_ruleset_entrypoint_version" "waf_config" {
 ##################################################################
 
 resource "ibm_cis_domain_settings" "domain_settings" {
-  count     = var.use_legacy_waf ? 1 : 0
+  count     = var.use_legacy_waf && !var.enable_waf ? 1 : 0
   cis_id    = var.cis_instance_id
   domain_id = var.domain_id
   waf       = var.enable_waf ? "on" : "off"
