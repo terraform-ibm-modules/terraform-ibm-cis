@@ -175,7 +175,7 @@ When you run a `terraform plan` command after a successful `terraform apply`, it
 }
 ```
 
-**Migrating to managed rules**
+#### Migrating to managed rules
 
  There is no automated Terraform support to migrate from legacy WAF to managed rules. It requires manual intervention. Using this module, you can either disable the existing legacy WAF or enable WAF using managed rulesets in a new CIS instance.
 

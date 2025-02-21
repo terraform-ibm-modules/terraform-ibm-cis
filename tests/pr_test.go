@@ -33,6 +33,7 @@ func TestRunCompleteExample(t *testing.T) {
 
 	options := setupOptions(t, "cis-new", domainName, defaultExampleTerraformDir)
 
+	// Need to ignore the update in-place after successful apply. Provider issue - https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5944
 	options.IgnoreUpdates = testhelper.Exemptions{
 		List: []string{
 			"module.waf.ibm_cis_ruleset_entrypoint_version.waf_config[0]",
@@ -49,6 +50,7 @@ func TestRunUpgradeCompleteExample(t *testing.T) {
 
 	options := setupOptions(t, "cis-new-upg", domainName, defaultExampleTerraformDir)
 
+	// Need to ignore the update in-place after successful apply. Provider issue - https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5944
 	options.IgnoreUpdates = testhelper.Exemptions{
 		List: []string{
 			"module.waf.ibm_cis_ruleset_entrypoint_version.waf_config[0]",
@@ -67,6 +69,7 @@ func TestRunFsCloudExample(t *testing.T) {
 
 	options := setupOptions(t, "cis-fs", domainName, fscloudExampleTerraformDir)
 
+	// Need to ignore the update in-place after successful apply. Provider issue - https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5944
 	options.IgnoreUpdates = testhelper.Exemptions{
 		List: []string{
 			"module.cis_instance.module.waf.ibm_cis_ruleset_entrypoint_version.waf_config[0]",
