@@ -4,7 +4,7 @@
 
 module "resource_group" {
   source  = "terraform-ibm-modules/resource-group/ibm"
-  version = "1.1.5"
+  version = "1.1.6"
   # if an existing resource group is not set (null) create a new one using prefix
   resource_group_name          = var.resource_group == null ? "${var.prefix}-resource-group" : null
   existing_resource_group_name = var.resource_group
@@ -114,10 +114,11 @@ resource "time_sleep" "wait_for_cis_instance" {
 # Enables web application firewall(WAF) to CIS instance
 ##############################################################################
 
-module "cis_domain_settings" {
-  source          = "../../modules/waf"
-  depends_on      = [time_sleep.wait_for_cis_instance]
-  cis_instance_id = module.cis_instance.cis_instance_id
-  domain_id       = module.cis_instance.cis_domain.domain_id
-  enable_waf      = true
+module "waf" {
+  source              = "../../modules/waf"
+  depends_on          = [time_sleep.wait_for_cis_instance]
+  cis_instance_id     = module.cis_instance.cis_instance_id
+  domain_id           = module.cis_instance.cis_domain.domain_id
+  enable_waf          = true
+  enable_waf_rulesets = var.enable_waf_rulesets
 }

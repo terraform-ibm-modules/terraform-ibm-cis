@@ -36,4 +36,9 @@ output "cis_dns_records" {
   description = "DNS records of CIS instance"
   value       = var.add_dns_records == true ? module.cis_dns_records[0].cis_dns_records : null
 }
+
+output "cis_waf_rulesets" {
+  description = "WAF rulesets of CIS instance"
+  value       = module.waf.cis_waf_rulesets
+}
 ##############################################################################
