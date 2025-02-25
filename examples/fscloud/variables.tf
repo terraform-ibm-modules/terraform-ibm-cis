@@ -25,3 +25,9 @@ variable "domain_name" {
   description = "Domain name to be added for the CIS Instance."
   default     = "example.cloud.ibm.com"
 }
+
+variable "enable_waf_rulesets" {
+  description = "List of rulesets to be enabled for web application firewal(WAF). For more information, refer to the [IBM Cloud Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)."
+  type        = list(string)
+  default     = ["CIS Managed Ruleset", "CIS Exposed Credentials Check Ruleset", "CIS OWASP Core Ruleset"]
+}

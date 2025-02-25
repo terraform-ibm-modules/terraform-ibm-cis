@@ -113,4 +113,70 @@ This means that when you run a `terraform plan` command after a successful `terr
 
 ### WAF submodule
 
-The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to turn WAF on and off. CIS includes the default rule sets for WAF: the [OWASP rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#owasp-rule-set-for-waf) and the [CIS rule set](https://cloud.ibm.com/docs/cis?topic=cis-waf-settings#cis-ruleset-for-waf). You can either enable or disable the WAF with these default rule sets.
+The [Web Application Firewall (WAF) submodule](https://github.com/terraform-ibm-modules/terraform-ibm-cis/blob/main/modules/waf/) provides the Terraform resources to enable WAF using managed rulesets. For more information, see [Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)
+
+When you run a `terraform plan` command after a successful `terraform apply`, it shows that an in-place update is required for CIS Ruleset resources, as shown in the following example. However, your infrastructure will not be affected and you can ignore that message. The work is being tracked [here](https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5944).
+
+```
+ # module.cis_domain_settings.ibm_cis_ruleset_entrypoint_version.config will be updated in-place
+  ~ resource "ibm_cis_ruleset_entrypoint_version" "config" {
+        id        = "http_request_firewall_managed:1a71f682d7a84667575fxxxxc07384b:crn:v1:bluemix:public:internet-svcs:global:a/abac0df06b644a9c0e:50xxx5c-b120-4bcd-be64-09480a05dc10::"
+        # (3 unchanged attributes hidden)
+
+      - rulesets {
+          - description  = "Managed rulesets" -> null
+          - kind         = "zone" -> null
+          - last_updated = "2025-01-27T08:35:19.069158Z" -> null
+          - name         = "default" -> null
+          - phase        = "http_request_firewall_managed" -> null
+          - ruleset_id   = "9daa90836793408ca3aef71ecbb573f1" -> null # pragma: allowlist secret
+          - version      = "1" -> null
+
+          - rules {
+              - action          = "execute" -> null
+              - categories      = [] -> null
+              - enabled         = true -> null
+              - expression      = "true" -> null
+              - id              = "7756b73305axxxea2da131250d725" -> null # pragma: allowlist secret
+              - last_updated_at = "2025-01-27T08:35:19.069158Z" -> null
+              - logging         = {} -> null
+              - ref             = "7756b73305a8xxxa2da131250d725" -> null # pragma: allowlist secret
+              - version         = "1" -> null
+                # (1 unchanged attribute hidden)
+
+              - action_parameters {
+                  - id       = "efb7b8c949acxxxx9736fc376e9aee" -> null # pragma: allowlist secret
+                  - rulesets = [] -> null
+                  - version  = "latest" -> null
+                    # (1 unchanged attribute hidden)
+                }
+            }
+        }
+      + rulesets {
+          + description  = "Managed rulesets"
+            name         = null
+            # (5 unchanged attributes hidden)
+
+          + rules {
+              + action          = "execute"
+              + categories      = []
+              + enabled         = true
+              + expression      = "true"
+                id              = null
+                # (4 unchanged attributes hidden)
+
+              + action_parameters {
+                  + id       = "efb7b8c949ac4xxx9736fc376e9aee" # pragma: allowlist secret
+                  + rulesets = []
+                    # (2 unchanged attributes hidden)
+                }
+            }
+        }
+}
+```
+
+#### Migrating to managed rules
+
+ There is no automated Terraform support to migrate from legacy WAF to managed rules. It requires manual intervention. Using this module, you can either disable the existing legacy WAF or enable WAF using managed rulesets in a new CIS instance.
+
+ To find more information on migration, refer [this](https://cloud.ibm.com/docs/cis?topic=cis-migrating-to-managed-rules).
