@@ -79,6 +79,19 @@ variable "dns_record_set" {
     ])
     error_message = "The specified DNS record type is not valid."
   }
+
+  validation {
+    condition     = !(var.add_dns_records && length(var.dns_record_set) == 0)
+    error_message = "No DNS records found."
+  }
+
+  validation {
+    condition = alltrue([
+      for record in var.dns_record_set : record.proxied == true
+    ])
+    error_message = "DNS records must be proxied for enabling DDoS protection."
+  }
+
 }
 
 # GLB variables
@@ -98,6 +111,11 @@ variable "fallback_pool_id" {
   description = "ID of the fallback pool. Required if fallback_pool_name is not provided."
   type        = string
   default     = null
+
+  validation {
+    condition     = !(var.add_glb && var.fallback_pool_name == null && var.fallback_pool_id == null)
+    error_message = "Both fallback_pool_name and fallback_pool_id cannot be null when add_glb is enabled."
+  }
 }
 
 variable "default_pool_ids" {

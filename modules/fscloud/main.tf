@@ -14,14 +14,6 @@ module "cis_instance" {
 ##############################################################################
 # Add dns records to CIS instance
 ##############################################################################
-locals {
-  # tflint-ignore: terraform_unused_declarations
-  validate_dns_input = (var.add_dns_records && length(var.dns_record_set) == 0) ? tobool("No DNS records found.") : true
-  # tflint-ignore: terraform_unused_declarations
-  validate_dns_records = [for record in var.dns_record_set : tobool("DNS records must be proxied for enabling DDoS protection.") if record.proxied != true]
-  # tflint-ignore: terraform_unused_declarations
-  validate_glb_input = var.add_glb ? ((var.fallback_pool_name == null && var.fallback_pool_id == null) ? tobool("Both fallback_pool_name and fallback_pool_id can not be null.") : true) : true
-}
 
 module "cis_dns_records" {
   count           = var.add_dns_records ? 1 : 0
