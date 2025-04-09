@@ -2,15 +2,6 @@
 # Add DNS records
 ##############################################################################
 
-locals {
-  # tflint-ignore: terraform_unused_declarations
-  validate_dns_record_data = [for record in var.dns_record_set : (record.type == "SRV" || record.type == "LOC" || record.type == "CAA") ? (record.data != null ? null : tobool("The data{} block in dns_record_set is not defined for the DNS record- ${record.name}")) : null]
-  # tflint-ignore: terraform_unused_declarations
-  validate_dns_record_content = [for record in var.dns_record_set : ((record.content == null && record.data != null) || (record.content != null && record.data == null)) ? null : tobool("Both the content and data can not be defined within the dns_record_set for the DNS record - ${record.name}")]
-  # tflint-ignore: terraform_unused_declarations
-  validate_dns_record_import = [(var.base64_encoded_dns_records_file != null && var.dns_records_file != null) ? tobool("Both variables base64_encoded_dns_records_file and dns_records_file cannot be defined together.") : null]
-}
-
 resource "ibm_cis_dns_record" "dns_records" {
   cis_id    = var.cis_instance_id
   domain_id = var.domain_id

@@ -2,11 +2,6 @@
 # Add Global Load Balancer
 ##############################################################################
 
-locals {
-  # tflint-ignore: terraform_unused_declarations
-  validate_inputs = (var.glb_proxied != null && var.ttl != null) ? tobool("The variable glb_proxied conflicts with ttl so both cannot have non-null value.") : null
-}
-
 resource "ibm_cis_global_load_balancer" "cis_glb" {
   cis_id           = var.cis_instance_id
   domain_id        = var.domain_id

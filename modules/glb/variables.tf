@@ -70,6 +70,11 @@ variable "ttl" {
   description = "Time to live (TTL) for the CIS global load balancer (GLB), in seconds. If the GLB is proxied, the value is set automatically."
   type        = number
   default     = null
+
+  validation {
+    condition     = !(var.glb_proxied != null && var.ttl != null)
+    error_message = "The variable glb_proxied conflicts with ttl so both cannot have non-null value."
+  }
 }
 
 variable "region_pools" {

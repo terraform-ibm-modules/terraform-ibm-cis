@@ -48,6 +48,21 @@ variable "dns_record_set" {
     ])
     error_message = "The specified DNS record type is not valid."
   }
+
+  validation {
+    condition = alltrue([
+      for record in var.dns_record_set : (record.type == "SRV" || record.type == "LOC" || record.type == "CAA") ? (record.data != null) : true
+    ])
+    error_message = "The data{} block in dns_record_set is not defined for the DNS record."
+  }
+
+  validation {
+    condition = alltrue([
+      for record in var.dns_record_set : (record.content == null && record.data != null) || (record.content != null && record.data == null)
+    ])
+    error_message = "Both the content and data can not be defined within the dns_record_set for the DNS record ."
+  }
+
 }
 
 variable "base64_encoded_dns_records_file" {
@@ -60,4 +75,10 @@ variable "dns_records_file" {
   type        = string
   description = "The DNS file in text format that contains the details of the DNS records. Required if `base64_encoded_dns_records_file` is not specified."
   default     = null
+
+  validation {
+    condition     = !(var.base64_encoded_dns_records_file != null && var.dns_records_file != null)
+    error_message = "Both variables base64_encoded_dns_records_file and dns_records_file cannot be defined together."
+  }
+
 }
