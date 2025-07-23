@@ -17,8 +17,8 @@ variable "plan" {
   description = "The type of plan for the CIS instance: standard-next or trial."
   default     = "trial"
   validation {
-    condition     = contains(["standard-next", "trial"], var.plan)
-    error_message = "Only the trial and standard-next plans are supported currently"
+    condition     = contains(["standard-next", "trial", "enterprise-usage"], var.plan)
+    error_message = "Only the trial, standard-next and enterprise-usage plans are supported currently"
   }
 }
 
