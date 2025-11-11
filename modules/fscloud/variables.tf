@@ -227,7 +227,7 @@ variable "enable_waf" {
 variable "enable_waf_rulesets" {
   description = "List of rulesets to be enabled for web application firewal(WAF). For more information, refer to the [IBM Cloud Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)."
   type        = list(string)
-  default     = ["CIS Managed Ruleset", "CIS Exposed Credentials Check Ruleset", "CIS OWASP Core Ruleset"]
+  default     = ["CIS Managed Ruleset", "Exposed Credentials Check", "OWASP Core Ruleset"]
 }
 
 variable "use_legacy_waf" {
