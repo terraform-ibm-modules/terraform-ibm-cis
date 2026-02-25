@@ -57,7 +57,7 @@ For more information, read [here](https://github.com/terraform-ibm-modules/terra
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Name of the CIS instance. | `string` | n/a | yes |
 | <a name="input_session_affinity"></a> [session\_affinity](#input\_session\_affinity) | Session Affinity of the CIS global load balancer. To make use of session affinity, glb\_proxied has to be true. | `string` | `null` | no |
 | <a name="input_steering_policy"></a> [steering\_policy](#input\_steering\_policy) | Steering Policy of the CIS global load balancer. | `string` | `"off"` | no |
-| <a name="input_tags"></a> [tags](#input\_tags) | List of tags to be associated to the CIS instance. | `list(string)` | `[]` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Add user resource tags to the Cis instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types). | `list(string)` | `[]` | no |
 | <a name="input_use_legacy_waf"></a> [use\_legacy\_waf](#input\_use\_legacy\_waf) | Set to true to enable/disable the old way of enabling WAF. To enable WAF by using managed rulesets, please use variable 'enable\_waf\_rulesets'. For more information, refer [this](https://cloud.ibm.com/docs/cis?topic=cis-migrating-to-managed-rules) | `bool` | `false` | no |
 
 ### Outputs
