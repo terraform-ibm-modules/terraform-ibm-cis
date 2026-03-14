@@ -24,7 +24,7 @@ variable "plan" {
 
 variable "tags" {
   type        = list(string)
-  description = "List of tags to be associated to the CIS instance."
+  description = "Add user resource tags to the Cis instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types)."
   default     = []
 }
 
