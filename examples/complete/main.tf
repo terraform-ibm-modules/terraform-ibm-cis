@@ -4,7 +4,7 @@
 
 module "resource_group" {
   source  = "terraform-ibm-modules/resource-group/ibm"
-  version = "1.4.8"
+  version = "1.5.0"
   # if an existing resource group is not set (null) create a new one using prefix
   resource_group_name          = var.resource_group == null ? "${var.prefix}-resource-group" : null
   existing_resource_group_name = var.resource_group
@@ -91,7 +91,7 @@ module "cis_glb" {
 }
 
 /*
-A 30-second sleep time has been added as a workround to ensure that the Cloud Interface Services (CIS) instance and domain are fully configured
+A 30-second sleep time has been added as a workaround to ensure that the Cloud Interface Services (CIS) instance and domain are fully configured
 before making changes to the domain settings to enable Web Application Firewall (WAF) for the instance. Failing to include this
 sleep time can result in the following error:
 
