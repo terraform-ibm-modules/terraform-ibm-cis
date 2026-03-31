@@ -15,6 +15,6 @@ variable "domain_type" {
   default     = "full"
   validation {
     condition     = contains(["full", "partial"], var.domain_type)
-    error_message = "Provided value of domain_type is not alllowed."
+    error_message = "Provided value of domain_type is not allowed."
   }
 }
