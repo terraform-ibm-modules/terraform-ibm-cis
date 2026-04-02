@@ -18,7 +18,7 @@ module "cis_instance" {
   source            = "../../"
   service_name      = "${var.prefix}-cis"
   resource_group_id = module.resource_group.resource_group_id
-  tags              = []
+  resource_tags     = []
   plan              = "standard-next"
   domain_name       = var.domain_name
 }
