@@ -1,5 +1,5 @@
 ##############################################################################
-# List of input varaibles
+# List of input variables
 ##############################################################################
 
 variable "resource_group_id" {
@@ -24,7 +24,7 @@ variable "plan" {
 
 variable "tags" {
   type        = list(string)
-  description = "Add user resource tags to the Cis instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types)."
+  description = "Add user resource tags to the CIS instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types)."
   default     = []
   validation {
     condition     = alltrue([for tag in var.tags : can(regex("^[A-Za-z0-9 _\\-.:](1, 128)$", tag))])

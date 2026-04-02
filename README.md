@@ -19,18 +19,32 @@ For more information about the module, see, read [Features of IBM Cloud Internet
 
 <!-- BEGIN OVERVIEW HOOK -->
 ## Overview
-* [terraform-ibm-cis](#terraform-ibm-cis)
-* [Submodules](./modules)
-    * [dns](./modules/dns)
-    * [domain](./modules/domain)
-    * [fscloud](./modules/fscloud)
-    * [glb](./modules/glb)
-    * [waf](./modules/waf)
-* [Examples](./examples)
-:information_source: Ctrl/Cmd+Click or right-click on the Schematics deploy button to open in a new tab
-    * <a href="./examples/complete">End-to-end example</a> <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=cis-complete-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/examples/complete"><img src="https://img.shields.io/badge/Deploy%20with IBM%20Cloud%20Schematics-0f62fe?logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
-    * <a href="./examples/fscloud">Financial Services Cloud profile example</a> <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=cis-fscloud-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/examples/fscloud"><img src="https://img.shields.io/badge/Deploy%20with IBM%20Cloud%20Schematics-0f62fe?logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
-* [Contributing](#contributing)
+<ul>
+  <li><a href="#terraform-ibm-cis">terraform-ibm-cis</a></li>
+  <li><a href="./modules">Submodules</a>
+    <ul>
+      <li><a href="./modules/dns">dns</a></li>
+      <li><a href="./modules/domain">domain</a></li>
+      <li><a href="./modules/fscloud">fscloud</a></li>
+      <li><a href="./modules/glb">glb</a></li>
+      <li><a href="./modules/waf">waf</a></li>
+    </ul>
+  </li>
+  <li><a href="./examples">Examples</a>
+    <ul>
+      <li>
+        <a href="./examples/complete">End-to-end example</a>
+        <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=cis-complete-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/examples/complete"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
+      </li>
+      <li>
+        <a href="./examples/fscloud">Financial Services Cloud profile example</a>
+        <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=cis-fscloud-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/examples/fscloud"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
+      </li>
+    </ul>
+    ℹ️ Ctrl/Cmd+Click or right-click on the Schematics deploy button to open in a new tab.
+  </li>
+  <li><a href="#contributing">Contributing</a></li>
+</ul>
 <!-- END OVERVIEW HOOK -->
 
 ## terraform-ibm-cis
@@ -142,7 +156,7 @@ You need the following permissions to run this module.
 | <a name="input_plan"></a> [plan](#input\_plan) | The type of plan for the CIS instance: standard-next or trial. | `string` | `"trial"` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The resource group ID to provision the CIS instance. | `string` | n/a | yes |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Name of the CIS instance. | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | Add user resource tags to the Cis instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types). | `list(string)` | `[]` | no |
+| <a name="input_tags"></a> [tags](#input\_tags) | Add user resource tags to the CIS instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types). | `list(string)` | `[]` | no |
 
 ### Outputs
 
