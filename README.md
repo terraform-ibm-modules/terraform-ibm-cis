@@ -155,8 +155,8 @@ You need the following permissions to run this module.
 | <a name="input_domain_name"></a> [domain\_name](#input\_domain\_name) | The domain name to be added to the CIS instance. | `string` | n/a | yes |
 | <a name="input_plan"></a> [plan](#input\_plan) | The type of plan for the CIS instance: standard-next or trial. | `string` | `"trial"` | no |
 | <a name="input_resource_group_id"></a> [resource\_group\_id](#input\_resource\_group\_id) | The resource group ID to provision the CIS instance. | `string` | n/a | yes |
+| <a name="input_resource_tags"></a> [resource\_tags](#input\_resource\_tags) | Add user resource tags to the CIS instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types). | `list(string)` | `[]` | no |
 | <a name="input_service_name"></a> [service\_name](#input\_service\_name) | Name of the CIS instance. | `string` | n/a | yes |
-| <a name="input_tags"></a> [tags](#input\_tags) | Add user resource tags to the CIS instance to organize, track, and manage costs. [Learn more](https://cloud.ibm.com/docs/account?topic=account-tag&interface=ui#tag-types). | `list(string)` | `[]` | no |
 
 ### Outputs
 
