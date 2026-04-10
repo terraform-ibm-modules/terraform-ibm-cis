@@ -6,7 +6,7 @@ module "cis_instance" {
   source            = "../../"
   service_name      = var.service_name
   resource_group_id = var.resource_group_id
-  tags              = var.tags
+  resource_tags     = var.resource_tags
   plan              = var.plan
   domain_name       = var.domain_name
 }
