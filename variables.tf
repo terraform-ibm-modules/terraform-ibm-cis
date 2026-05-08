@@ -14,7 +14,7 @@ variable "service_name" {
 
 variable "plan" {
   type        = string
-  description = "description = "The type of plan for the CIS instance: trial, standard-next, enterprise-essential, enterprise-advanced, enterprise-premier or enterprise-usage.""
+  description = "The type of plan for the CIS instance: trial, standard-next, enterprise-essential, enterprise-advanced, enterprise-premier or enterprise-usage."
   default     = "trial"
   validation {
     condition     = contains(["standard-next", "trial", "enterprise-usage", "enterprise-advanced", "enterprise-premier", "enterprise-essential"], var.plan)
