@@ -18,7 +18,7 @@ variable "plan" {
   default     = "trial"
   validation {
     condition     = contains(["standard-next", "trial", "enterprise-usage", "enterprise-advanced", "enterprise-premier", "enterprise-essential"], var.plan)
-    error_message = "Valid plans are: trial, standard-next, enterprise-essential, enterprise-advanced, enterprise-premier, enterprise-usage"
+    error_message = "Valid plans are: `trial`, `standard-next`, `enterprise-essential`, `enterprise-advanced`, `enterprise-premier`, `enterprise-usage`"
   }
 }
 
