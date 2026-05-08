@@ -12,7 +12,7 @@ For more information, read [here](https://github.com/terraform-ibm-modules/terra
 ### Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.79.0, < 3.0.0 |
 | <a name="requirement_time"></a> [time](#requirement\_time) | 0.10.0 |
@@ -20,7 +20,7 @@ For more information, read [here](https://github.com/terraform-ibm-modules/terra
 ### Modules
 
 | Name | Source | Version |
-|------|--------|---------|
+| ---- | ------ | ------- |
 | <a name="module_cis_dns_records"></a> [cis\_dns\_records](#module\_cis\_dns\_records) | ../../modules/dns | n/a |
 | <a name="module_cis_glb"></a> [cis\_glb](#module\_cis\_glb) | ../../modules/glb | n/a |
 | <a name="module_cis_instance"></a> [cis\_instance](#module\_cis\_instance) | ../../ | n/a |
@@ -29,13 +29,13 @@ For more information, read [here](https://github.com/terraform-ibm-modules/terra
 ### Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [time_sleep.wait_for_cis_instance](https://registry.terraform.io/providers/hashicorp/time/0.10.0/docs/resources/sleep) | resource |
 
 ### Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_add_dns_records"></a> [add\_dns\_records](#input\_add\_dns\_records) | Set to true if dns records to be added to the CIS instance | `bool` | `false` | no |
 | <a name="input_add_glb"></a> [add\_glb](#input\_add\_glb) | Set to true if global load balancer(glb) to be added to the CIS instance | `bool` | `false` | no |
 | <a name="input_default_pool_ids"></a> [default\_pool\_ids](#input\_default\_pool\_ids) | List of default pool IDs. | `list(string)` | `null` | no |
@@ -63,7 +63,7 @@ For more information, read [here](https://github.com/terraform-ibm-modules/terra
 ### Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_cis_dns_records"></a> [cis\_dns\_records](#output\_cis\_dns\_records) | DNS records of CIS instance |
 | <a name="output_cis_domain"></a> [cis\_domain](#output\_cis\_domain) | CIS Domain details |
 | <a name="output_cis_glb_id"></a> [cis\_glb\_id](#output\_cis\_glb\_id) | ID of CIS GLB |
