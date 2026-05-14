@@ -69,6 +69,25 @@ variable "dns_record_set" {
     }))
   }))
   default = []
+  validation {
+    condition = alltrue([
+      for record in var.dns_record_set : contains(["A", "AAAA", "CNAME", "NS", "MX", "TXT", "LOC", "SRV", "CAA", "PTR"], record.type)
+    ])
+    error_message = "The specified DNS record type is not valid."
+  }
+
+  validation {
+    condition     = !(var.add_dns_records && length(var.dns_record_set) == 0)
+    error_message = "No DNS records found."
+  }
+
+  validation {
+    condition = alltrue([
+      for record in var.dns_record_set : record.proxied == true
+    ])
+    error_message = "DNS records must be proxied for enabling DDoS protection."
+  }
+
 }
 
 # GLB variables
@@ -88,6 +107,11 @@ variable "fallback_pool_id" {
   description = "ID of the fallback pool. Required if fallback_pool_name is not provided."
   type        = string
   default     = null
+
+  validation {
+    condition     = !(var.add_glb && var.fallback_pool_name == null && var.fallback_pool_id == null)
+    error_message = "Both fallback_pool_name and fallback_pool_id cannot be null when add_glb is enabled."
+  }
 }
 
 variable "default_pool_ids" {
@@ -124,6 +148,10 @@ variable "steering_policy" {
   description = "Steering Policy of the CIS global load balancer."
   type        = string
   default     = "off"
+  validation {
+    condition     = contains(["off", "geo", "random", "dynamic_latency"], var.steering_policy)
+    error_message = "Provided value of steering_policy is not allowed"
+  }
 }
 
 variable "region_pools" {
@@ -202,4 +230,9 @@ variable "use_legacy_waf" {
   type        = bool
   description = "Set to true to enable/disable the old way of enabling WAF. To enable WAF by using managed rulesets, please use variable 'enable_waf_rulesets'. For more information, refer [this](https://cloud.ibm.com/docs/cis?topic=cis-migrating-to-managed-rules)"
   default     = false
+
+  validation {
+    condition     = (!var.use_legacy_waf && var.enable_waf) || var.use_legacy_waf
+    error_message = "WAF can not be disabled as per IBM Cloud Framework for Financial Services for a CIS instance."
+  }
 }
