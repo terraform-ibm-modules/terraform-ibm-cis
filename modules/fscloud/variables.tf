@@ -14,12 +14,8 @@ variable "service_name" {
 
 variable "plan" {
   type        = string
-  description = "The type of plan for the CIS instance: standard-next or trial."
+  description = "The type of plan for the CIS instance: `trial`, `standard-next`, `enterprise-essential`, `enterprise-advanced`, `enterprise-premier` or `enterprise-usage`."
   default     = "trial"
-  validation {
-    condition     = contains(["standard-next", "trial", "enterprise-usage"], var.plan)
-    error_message = "Only the trial, standard-next and enterprise-usage plans are supported currently"
-  }
 }
 
 variable "resource_tags" {
