@@ -35,5 +35,5 @@ variable "glb_name" {
 variable "enable_waf_rulesets" {
   description = "List of rulesets to be enabled for web application firewal(WAF). For more information, refer to the [IBM Cloud Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)."
   type        = list(string)
-  default     = ["CIS Managed Ruleset", "CIS OWASP Core Ruleset"]
+  default     = ["Cloudflare Managed Ruleset", "Cloudflare OWASP Core Ruleset"]
 }
