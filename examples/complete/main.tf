@@ -48,6 +48,7 @@ module "cis_dns_records" {
 
 module "cis_glb" {
   source             = "../../modules/glb"
+  depends_on         = [time_sleep.wait_for_cis_instance]
   cis_instance_id    = module.cis_instance.cis_instance_id
   domain_id          = module.cis_instance.cis_domain.domain_id
   glb_name           = join(".", [var.glb_name, var.domain_name])
