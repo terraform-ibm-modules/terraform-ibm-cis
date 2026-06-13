@@ -21,23 +21,23 @@ For more information about the module, see, read [Features of IBM Cloud Internet
 ## Overview
 <ul>
   <li><a href="#terraform-ibm-cis">terraform-ibm-cis</a></li>
-  <li><a href="./modules">Submodules</a>
+  <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules">Submodules</a>
     <ul>
-      <li><a href="./modules/dns">dns</a></li>
-      <li><a href="./modules/domain">domain</a></li>
-      <li><a href="./modules/fscloud">fscloud</a></li>
-      <li><a href="./modules/glb">glb</a></li>
-      <li><a href="./modules/waf">waf</a></li>
+      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/dns">dns</a></li>
+      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/domain">domain</a></li>
+      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/fscloud">fscloud</a></li>
+      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/glb">glb</a></li>
+      <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/modules/waf">waf</a></li>
     </ul>
   </li>
-  <li><a href="./examples">Examples</a>
+  <li><a href="https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/examples">Examples</a>
     <ul>
       <li>
-        <a href="./examples/complete">End-to-end example</a>
+        <a href="https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/examples/complete">End-to-end example</a>
         <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=cis-complete-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/examples/complete"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
       </li>
       <li>
-        <a href="./examples/fscloud">Financial Services Cloud profile example</a>
+        <a href="https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/examples/fscloud">Financial Services Cloud profile example</a>
         <a href="https://cloud.ibm.com/schematics/workspaces/create?workspace_name=cis-fscloud-example&repository=https://github.com/terraform-ibm-modules/terraform-ibm-cis/tree/main/examples/fscloud"><img src="https://img.shields.io/badge/Deploy%20with%20IBM%20Cloud%20Schematics-0f62fe?style=flat&logo=ibm&logoColor=white&labelColor=0f62fe" alt="Deploy with IBM Cloud Schematics" style="height: 16px; vertical-align: text-bottom; margin-left: 5px;"></a>
       </li>
     </ul>
