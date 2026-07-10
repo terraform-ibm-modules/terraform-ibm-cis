@@ -29,11 +29,6 @@ variable "enable_waf_rulesets" {
   description = "List of rulesets to be enabled for web application firewal(WAF). For more information, refer to the [IBM Cloud Managed Rules Overview](https://cloud.ibm.com/docs/cis?topic=cis-managed-rules-overview)."
   type        = list(string)
   default     = ["Cloudflare Managed Ruleset", "Cloudflare Exposed Credentials Check Ruleset", "Cloudflare OWASP Core Ruleset", "Cloudflare Managed Free Ruleset"]
-
-  validation {
-    condition     = alltrue([for rule in var.enable_waf_rulesets : contains(keys(local.rulesets_map), rule)])
-    error_message = "The following ruleset names are invalid: ${join(", ", [for rule in var.enable_waf_rulesets : rule if !contains(keys(local.rulesets_map), rule)])}"
-  }
 }
 
 variable "rulesets_description" {
