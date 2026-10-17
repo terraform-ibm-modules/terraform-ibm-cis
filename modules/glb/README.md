@@ -48,7 +48,7 @@ module "cis_glb" {
 ### Requirements
 
 | Name | Version |
-|------|---------|
+| ---- | ------- |
 | <a name="requirement_terraform"></a> [terraform](#requirement\_terraform) | >= 1.9.0 |
 | <a name="requirement_ibm"></a> [ibm](#requirement\_ibm) | >= 1.79.0, < 3.0.0 |
 
@@ -59,7 +59,7 @@ No modules.
 ### Resources
 
 | Name | Type |
-|------|------|
+| ---- | ---- |
 | [ibm_cis_global_load_balancer.cis_glb](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis_global_load_balancer) | resource |
 | [ibm_cis_healthcheck.health_check](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis_healthcheck) | resource |
 | [ibm_cis_origin_pool.origin_pool](https://registry.terraform.io/providers/IBM-Cloud/ibm/latest/docs/resources/cis_origin_pool) | resource |
@@ -67,7 +67,7 @@ No modules.
 ### Inputs
 
 | Name | Description | Type | Default | Required |
-|------|-------------|------|---------|:--------:|
+| ---- | ----------- | ---- | ------- | :------: |
 | <a name="input_cis_instance_id"></a> [cis\_instance\_id](#input\_cis\_instance\_id) | CRN of the existing CIS Instance. | `string` | n/a | yes |
 | <a name="input_default_pool_ids"></a> [default\_pool\_ids](#input\_default\_pool\_ids) | List of default pool IDs. | `list(string)` | `null` | no |
 | <a name="input_domain_id"></a> [domain\_id](#input\_domain\_id) | Existing domain ID of the CIS Instance. | `string` | n/a | yes |
@@ -88,7 +88,7 @@ No modules.
 ### Outputs
 
 | Name | Description |
-|------|-------------|
+| ---- | ----------- |
 | <a name="output_glb_id"></a> [glb\_id](#output\_glb\_id) | ID of CIS GLB |
 | <a name="output_health_check_id"></a> [health\_check\_id](#output\_health\_check\_id) | IDs of CIS Health Checks |
 | <a name="output_origin_pool_ids"></a> [origin\_pool\_ids](#output\_origin\_pool\_ids) | IDs of CIS origin pools |
