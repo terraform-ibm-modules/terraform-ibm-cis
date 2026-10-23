@@ -52,20 +52,20 @@ module "cis_glb" {
 # Enables web application firewall(WAF) to CIS instance
 ##############################################################################
 
-/*
-A 30-second sleep time has been added as a workaround to ensure that the Cloud Interface Services (CIS) instance and domain are fully configured
-before making changes to the domain settings to enable Web Application Firewall (WAF) for the instance. Failing to include this
-sleep time can result in the following error:
 
-  │ Error: Not allowed to edit setting for waf
-  │
-  │   with module.cis_domain_settings.ibm_cis_domain_settings.domain_settings,
-  │   on ../../modules/waf/main.tf line 5, in resource "ibm_cis_domain_settings" "domain_settings":
-  │    5: resource "ibm_cis_domain_settings" "domain_settings" {
-  │
-  ╵}
-The issue is being tracked here: https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5118
-*/
+# A 30-second sleep time has been added as a workaround to ensure that the Cloud Interface Services (CIS) instance and domain are fully configured
+# before making changes to the domain settings to enable Web Application Firewall (WAF) for the instance. Failing to include this
+# sleep time can result in the following error:
+#
+#   │ Error: Not allowed to edit setting for waf
+#   │
+#   │   with module.cis_domain_settings.ibm_cis_domain_settings.domain_settings,
+#   │   on ../../modules/waf/main.tf line 5, in resource "ibm_cis_domain_settings" "domain_settings":
+#   │    5: resource "ibm_cis_domain_settings" "domain_settings" {
+#   │
+#   ╵}
+# The issue is being tracked here: https://github.com/IBM-Cloud/terraform-provider-ibm/issues/5118
+
 
 resource "time_sleep" "wait_for_cis_instance" {
   depends_on = [module.cis_instance]
